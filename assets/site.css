@@ -2678,7 +2678,58 @@ footer a.tel-link:focus {
 }
 
 /* ==========================================================================
-   16. FOOTER DENSITY (MOBILE + TABLET)
+   16. FOOTER STRUCTURE
+   ========================================================================== */
+
+/* The footer grid only ever existed in each page's own inline <style>, and the
+   404 is hand-authored and outside the build, so it never got one: its columns
+   stacked and the footer ran 1,035px at desktop against 588px everywhere else.
+   The shared layer owns the grid now; the inline copies restate it harmlessly.
+   The column counts stay with the responsive rules that follow. */
+.footer-inner {
+  display: grid;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 901px) {
+  .footer-inner {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  /* Guarded, so it cannot reach past the rule that closes this gap up once
+     the links become 44px tap targets. */
+  .footer-links li { margin-bottom: 0.6rem; }
+}
+
+/* The rest of the footer's structure lived only in the inline copies too, so
+   the 404 rendered its link lists as underlined text with bullet markers and
+   its column heads as sentence-case body copy. These restate what the ninety
+   built pages already say; the 404 is the page that needed them said once. */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a { text-decoration: none; }
+
+.footer-col-head {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+
+/* The 404's own <style> centres everything in the footer, which reads as a
+   mistake once the columns exist. */
+.error-page .footer-inner,
+.error-page .footer-inner div { text-align: left; }
+
+/* ==========================================================================
+   16b. FOOTER DENSITY (MOBILE + TABLET)
    ========================================================================== */
 
 /* The footer carries twenty-three links in three lists. Section 8 gives each
@@ -2713,29 +2764,6 @@ footer a.tel-link:focus {
 
   .footer-bottom { margin-top: 2rem; padding-top: 1.5rem; }
 }
-
-/* The footer grid only ever existed in each page's own inline <style>, and the
-   404 is hand-authored and outside the build, so it never got one: its columns
-   stacked and the footer ran 1,035px at desktop against 588px everywhere else.
-   The shared layer owns the grid now; the inline copies restate it harmlessly.
-   `grid-template-columns` is left to the responsive rules above. */
-.footer-inner {
-  display: grid;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-@media (min-width: 901px) {
-  .footer-inner {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-  }
-}
-
-/* The 404's own <style> centres everything in the footer, which reads as a
-   mistake once the columns exist. */
-.error-page .footer-inner,
-.error-page .footer-inner div { text-align: left; }
 
 /* ==========================================================================
    17. ARTICLE IMAGERY
