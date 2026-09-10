@@ -2676,3 +2676,155 @@ footer a.tel-link:focus {
 
   .strip-inner { animation: none; transform: none; }
 }
+
+/* ==========================================================================
+   16. FOOTER DENSITY (MOBILE + TABLET)
+   ========================================================================== */
+
+/* The footer carries twenty-three links in three lists. Section 8 gives each
+   one a 44px tap target, which is right, but stacked single-file that made the
+   mobile footer 1,760px — two full viewports, seventeen per cent of a long
+   page, and the first thing a reader meets after the last paragraph. Setting
+   the lists two-up keeps the target and halves the column. */
+@media (max-width: 900px) {
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    align-items: start;
+  }
+
+  .footer-links a {
+    /* The grid cell is the row; the anchor fills it so the whole width is
+       tappable rather than just the word. */
+    width: 100%;
+  }
+
+  .footer-col-head { margin-bottom: 0.6rem; }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  footer { padding: 2.5rem 1.25rem 2rem; }
+
+  .footer-bottom { margin-top: 2rem; padding-top: 1.5rem; }
+}
+
+/* The footer grid only ever existed in each page's own inline <style>, and the
+   404 is hand-authored and outside the build, so it never got one: its columns
+   stacked and the footer ran 1,035px at desktop against 588px everywhere else.
+   The shared layer owns the grid now; the inline copies restate it harmlessly.
+   `grid-template-columns` is left to the responsive rules above. */
+.footer-inner {
+  display: grid;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 901px) {
+  .footer-inner {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* The 404's own <style> centres everything in the footer, which reads as a
+   mistake once the columns exist. */
+.error-page .footer-inner,
+.error-page .footer-inner div { text-align: left; }
+
+/* ==========================================================================
+   17. ARTICLE IMAGERY
+   ========================================================================== */
+
+/* Blog heroes come from a 3:1 band — the seven hand-authored posts render one
+   with `.article-hero-img`, which has no aspect-ratio of its own and so simply
+   keeps the file's shape. The three built ones went through `.blog-hero-img`,
+   whose box narrowed to 4:3 on a phone and took the sides off the band to get
+   there. Hold the band's own shape instead, and the two agree. */
+@media (max-width: 900px) {
+  .blog-hero-img { aspect-ratio: 3 / 1; }
+}
+
+@media (max-width: 600px) {
+  .blog-hero-img { aspect-ratio: 3 / 1; }
+}
+
+/* A figure set into the run of an article. The long-form pages — the salon
+   guide especially — were an unbroken column of prose; these give the eye a
+   place to rest and carry the work the words are describing. */
+.article-figure {
+  margin: 3rem 0;
+}
+
+.article-figure img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.article-figure > img,
+.article-figure .article-figure-frame {
+  /* One shape at every width. A band that narrows on a phone would be cropped
+     twice — once into the file, once into the box — and the second crop is the
+     one that turns a photograph into abstract texture. */
+  aspect-ratio: 2 / 1;
+  max-height: 460px;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.article-figure figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--mid);
+  font-weight: 300;
+}
+
+/* Full-bleed out of the 800px text column on a wide screen: the band reads as
+   a break in the article rather than another element inside the measure. */
+@media (min-width: 1000px) {
+  .article-figure {
+    margin-left: calc((100% - min(1100px, 100vw - 4rem)) / 2);
+    margin-right: calc((100% - min(1100px, 100vw - 4rem)) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .article-figure { margin: 2.25rem 0; }
+}
+
+/* A line lifted out of the prose. One per page at most — it is a rest, not a
+   decoration, and a second one stops reading as emphasis. */
+.pull-quote {
+  margin: 3rem 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  line-height: 1.35;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+}
+
+.pull-quote p {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .pull-quote {
+    margin: 2.25rem 0;
+    padding-left: 1.1rem;
+  }
+}
