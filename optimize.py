@@ -20,6 +20,7 @@ you like and the output is identical.
 """
 
 import glob
+import hashlib
 import html
 import json
 import math
@@ -2349,6 +2350,32 @@ def build_sitemap(paths):
             f"{body}\n</urlset>\n")
 
 
+def stamp_assets(paths):
+    """Re-stamp the ?v= on the shared stylesheet and script from their content.
+
+    The query string is the only cache-buster these two have — /assets is served
+    max-age=604800 — and it was written into all 91 pages by hand, so editing
+    site.css did not change it and a returning reader kept the old file for a
+    week. Deriving it from the bytes means it can only be wrong if the file did
+    not change. 404.html is included: it links the same two assets, and it is
+    the one page the build otherwise leaves alone."""
+    changed = 0
+    for asset in ("site.css", "site.js"):
+        full = os.path.join(ROOT, "assets", asset)
+        if not os.path.exists(full):
+            continue
+        digest = hashlib.sha256(open(full, "rb").read()).hexdigest()[:8]
+        for path in paths:
+            page = os.path.join(ROOT, path)
+            txt = open(page, encoding="utf-8").read()
+            new = re.sub(rf'(/assets/{re.escape(asset)})\?v=[0-9a-f]+',
+                         rf'\1?v={digest}', txt)
+            if new != txt:
+                open(page, "w", encoding="utf-8").write(new)
+                changed += 1
+    return changed
+
+
 def main():
     # 404.html is hand-authored and must stay noindex and out of the sitemap;
     # the head block this script injects would overwrite both.
@@ -2358,6 +2385,12 @@ def main():
     )
     changed = sum(process(p) for p in paths)
     print(f"processed {len(paths)} pages, {changed} rewritten")
+
+    every = sorted(
+        p for p in glob.glob("**/*.html", recursive=True)
+        if "_audit" not in p and ".git" not in p
+    )
+    print(f"asset stamps: {stamp_assets(every)} rewritten")
 
     open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(build_sitemap(paths))
     print(f"sitemap.xml: {len(paths)} urls")
