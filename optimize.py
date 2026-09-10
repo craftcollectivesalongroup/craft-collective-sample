@@ -22,6 +22,7 @@ you like and the output is identical.
 import glob
 import html
 import json
+import math
 import os
 import re
 from datetime import date
@@ -31,6 +32,13 @@ PHONE = "724-514-7231"
 PHONE_HREF = "+17245147231"
 EMAIL = "info@craftcollectivesalongroup.com"
 BOOKING = "https://phorest.com/book/salons/craftcollectivesalongroup"
+EXT_ATTR = ' target="_blank" rel="noreferrer noopener"'
+
+# The live rating. Every place that states it — schema, trust strip, FAQ copy,
+# meta descriptions — reads these two names, so the figure can only be wrong
+# in one place at a time.
+RATING = "5.0"
+REVIEWS = "778"
 
 NH_ADDR = "2014D Babcock Blvd, Pittsburgh, PA 15209"
 CB_ADDR = "115 W Pike St, Canonsburg, PA 15317"
@@ -487,7 +495,7 @@ def area_faq(slug):
          f"Yes — {name} clients are a regular part of our books. Our North Hills studio at {NH_ADDR} is {drive}, and "
          f"we also have a Canonsburg studio at {CB_ADDR}."),
         (f"What is the best hair salon near {name}?",
-         f"Craft Collective Salon Group is rated 4.9 stars across 247 reviews and is led by Derek Piekarski, a former "
+         f"Craft Collective Salon Group is rated {RATING} stars across {REVIEWS} reviews and is led by Derek Piekarski, a former "
          f"Wella Professionals North America Signature Artist. {name} clients come to us for balayage, highlights, "
          f"blonding, colour correction and precision cutting."),
         (f"How do I book an appointment from {name}?",
@@ -658,7 +666,7 @@ PAGE_FAQ = {
     ],
     "reviews": [
         ("How is Craft Collective Salon Group rated?",
-         "4.9 out of 5 stars across 247 client reviews, for balayage, highlights, colour correction and precision "
+         f"{RATING} out of 5 stars across {REVIEWS} client reviews, for balayage, highlights, colour correction and precision "
          "cutting."),
         ("Where can I read reviews?",
          "Reviews appear on this page and on Google, and our work is posted on Instagram at "
@@ -698,7 +706,7 @@ CORE_LINKS = [
     ("/reviews", "Reviews"),
     ("/blog", "Blog"),
     ("/faq", "FAQ"),
-    ("/book", "Book Now"),
+    (BOOKING, "Book Now"),
 ]
 
 
@@ -794,7 +802,7 @@ def organization(page_url):
             "Piekarski, formerly of the Wella Professionals North America Signature Artist Team."
         ),
         "logo": {"@type": "ImageObject", "url": f"{SITE}/images/logo.png"},
-        "image": SITE + "/og-card.jpg",
+        "image": SITE + "/images/derek-at-the-chair-1200x800.jpg",
         "priceRange": "$$",
         "founder": {"@type": "Person", "name": "Derek Piekarski"},
         "address": {
@@ -852,11 +860,11 @@ def organization(page_url):
         ],
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.9",
+            "ratingValue": RATING,
             "bestRating": "5",
             "worstRating": "1",
-            "ratingCount": "247",
-            "reviewCount": "247",
+            "ratingCount": REVIEWS,
+            "reviewCount": REVIEWS,
         },
         "contactPoint": {
             "@type": "ContactPoint",
@@ -905,12 +913,12 @@ def service_schema(slug, url):
                 "itemOffered": {"@type": "Service", "name": name},
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/InStock",
-                "url": f"{SITE}/book",
+                "url": BOOKING,
             }],
         },
         "aggregateRating": {
-            "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5",
-            "ratingCount": "247", "reviewCount": "247",
+            "@type": "AggregateRating", "ratingValue": RATING, "bestRating": "5",
+            "ratingCount": REVIEWS, "reviewCount": REVIEWS,
         },
     }
 
@@ -1003,11 +1011,21 @@ def faq_schema(qas):
     }
 
 
+def dial(text):
+    """Make the phone number in an answer tappable.
+
+    Half of these answers end by telling the reader to call, and on a phone a
+    number they have to memorise and retype is a dropped booking. The schema
+    keeps the plain text — only the rendered answer gets the link."""
+    return text.replace(
+        PHONE, f'<a href="tel:{PHONE_HREF}" class="tel-link">{PHONE}</a>')
+
+
 def faq_html(qas, heading="Frequently asked <em>questions</em>"):
     items = "\n".join(
         f'''        <div class="faq-item">
           <h3 class="faq-question">{esc(q)}</h3>
-          <div class="faq-answer"><p>{esc(a)}</p></div>
+          <div class="faq-answer"><p>{dial(esc(a))}</p></div>
         </div>'''
         for q, a in qas
     )
@@ -1025,7 +1043,9 @@ def faq_html(qas, heading="Frequently asked <em>questions</em>"):
 
 
 def xlinks_html(pairs, heading="Explore more"):
-    links = "\n".join(f'        <a href="{u}">{esc(t)}</a>' for u, t in pairs)
+    links = "\n".join(
+        f'        <a href="{u}"{EXT_ATTR if u.startswith("http") else ""}>{esc(t)}</a>'
+        for u, t in pairs)
     return f'''
   <section class="xlinks" aria-labelledby="xlinks-heading">
     <div class="xlinks-inner">
@@ -1053,12 +1073,12 @@ CTA_BAR = '''
   </div>
 '''
 
-TRUST_BAR = '''
+TRUST_BAR = ('''
   <section class="trust-bar" aria-label="Why clients choose Craft Collective">
     <div class="trust-inner">
       <div class="trust-item">
         <span class="trust-value"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
-        <span class="trust-label">4.9 from 247 reviews</span>
+        <span class="trust-label">{rating} from {reviews} reviews</span>
       </div>
       <div class="trust-item">
         <span class="trust-value">Wella</span>
@@ -1074,7 +1094,7 @@ TRUST_BAR = '''
       </div>
     </div>
   </section>
-'''
+''').format(rating=RATING, reviews=REVIEWS)
 
 SKIP_LINK = '<a class="skip-link" href="#main">Skip to content</a>'
 
@@ -1095,6 +1115,8 @@ SALON = {
     "auburn": "/images/icy-blonde-long",
     "bob": "/images/blonde-balayage-waves",
     "platinum": "/images/platinum-lob",
+    "curtain": "/images/blonde-curtain-bangs",
+    "smooth": "/images/straight-blonde-back",
 }
 
 # Every image on this site is the salon's own photography, downloaded from
@@ -1116,85 +1138,94 @@ STOCK = {
     "studio": "/images/salon-interior",
 }
 
-# (hero image, hero alt, [three work shots as (src, alt)])
+# Alt text belongs to the photograph, not to the slot it is dropped into.
+# Keyed per slot it drifts the moment a picture is swapped: the same file of
+# long platinum waves was being announced as "men's textured crop" on one page
+# and "keratin-smoothed layers" on another. One line per image, reused
+# everywhere that image appears, cannot go out of step with what is on screen.
+IMG_ALT = {
+    "/images/ash-blonde-long": "Long cool-toned ash blonde by Craft Collective Salon Group",
+    "/images/blonde-balayage-smiling": "Lived-in blonde balayage by Craft Collective Salon Group",
+    "/images/blonde-balayage-waves": "Hand-painted blonde balayage with soft waves, Craft Collective Salon Group",
+    "/images/blonde-curtain-bangs": "Blonde cut with curtain bangs by Craft Collective Salon Group",
+    "/images/brunette-shag": "Long brunette shag with curtain bangs by Craft Collective Salon Group",
+    "/images/copper-dimensional": "Dimensional copper hair colour by Craft Collective Salon Group",
+    "/images/derek-at-the-chair": "Derek Piekarski colouring a client at Craft Collective Salon Group",
+    "/images/derek-styling": "Derek Piekarski styling a client at Craft Collective Salon Group",
+    "/images/dimensional-balayage": "Dimensional brunette-to-blonde balayage by Craft Collective Salon Group",
+    "/images/face-framing-blonde": "Face-framing blonde highlights by Craft Collective Salon Group",
+    "/images/hair-care-products": "Professional hair care products stocked at Craft Collective Salon Group",
+    "/images/icy-blonde-long": "Long icy blonde blonding work by Craft Collective Salon Group",
+    "/images/platinum-lob": "Platinum blonde lob by Craft Collective Salon Group",
+    "/images/platinum-long-waves": "Long platinum blonde waves by Craft Collective Salon Group",
+    "/images/salon-interior": "Inside the Craft Collective Salon Group studio",
+    "/images/soft-blonde-balayage": "Soft blonde balayage with beach waves, Craft Collective Salon Group",
+    "/images/soft-blonde-lob": "Soft blonde lob with lived-in colour, Craft Collective Salon Group",
+    "/images/straight-blonde-back": "Smoothed and straightened blonde by Craft Collective Salon Group",
+    "/images/stylist-at-work": "A Craft Collective stylist finishing a cut in the North Hills studio",
+}
+
+
+def alt_for(src, suffix=""):
+    """The alt line for an image, plus an optional area qualifier."""
+    return IMG_ALT[src] + suffix
+
+
+# (hero image, [three work shots])
 SERVICE_ART = {
-    "balayage-pittsburgh": (
-        SALON["balayage"], "Hand-painted brunette balayage by Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["caramel"], "Caramel balayage with soft grow-out, Pittsburgh"),
-         (STOCK["sunkissed"], "Sun-kissed brunette balayage, Craft Collective Pittsburgh"),
-         (STOCK["honey"], "Honey blonde balayage hand-painted in Pittsburgh")]),
-    "highlights-pittsburgh": (
-        SALON["platinum"], "Platinum foil highlights by Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["livedin"], "Lived-in blonde foil highlights, Pittsburgh"),
-         (STOCK["caramel"], "Partial highlights framing the face, Pittsburgh salon"),
-         (STOCK["honey"], "Full head of foils finished with a custom toner, Pittsburgh")]),
-    "hair-color-pittsburgh": (
-        SALON["auburn"], "Rich auburn hair colour transformation at Craft Collective, Pittsburgh",
-        [(STOCK["red"], "Dimensional red hair colour, Craft Collective Pittsburgh"),
-         (STOCK["livedin"], "Lived-in dimensional colour, Pittsburgh salon"),
-         (SALON["platinum"], "Platinum colour transformation, Pittsburgh")]),
-    "hair-extensions-pittsburgh": (
-        STOCK["extensions"], "Hand-tied hair extensions fitted at Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["length"], "Length and volume added with hand-tied wefts, Pittsburgh"),
-         (STOCK["livedin"], "Extensions colour-matched to existing balayage, Pittsburgh"),
-         (SALON["interior"], "Extension fitting at the Craft Collective studio, Pittsburgh")]),
-    "keratin-treatment-pittsburgh": (
-        SALON["bob"], "Smooth, frizz-free finish after a keratin treatment, Pittsburgh",
-        [(STOCK["layers"], "Keratin-smoothed layers holding through Pittsburgh humidity"),
-         (STOCK["livedin"], "Frizz-free smoothing on coloured hair, Pittsburgh salon"),
-         (SALON["interior"], "Keratin smoothing service at Craft Collective, Pittsburgh")]),
-    "haircuts-pittsburgh": (
-        SALON["bob"], "Precision bob haircut at Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["layers"], "Textured long layers cut in Pittsburgh"),
-         (STOCK["mens"], "Precision cutting at Craft Collective, Pittsburgh"),
-         (SALON["interior"], "The cutting floor at Craft Collective Pittsburgh")]),
-    "blowout-pittsburgh": (
-        STOCK["station"], "Blowout and styling at the Craft Collective styling station, Pittsburgh",
-        [(SALON["bob"], "Smooth blowout finish, Craft Collective Pittsburgh"),
-         (STOCK["layers"], "Round-brush blowout with movement, Pittsburgh salon"),
-         (STOCK["livedin"], "Blowout on lived-in blonde colour, Pittsburgh")]),
-    "bridal-hair-pittsburgh": (
-        STOCK["bridal"], "Bridal hair styling at Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["honey"], "Soft bridal waves styled in Pittsburgh"),
-         (STOCK["layers"], "Wedding party styling at Craft Collective, Pittsburgh"),
-         (SALON["interior"], "Bridal preparation at the Craft Collective studio, Pittsburgh")]),
-    "mens-grooming-pittsburgh": (
-        STOCK["mens"], "Men's precision haircut at Craft Collective Salon Group, Pittsburgh",
-        [(STOCK["layers"], "Men's textured crop cut in Pittsburgh"),
-         (SALON["bob"], "Clipper and scissor work, Craft Collective Pittsburgh"),
-         (SALON["interior"], "Men's grooming at the Craft Collective studio, Pittsburgh")]),
+    "balayage-pittsburgh": (SALON["balayage"], [
+        STOCK["caramel"], STOCK["sunkissed"], STOCK["honey"]]),
+    "highlights-pittsburgh": (SALON["platinum"], [
+        STOCK["livedin"], STOCK["caramel"], STOCK["honey"]]),
+    "hair-color-pittsburgh": (SALON["auburn"], [
+        STOCK["red"], STOCK["livedin"], SALON["platinum"]]),
+    "hair-extensions-pittsburgh": (STOCK["extensions"], [
+        STOCK["length"], STOCK["livedin"], SALON["curtain"]]),
+    "keratin-treatment-pittsburgh": (SALON["smooth"], [
+        STOCK["layers"], STOCK["livedin"], SALON["curtain"]]),
+    "haircuts-pittsburgh": (STOCK["sunkissed"], [
+        STOCK["layers"], STOCK["mens"], SALON["curtain"]]),
+    "blowout-pittsburgh": (STOCK["station"], [
+        STOCK["balayage_paint"], STOCK["layers"], STOCK["livedin"]]),
+    "bridal-hair-pittsburgh": (STOCK["bridal"], [
+        STOCK["honey"], STOCK["layers"], SALON["curtain"]]),
+    "mens-grooming-pittsburgh": (STOCK["mens"], [
+        STOCK["layers"], STOCK["balayage_paint"], SALON["curtain"]]),
 }
 
 BLOG_ART = {
-    "mens-grooming-trends-2026": (STOCK["mens"], "Men's textured crop and fade, Craft Collective Salon Group Pittsburgh"),
-    "spring-hair-care-pittsburgh": (STOCK["sunkissed"], "Sun-kissed spring hair colour by Craft Collective, Pittsburgh"),
-    "top-hair-trends-pittsburgh-2026": (STOCK["livedin"], "Lived-in dimensional blonde, a leading 2026 Pittsburgh hair trend"),
+    "mens-grooming-trends-2026": STOCK["mens"],
+    "spring-hair-care-pittsburgh": STOCK["sunkissed"],
+    "top-hair-trends-pittsburgh-2026": STOCK["livedin"],
 }
 
 PAGE_ART = {
-    "hair-services-pittsburgh": (SALON["interior"], "Craft Collective Salon Group studio floor, Pittsburgh North Hills"),
-    "reviews": (SALON["balayage"], "Balayage work reviewed by Craft Collective clients in Pittsburgh"),
-    "book": (SALON["interior"], "The Craft Collective Salon Group studio on Babcock Blvd, Pittsburgh"),
-    "faq": (STOCK["station"], "Styling station at Craft Collective Salon Group, Pittsburgh"),
-    "hair-care-tips": (STOCK["sunkissed"], "Colour-treated hair cared for by Craft Collective, Pittsburgh"),
-    "pittsburgh-hair-salon-guide-2026": (SALON["interior"], "Inside Craft Collective Salon Group, Pittsburgh North Hills"),
+    "hair-services-pittsburgh": SALON["curtain"],
+    "reviews": SALON["balayage"],
+    "book": SALON["curtain"],
+    "faq": STOCK["station"],
+    "hair-care-tips": STOCK["sunkissed"],
+    # A guide to choosing a salon wants the room, not a face. The square
+    # portrait that was here lost the crown of the head to the band crop.
+    "pittsburgh-hair-salon-guide-2026": SALON["interior"],
 }
 
-# Location pages alternate so neighbouring areas do not look identical.
+# Location pages alternate so neighbouring areas do not look identical. The
+# second value qualifies the alt with the area where that reads naturally.
 AREA_ART = [
-    (SALON["interior"], "Craft Collective Salon Group studio, Pittsburgh North Hills"),
-    (SALON["balayage"], "Balayage by Craft Collective Salon Group for {} clients"),
-    (STOCK["station"], "Styling station at Craft Collective Salon Group near {}"),
-    (SALON["platinum"], "Blonding work by Craft Collective for {} clients"),
-    (SALON["bob"], "Precision cutting at Craft Collective, serving {}"),
-    (STOCK["studio"], "Craft Collective Salon Group interior, serving {}"),
+    (SALON["curtain"], ""),
+    (SALON["balayage"], ""),
+    (STOCK["station"], ", near {}"),
+    (SALON["platinum"], ""),
+    (SALON["bob"], ", serving {}"),
+    (STOCK["studio"], ", serving {}"),
 ]
 
 
-def hero_media(src, alt, cls="loc-hero-img"):
+def hero_media(src, suffix="", cls="loc-hero-img"):
     return f'''
   <div class="{cls}">
-    <img src="{src}" alt="{esc(alt)}" />
+    <img src="{src}" alt="{esc(alt_for(src, suffix))}" />
   </div>
 '''
 
@@ -1202,8 +1233,8 @@ def hero_media(src, alt, cls="loc-hero-img"):
 def service_shots(shots, name):
     items = "\n".join(
         f'''      <figure class="svc-shot">
-        <img src="{s}" alt="{esc(a)}" />
-      </figure>''' for s, a in shots)
+        <img src="{s}" alt="{esc(alt_for(s))}" />
+      </figure>''' for s in shots)
     return f'''
   <section class="svc-work" aria-labelledby="svc-work-heading">
     <div class="svc-work-inner">
@@ -1302,24 +1333,57 @@ def _asset_key(src):
     return "w:" + m.group(1) if m else None
 
 
+def _committed(src):
+    """Every committed derivative of an image base, as (w, h, name)."""
+    base = re.sub(r"-\d+x\d+\.jpg$", "", src).rstrip("/")
+    if not base.startswith("/images/"):
+        return []
+    return sorted(
+        (int(m.group(1)), int(m.group(2)), os.path.relpath(p, os.path.join(ROOT, "images")))
+        for p in glob.glob(os.path.join(ROOT, base.lstrip("/") + "-*.jpg"))
+        if (m := re.search(r"-(\d+)x(\d+)\.jpg$", p)))
+
+
 def img_ratio(src, fallback=1.0):
     d = IMG_DIMS.get(_asset_key(src) or "")
-    return (d[0] / d[1]) if d else fallback
+    if d:
+        return d[0] / d[1]
+    # Not in the probed table. Read the shape off the largest derivative that
+    # was committed rather than assuming a square: assuming one declared a
+    # 1280x1918 portrait as 1280x1280 in width/height, which is a layout shift
+    # the moment the file lands.
+    have = _committed(src)
+    if not have:
+        return fallback
+    # Largest by area, not by width: the stylist portraits are square up to
+    # 1024 and carry one 1200x800 alongside them purely for schema, so "widest"
+    # would have called a square set 3:2 and rebuilt every srcset around it.
+    w, h, _ = max(have, key=lambda c: c[0] * c[1])
+    return w / h
 
 
 def _variant(src, w, h):
     """Point a local image base at the committed derivative nearest to w x h."""
     if not src.startswith("/images/"):
         return src
-    base = re.sub(r"-\d+x\d+\.jpg$", "", src).rstrip("/")
-    have = sorted(
-        (int(m.group(1)), int(m.group(2)), os.path.basename(p))
-        for p in glob.glob(os.path.join(ROOT, "images", os.path.basename(base) + "-*.jpg"))
-        if (m := re.search(r"-(\d+)x(\d+)\.jpg$", p)))
+    have = _committed(src)
     if not have:
         return src
-    fit = [c for c in have if c[0] >= w] or [have[-1]]
-    return "/images/" + fit[0][2]
+    # Width alone is not enough. Several bases carry both a 4:3 and a 3:1 crop
+    # at the same width, and picking on width put the letterbox strip inside a
+    # 4:3 card — a 640x214 file stretched into a 640x480 hole. Match the shape
+    # the layout asked for first, then take the smallest wide-enough file.
+    # Shape first, size second. Compare shapes in log space in 5% buckets, so a
+    # 640x214 and a 960x320 count as the same crop; then take the smallest file
+    # in that shape that is wide enough, or the largest one there is. Choosing
+    # on width alone put a 3:1 letterbox inside a 4:3 card, and let the 1200x800
+    # still that only exists for schema serve the 1440w slot of a square photo.
+    want = math.log(w / max(1, h))
+    shape = lambda c: round(abs(math.log(c[0] / c[1]) - want) / 0.05)
+    keep = min(shape(c) for c in have)
+    same = [c for c in have if shape(c) == keep]
+    fit = [c for c in same if c[0] >= w] or [same[-1]]
+    return "/images/" + min(fit, key=lambda c: c[0])[2]
 
 
 # role -> (candidate widths, sizes attribute, rendered aspect ratio or None to
@@ -1329,18 +1393,43 @@ IMG_ROLES = {
     "hero-split":  ([480, 768, 1024, 1440], "(min-width: 901px) 50vw, 100vw", None),
     "hero-full":   ([640, 960, 1280, 1600], "100vw", None),
     "article":     ([640, 960, 1280, 1600], "(min-width: 1240px) 1200px, 100vw", 3.0),
+    # A band set into the run of an article: the 800px measure below 1000px,
+    # breaking out to 1100px above it.
+    "article-fig": ([480, 640, 960, 1280, 1600],
+                    "(min-width: 1140px) 1100px, (min-width: 1000px) calc(100vw - 4rem), "
+                    "(min-width: 864px) 736px, calc(100vw - 4rem)", 2.0),
     "card":        ([320, 480, 640, 800], "(min-width: 901px) 380px, (min-width: 601px) 50vw, 100vw", 4 / 3),
     "portrait":    ([280, 420, 560], "(min-width: 901px) 280px, (min-width: 601px) 50vw, 100vw", 1.0),
-    "gallery":     ([320, 480, 640, 800], "(min-width: 901px) 380px, 50vw", 4 / 3),
+    # The gallery grid is portrait by default with two exceptions, and each
+    # shape needs its own ladder: one 4:3 rule for the whole grid asked the
+    # browser for a landscape file and then cropped it back to 3:4 on screen.
+    "gallery":     ([240, 480, 720], "(min-width: 901px) 380px, 50vw", 3 / 4),
+    "gallery-land": ([320, 480, 640, 800], "(min-width: 901px) 380px, 50vw", 4 / 3),
+    "gallery-wide": ([480, 960, 1440], "(min-width: 901px) 780px, 100vw", 16 / 9),
 }
 
 
-def classify_img(tag, before):
+def classify_img(tag, before, slug=""):
     """Work out an image's layout role from the container it sits in."""
     if "article-hero-img" in tag:
         return "article"
     opens = re.findall(r'<(?:div|section|a|figure|article)\b[^>]*class="([^"]+)"[^>]*>', before)
-    parent = opens[-1].split()[0] if opens else ""
+    classes = opens[-1].split() if opens else []
+    parent = classes[0] if classes else ""
+    # Two grids share the class name and disagree on the default shape: the
+    # gallery page stands its tiles portrait and marks the exceptions, the home
+    # page lays them landscape and marks the tall one. Asking for the wrong one
+    # fetches a landscape file and then crops it back to portrait on screen.
+    if parent == "gallery-item":
+        if "wide" in classes:
+            return "gallery-wide"
+        if "landscape" in classes:
+            return "gallery-land"
+        return "gallery" if slug == "hair-salon-gallery-pittsburgh" else "gallery-land"
+    if parent == "gallery-item-tall":
+        return "gallery"
+    if parent == "gallery-item-wide":
+        return "gallery-land"
     return {
         "hero-image": "hero-split",
         "hero-image-panel": "hero-split",
@@ -1351,7 +1440,8 @@ def classify_img(tag, before):
         "gallery-item": "gallery",
         "blog-card-img": "card",
         "service-card-img": "card",
-        "svc-shot": "gallery",
+        "svc-shot": "gallery-land",
+        "article-figure": "article-fig",
         "loc-hero-img": "hero-full",
         "blog-hero-img": "article",
     }.get(parent, "card")
@@ -1373,8 +1463,17 @@ def enhance_img(tag, role, lcp=False):
         tag = re.sub(rf'\s+{attr}="[^"]*"', "", tag)
 
     if src.startswith("/images/"):
-        srcset = ", ".join(
-            f"{_variant(src, w, max(1, round(w / ratio)))} {w}w" for w in widths)
+        # Two candidate widths can land on the same file once the ladder runs
+        # past the largest committed size. Keep the first descriptor for it and
+        # drop the rest: a repeated entry tells the browser nothing.
+        picked, seen = [], set()
+        for w in widths:
+            v = _variant(src, w, max(1, round(w / ratio)))
+            if v in seen:
+                continue
+            seen.add(v)
+            picked.append(f"{v} {w}w")
+        srcset = ", ".join(picked)
         tag = tag.replace(f'src="{src}"',
                           f'src="{_variant(src, widths[-2], max(1, round(widths[-2] / ratio)))}"'
                           f' srcset="{srcset}" sizes="{sizes}"')
@@ -1389,7 +1488,7 @@ def enhance_img(tag, role, lcp=False):
     return tag[:-1].rstrip().rstrip("/").rstrip() + extra + " />"
 
 
-def process_images(txt):
+def process_images(txt, slug=""):
     """Rewrite every <img> on the page and preload the LCP candidate."""
     body_start = txt.find("<body")
     if body_start == -1:
@@ -1406,7 +1505,7 @@ def process_images(txt):
     for m in re.finditer(r"<img\b[^>]*>", txt[body_start:]):
         start, end = body_start + m.start(), body_start + m.end()
         before = txt[max(0, start - 300):start]
-        role = classify_img(m.group(0), before)
+        role = classify_img(m.group(0), before, slug)
         new = enhance_img(m.group(0), role, lcp=first)
 
         if first:
@@ -1517,21 +1616,21 @@ def get_xlinks(kind, slug):
                           ("/hair-salon-gallery-pittsburgh", "See Our Work"),
                           ("/locations/north-hills-pittsburgh", "North Hills Salon"),
                           ("/locations/canonsburg", "Canonsburg Salon"),
-                          ("/book", "Book Now")])
+                          (BOOKING, "Book Now")])
     if kind == "location":
         others = [(u, n) for u, n in AREA_LINKS if not u.endswith("/" + slug)][:6]
         return ("Services and nearby areas",
-                SERVICE_LINKS[:6] + others + [("/book", "Book Now")])
+                SERVICE_LINKS[:6] + others + [(BOOKING, "Book Now")])
     if kind == "stylist":
         return ("Book a service or browse the team",
                 SERVICE_LINKS[:6] + [("/meet-the-team", "Full Team"),
                                      ("/derek-piekarski", "Derek Piekarski"),
                                      ("/hair-salon-gallery-pittsburgh", "Gallery"),
                                      ("/reviews", "Reviews"),
-                                     ("/book", "Book Now")])
+                                     (BOOKING, "Book Now")])
     if kind in ("blog-post", "blog-index"):
         return ("Services featured in this article",
-                SERVICE_LINKS + [("/blog", "All Articles"), ("/book", "Book Now")])
+                SERVICE_LINKS + [("/blog", "All Articles"), (BOOKING, "Book Now")])
     return ("Explore Craft Collective", CORE_LINKS + SERVICE_LINKS[:6] + AREA_LINKS[:4])
 
 
@@ -1567,8 +1666,17 @@ def build_breadcrumb(kind, slug, txt, url):
 def blogposting(slug, txt, url):
     title, published, topic = BLOG_POSTS[slug]
     desc = re.search(r'name="description" content="([^"]*)"', txt)
-    img = re.search(r'class="article-hero-img"[^>]*src="([^"]*)"', txt) or \
+    img = re.search(r'<img[^>]*src="([^"]*)"[^>]*class="(?:article|blog)-hero-img"', txt) or \
+          re.search(r'<div class="blog-hero-img">\s*<img[^>]*src="([^"]*)"', txt) or \
           re.search(r'property="og:image" content="([^"]*)"', txt)
+    # Posts whose hero comes from BLOG_ART have not had it injected yet at the
+    # point the schema is built, so read it off the table rather than the page.
+    hero_url = BLOG_ART.get(slug) or (img.group(1) if img else "/og-card.jpg")
+    schema_still = _variant(hero_url, 1200, 800)
+    if schema_still != hero_url and re.search(r"-1200x800\.jpg$", schema_still):
+        hero_url = schema_still
+    if hero_url.startswith("/"):
+        hero_url = SITE + hero_url
     body = txt.split("</style>", 1)[-1]
     words = len(re.sub(r"<[^>]+>", " ", body).split())
     return {
@@ -1577,7 +1685,7 @@ def blogposting(slug, txt, url):
         "@id": url + "#article",
         "headline": norm(title),
         "description": norm(desc.group(1)) if desc else norm(title),
-        "image": img.group(1) if img else "",
+        "image": hero_url,
         "datePublished": published,
         "dateModified": date.today().isoformat(),
         "wordCount": words,
@@ -1629,7 +1737,7 @@ def scrape_visible_faq(txt):
 TITLE_OVERRIDES = {
     "index.html": (
         "Best Hair Salon Pittsburgh PA | Craft Collective Salon",
-        "Pittsburgh's top-rated hair salon — 4.9 stars from 247 reviews. Balayage, highlights, "
+        f"Pittsburgh's top-rated hair salon — {RATING} stars from {REVIEWS} reviews. Balayage, highlights, "
         "hair color, extensions and keratin treatments across greater Pittsburgh. Led by Wella "
         f"Professionals artist Derek Piekarski. North Hills & Canonsburg. Call {PHONE}.",
     ),
@@ -1642,7 +1750,7 @@ TITLE_OVERRIDES = {
     "services/highlights-pittsburgh/index.html": (
         "Highlights Pittsburgh PA | Partial & Full Foils",
         "Highlights in Pittsburgh — partial foils, full foils, lowlights and dimensional blonding "
-        "at Craft Collective Salon Group. Wella Professionals color, 4.9-star rated. North Hills "
+        f"at Craft Collective Salon Group. Wella Professionals color, {RATING}-star rated. North Hills "
         f"& Canonsburg. Book online or call {PHONE}.",
     ),
     "services/hair-color-pittsburgh/index.html": (
@@ -1721,8 +1829,8 @@ TITLE_OVERRIDES = {
         "you what it takes on your hair.",
     ),
     "reviews/index.html": (
-        "Reviews | Best Hair Salon Pittsburgh PA | 4.9 Stars",
-        "4.9 stars from 247 client reviews. Read what Pittsburgh clients say about balayage, "
+        f"Reviews | Best Hair Salon Pittsburgh PA | {RATING} Stars",
+        f"{RATING} stars from {REVIEWS} client reviews. Read what Pittsburgh clients say about balayage, "
         "highlights, color correction and precision cutting at Craft Collective Salon Group in "
         "the North Hills and Canonsburg.",
     ),
@@ -1747,7 +1855,7 @@ TITLE_OVERRIDES = {
         "About Craft Collective | Hair Salon Pittsburgh PA",
         "Craft Collective Salon Group serves greater Pittsburgh from studios in the North Hills "
         "and Canonsburg. Every colorist trained by Wella Professionals artist Derek Piekarski. "
-        "4.9 stars from 247 reviews.",
+        f"{RATING} stars from {REVIEWS} reviews.",
     ),
     "hair-care-tips/index.html": (
         "Hair Care Tips from Pittsburgh Salon Stylists",
@@ -1790,8 +1898,8 @@ def area_meta(slug):
             f"Hair Salon Near {name} PA | Craft Collective Salon",
         ),
         f"Craft Collective Salon Group serves {name} clients from our Pittsburgh North Hills and "
-        f"Canonsburg studios. Balayage, highlights, hair color, keratin and extensions — 4.9 stars "
-        f"from 247 reviews. Book online or call {PHONE}.",
+        f"Canonsburg studios. Balayage, highlights, hair color, keratin and extensions — {RATING} stars "
+        f"from {REVIEWS} reviews. Book online or call {PHONE}.",
     )
 
 
@@ -1844,7 +1952,7 @@ def og_crop(src):
     order, so the claim is made true rather than dropped — an accurate size
     lets a scraper lay the card out before the image lands, and a wrong one
     gets the card letterboxed or rejected outright."""
-    return "/og-card.jpg"
+    return SITE + "/og-card.jpg"
 
 
 def set_meta(txt, title, desc, url):
@@ -1901,7 +2009,7 @@ def process(path):
 
     # ---- 2. head additions ------------------------------------------------
     head_bits = [
-        '<meta name="theme-color" content="#17150f" />',
+        '<meta name="theme-color" content="#1A2440" />',
         '<meta name="format-detection" content="telephone=yes" />',
         '<meta name="author" content="Craft Collective Salon Group" />',
         '<meta name="geo.region" content="US-PA" />',
@@ -2129,15 +2237,15 @@ def process(path):
     # want to see before they book it.
     art = None
     if kind == "service" and slug in SERVICE_ART:
-        art = SERVICE_ART[slug][:2]
+        art = (SERVICE_ART[slug][0], "")
     elif kind == "location":
         i = sorted(AREAS).index(slug) % len(AREA_ART) if slug in AREAS else 0
-        src, alt = AREA_ART[i]
-        art = (src, alt.format(AREAS.get(slug, (slug, None))[0]))
+        src, suffix = AREA_ART[i]
+        art = (src, suffix.format(AREAS.get(slug, (slug, None))[0]))
     elif kind == "blog-post" and slug in BLOG_ART:
-        art = BLOG_ART[slug]
+        art = (BLOG_ART[slug], "")
     elif slug in PAGE_ART:
-        art = PAGE_ART[slug]
+        art = (PAGE_ART[slug], "")
 
     if art and hero:
         cls = "blog-hero-img" if kind == "blog-post" else "loc-hero-img"
@@ -2158,7 +2266,7 @@ def process(path):
     # FAQ block + cross-links, inserted ahead of the closing CTA / footer.
     tail = ""
     if kind == "service" and slug in SERVICE_ART:
-        tail += marker("work", service_shots(SERVICE_ART[slug][2], SERVICES[slug]))
+        tail += marker("work", service_shots(SERVICE_ART[slug][1], SERVICES[slug]))
     if faqs:
         tail += marker("faq", faq_html(faqs))
     xl_heading, xl_pairs = get_xlinks(kind, slug)
@@ -2188,7 +2296,7 @@ def process(path):
     txt = txt.replace("</body>", marker("cta", CTA_BAR) + "\n</body>", 1)
 
     # Images last, so the pipeline also covers everything injected above.
-    txt, preload = process_images(txt)
+    txt, preload = process_images(txt, slug)
 
     if preload:
         psrc, pset, psizes = preload
