@@ -1587,7 +1587,7 @@ def blogposting(slug, txt, url):
             "@type": "Person",
             "name": "Derek Piekarski",
             "url": f"{SITE}/derek-piekarski",
-            "jobTitle": "Owner & Master Stylist",
+            "jobTitle": "Owner / Stylist",
         },
         "publisher": {"@id": f"{SITE}/#organization"},
         "isPartOf": {"@type": "Blog", "name": "Craft Collective Salon Group Blog", "url": f"{SITE}/blog"},
