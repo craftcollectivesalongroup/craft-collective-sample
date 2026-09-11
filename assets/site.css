@@ -2676,3 +2676,12 @@ footer a.tel-link:focus {
 
   .strip-inner { animation: none; transform: none; }
 }
+
+/* The trust band's labels are set in wide-tracked uppercase in four equal
+   columns, so anything longer than a couple of words wraps. Left to itself the
+   wrap goes ragged — "Pittsburgh-area studios" broke 118px/56px on a phone.
+   Balancing evens the lines out so a two- or three-line label reads as a
+   deliberate block rather than an overflow. */
+.trust-label {
+  text-wrap: balance;
+}

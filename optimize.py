@@ -1058,18 +1058,18 @@ TRUST_BAR = '''
     <div class="trust-inner">
       <div class="trust-item">
         <span class="trust-value"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
-        <span class="trust-label">4.9 from 247 reviews</span>
+        <span class="trust-label">5.0 from 778 reviews</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">Wella</span>
-        <span class="trust-label">Professionals Artist Team</span>
+        <span class="trust-value">2</span>
+        <span class="trust-label">Stylists on Wella Professionals and R+Co artist teams</span>
       </div>
       <div class="trust-item">
         <span class="trust-value">2</span>
         <span class="trust-label">Pittsburgh-area studios</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">39</span>
+        <span class="trust-value">46</span>
         <span class="trust-label">Stylists &amp; specialists</span>
       </div>
     </div>
