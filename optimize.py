@@ -1082,15 +1082,15 @@ TRUST_BAR = ('''
         <span class="trust-label">{rating} from {reviews} reviews</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">Wella</span>
-        <span class="trust-label">Professionals Artist Team</span>
+        <span class="trust-value">2</span>
+        <span class="trust-label">Stylists on Wella Professionals and R+Co artist teams</span>
       </div>
       <div class="trust-item">
         <span class="trust-value">2</span>
         <span class="trust-label">Pittsburgh-area studios</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">39</span>
+        <span class="trust-value">46</span>
         <span class="trust-label">Stylists &amp; specialists</span>
       </div>
     </div>
