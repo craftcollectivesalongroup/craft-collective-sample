@@ -2685,3 +2685,13 @@ footer a.tel-link:focus {
 .trust-label {
   text-wrap: balance;
 }
+
+/* The award badge on /derek-piekarski carried a 2.5rem bottom margin to clear
+   the booking button that used to sit under it. With that button gone the
+   margin is trailing: 88px of dead space under the badge on a phone against
+   the 48px the padding intends, and a 20px upward shift of the whole block
+   where the hero centres it vertically. Scoped to :last-child so the spacing
+   comes back on its own if anything is ever placed after it again. */
+.award-badge:last-child {
+  margin-bottom: 0;
+}
