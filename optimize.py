@@ -487,7 +487,7 @@ def area_faq(slug):
          f"Yes — {name} clients are a regular part of our books. Our North Hills studio at {NH_ADDR} is {drive}, and "
          f"we also have a Canonsburg studio at {CB_ADDR}."),
         (f"What is the best hair salon near {name}?",
-         f"Craft Collective Salon Group is rated 4.9 stars across 247 reviews and is led by Derek Piekarski, a former "
+         f"Craft Collective Salon Group is rated 5.0 stars across 809 reviews and is led by Derek Piekarski, a former "
          f"Wella Professionals North America Signature Artist. {name} clients come to us for balayage, highlights, "
          f"blonding, colour correction and precision cutting."),
         (f"How do I book an appointment from {name}?",
@@ -658,7 +658,7 @@ PAGE_FAQ = {
     ],
     "reviews": [
         ("How is Craft Collective Salon Group rated?",
-         "4.9 out of 5 stars across 247 client reviews, for balayage, highlights, colour correction and precision "
+         "5.0 out of 5 stars across 809 client reviews, for balayage, highlights, colour correction and precision "
          "cutting."),
         ("Where can I read reviews?",
          "Reviews appear on this page and on Google, and our work is posted on Instagram at "
@@ -852,11 +852,11 @@ def organization(page_url):
         ],
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.9",
+            "ratingValue": "5.0",
             "bestRating": "5",
             "worstRating": "1",
-            "ratingCount": "247",
-            "reviewCount": "247",
+            "ratingCount": "809",
+            "reviewCount": "809",
         },
         "contactPoint": {
             "@type": "ContactPoint",
@@ -909,8 +909,8 @@ def service_schema(slug, url):
             }],
         },
         "aggregateRating": {
-            "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5",
-            "ratingCount": "247", "reviewCount": "247",
+            "@type": "AggregateRating", "ratingValue": "5.0", "bestRating": "5",
+            "ratingCount": "809", "reviewCount": "809",
         },
     }
 
@@ -1058,7 +1058,7 @@ TRUST_BAR = '''
     <div class="trust-inner">
       <div class="trust-item">
         <span class="trust-value"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
-        <span class="trust-label">5.0 from 778 reviews</span>
+        <span class="trust-label">5.0 from 809 reviews</span>
       </div>
       <div class="trust-item">
         <span class="trust-value">2</span>
@@ -1629,7 +1629,7 @@ def scrape_visible_faq(txt):
 TITLE_OVERRIDES = {
     "index.html": (
         "Best Hair Salon Pittsburgh PA | Craft Collective Salon",
-        "Pittsburgh's top-rated hair salon — 4.9 stars from 247 reviews. Balayage, highlights, "
+        "Pittsburgh's top-rated hair salon — 5.0 stars from 809 reviews. Balayage, highlights, "
         "hair color, extensions and keratin treatments across greater Pittsburgh. Led by Wella "
         f"Professionals artist Derek Piekarski. North Hills & Canonsburg. Call {PHONE}.",
     ),
@@ -1642,7 +1642,7 @@ TITLE_OVERRIDES = {
     "services/highlights-pittsburgh/index.html": (
         "Highlights Pittsburgh PA | Partial & Full Foils",
         "Highlights in Pittsburgh — partial foils, full foils, lowlights and dimensional blonding "
-        "at Craft Collective Salon Group. Wella Professionals color, 4.9-star rated. North Hills "
+        "at Craft Collective Salon Group. Wella Professionals color, 5.0-star rated. North Hills "
         f"& Canonsburg. Book online or call {PHONE}.",
     ),
     "services/hair-color-pittsburgh/index.html": (
@@ -1721,8 +1721,8 @@ TITLE_OVERRIDES = {
         "you what it takes on your hair.",
     ),
     "reviews/index.html": (
-        "Reviews | Best Hair Salon Pittsburgh PA | 4.9 Stars",
-        "4.9 stars from 247 client reviews. Read what Pittsburgh clients say about balayage, "
+        "Reviews | Best Hair Salon Pittsburgh PA | 5.0 Stars",
+        "5.0 stars from 809 client reviews. Read what Pittsburgh clients say about balayage, "
         "highlights, color correction and precision cutting at Craft Collective Salon Group in "
         "the North Hills and Canonsburg.",
     ),
@@ -1747,7 +1747,7 @@ TITLE_OVERRIDES = {
         "About Craft Collective | Hair Salon Pittsburgh PA",
         "Craft Collective Salon Group serves greater Pittsburgh from studios in the North Hills "
         "and Canonsburg. Every colorist trained by Wella Professionals artist Derek Piekarski. "
-        "4.9 stars from 247 reviews.",
+        "5.0 stars from 809 reviews.",
     ),
     "hair-care-tips/index.html": (
         "Hair Care Tips from Pittsburgh Salon Stylists",
@@ -1790,8 +1790,8 @@ def area_meta(slug):
             f"Hair Salon Near {name} PA | Craft Collective Salon",
         ),
         f"Craft Collective Salon Group serves {name} clients from our Pittsburgh North Hills and "
-        f"Canonsburg studios. Balayage, highlights, hair color, keratin and extensions — 4.9 stars "
-        f"from 247 reviews. Book online or call {PHONE}.",
+        f"Canonsburg studios. Balayage, highlights, hair color, keratin and extensions — 5.0 stars "
+        f"from 809 reviews. Book online or call {PHONE}.",
     )
 
 

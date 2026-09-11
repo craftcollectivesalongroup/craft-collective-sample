@@ -148,7 +148,7 @@ FOOTER_HTML = """
           <a href="mailto:info@craftcollectivesalongroup.com">info@craftcollectivesalongroup.com</a><br><br>
           2014D Babcock Blvd, Pittsburgh PA 15209<br>
           115 W Pike St, Canonsburg PA 15317<br><br>
-          <div class="footer-rating">&#9733; 5.0 Stars - 700+ Reviews</div>
+          <div class="footer-rating">&#9733; 5.0 Stars - 800+ Reviews</div>
         </div>
       </div>
       <div>
@@ -342,7 +342,7 @@ def gen_location_pages():
                 {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00"}
             ],
             "areaServed": [name, "Pittsburgh", "North Hills"],
-            "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "worstRating": "1", "ratingCount": "247", "reviewCount": "247"}
+            "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "bestRating": "5", "worstRating": "1", "ratingCount": "809", "reviewCount": "809"}
         }
         
         faq_schema = {
@@ -402,7 +402,7 @@ def gen_location_pages():
       <p class="section-label">Why {name} Clients Choose Us</p>
       <h2 class="section-headline">Pittsburgh's <em>top-rated</em> salon</h2>
       <div class="prose">
-        <p>With a 4.9-star rating from over 247 reviews, Craft Collective is consistently ranked as one of the best hair salons in the Pittsburgh area. {name} residents choose us for our expert colorists, welcoming atmosphere, and the kind of personalized service you will not find at a chain salon.</p>
+        <p>With a 5.0-star rating from over 809 reviews, Craft Collective is consistently ranked as one of the best hair salons in the Pittsburgh area. {name} residents choose us for our expert colorists, welcoming atmosphere, and the kind of personalized service you will not find at a chain salon.</p>
         <p>Our team includes specialists in balayage and dimensional color, extension experts certified in hand-tied and tape-in methods, keratin smoothing treatment pros, and stylists who specialize in men's grooming, bridal styling, and corrective color work.</p>
         <p><a href="/meet-the-team">Meet our full team of stylists</a> or <a href="/reviews">read what our clients say about us</a>.</p>
       </div>
@@ -582,7 +582,7 @@ def gen_service_pages():
                 "url": SITE_URL,
                 "telephone": PHONE_TEL,
                 "address": {"@type": "PostalAddress", "streetAddress": NH_ADDRESS, "addressLocality": NH_CITY, "addressRegion": NH_STATE, "postalCode": NH_ZIP, "addressCountry": "US"},
-                "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "247"}
+                "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "bestRating": "5", "ratingCount": "809"}
             },
             "areaServed": {"@type": "City", "name": "Pittsburgh", "sameAs": "https://en.wikipedia.org/wiki/Pittsburgh"}
         }
