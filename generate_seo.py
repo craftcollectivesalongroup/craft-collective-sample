@@ -1,7 +1,25 @@
 #!/usr/bin/env python3
 """
 Craft Collective Salon Group - SEO Enhancement Generator
-Generates: location landing pages, service pages, blog posts, enhanced sitemap
+
+SUPERSEDED. This is the scaffolding script that generated the location,
+service and blog pages in the first place. `optimize.py` is the build pass
+now; see the README. This file is kept for reference, not for running.
+
+DO NOT RUN IT. Two things here will damage the live site:
+
+  * `gen_sitemap()` writes sitemap.xml from the hardcoded tables below.
+    `optimize.py` also writes sitemap.xml, but from the pages that actually
+    exist on disk. Running this one clobbers the real sitemap with whatever
+    these tables happen to say, which is how a stylist who has left gets
+    resurrected into the index.
+
+  * `team_members` and the other rosters here are hand-maintained copies of
+    what the site contains. They go stale the moment anyone joins or leaves,
+    and nothing checks them.
+
+If you need to add a service, area or post, edit the tables near the top of
+`optimize.py` and re-run that instead.
 """
 import os
 import json
@@ -799,7 +817,7 @@ def gen_sitemap():
         "derek-piekarski", "abigail-radziminski", "alexis-tara", "allison-logan",
         "alyvia-merz", "amanda-melvin", "angie-beattie", "bethany-yates", "billy-bremer",
         "carlena-bonomi", "caroline-radziminski", "cori-patterson", "delilah-keller",
-        "erin-mccleary", "grace-hartle", "greg-mckenzie", "greta-healy", "ha-na-ko",
+        "erin-mccleary", "greg-mckenzie", "greta-healy", "ha-na-ko",
         "jess-imler", "jess-mitsch", "kayla-quinn", "kelly-buttermore", "kerrie-kipp",
         "kim-hughes", "laurel-seager", "lauren-trudeau", "liz-potts", "logan-goetz",
         "mallory-puniak", "marie-puniak", "nicolette-chieffe", "olivia-spearl",
