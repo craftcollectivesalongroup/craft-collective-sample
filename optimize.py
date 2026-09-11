@@ -578,14 +578,11 @@ PAGE_FAQ = {
          "Ströher Global Education Master Trainer Award. He has been featured in Vogue India and in the ELMI Cut "
          "Craft video series."),
         ("Can I book an appointment with Derek?",
-         f"Yes. Derek sees clients at our North Hills studio at {NH_ADDR}. Book online or call {PHONE} — his column "
-         "books out further ahead than most, so plan early."),
+         f"Yes. If you have any questions, please call the salon directly at {PHONE}."),
         ("What does Derek specialise in?",
-         "Balayage, blonding, colour correction, dimensional colour, and hair education. Much of his career has been "
-         "spent teaching these techniques to other professionals."),
-        ("Does Derek train the rest of the team?",
-         "Yes. Every colourist at Craft Collective is trained by Derek directly, using the same curriculum he taught "
-         "to salon professionals across North America, Europe and Asia."),
+         "Although most of Derek's career was spent travelling and teaching hair colour theory and techniques, he has "
+         "always been an avid cutter — from short hair to long, from a blade to scissors. Derek is now available at "
+         "Craft Collective specialising in hair cutting only."),
     ],
     "hair-salon-gallery-pittsburgh": [
         ("Is the work in this gallery done at your salon?",
