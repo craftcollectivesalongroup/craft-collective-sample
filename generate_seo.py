@@ -381,7 +381,7 @@ def gen_location_pages():
       <h2 class="section-headline">Just <em>{dist}</em> from {name}</h2>
       <div class="prose">
         <p>Craft Collective Salon Group has two locations serving the greater Pittsburgh area. Our flagship studio is at <strong>{NH_ADDRESS}, Pittsburgh PA {NH_ZIP}</strong> in the North Hills, and our second studio is at <strong>{CB_ADDRESS}, Canonsburg PA {CB_ZIP}</strong>.</p>
-        <p>Both locations are led by owner and globally recognized stylist Derek Piekarski, a former Wella Professionals Signature Artist and Aveda/Estee Lauder Technical Capabilities Manager. Our team of 39 stylists specializes in balayage, highlights, blonding, dimensional color, keratin treatments, hair extensions, and precision cuts.</p>
+        <p>Both locations are led by owner and globally recognized stylist Derek Piekarski, a former Wella Professionals Signature Artist and Aveda/Estee Lauder Technical Capabilities Manager. With over 40 stylists and specialists, we specialize in balayage, highlights, blonding, dimensional color, keratin treatments, hair extensions, and precision cuts.</p>
       </div>
       <div class="nap-box">
         <h3>Craft Collective Salon Group</h3>
