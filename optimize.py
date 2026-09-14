@@ -1280,6 +1280,13 @@ IMG_DIMS = {
     "l:salon-portrait-room": (5584, 3666),
     "l:salon-wash-stations": (4000, 6000),
     "l:salon-color-bar": (5164, 3443),
+    # The Canonsburg studio photographs. Same arrangement: 4:3 thumbnail crops
+    # plus full-frame files. All three masters are portrait, so the thumbnail
+    # crop is doing real work — see the note in the page markup about the
+    # front-room crop being biased upward rather than centred.
+    "l:canonsburg-styling-row": (1932, 2576),
+    "l:canonsburg-front-room": (1932, 2576),
+    "l:canonsburg-portrait-wall": (1932, 2576),
 
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),

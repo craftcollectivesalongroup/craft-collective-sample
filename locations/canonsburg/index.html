@@ -448,13 +448,50 @@
       </div>
       <a href="tel:+17245147231" class="btn-primary">Call to Book &mdash; 724-514-7231</a>
     </div>
-    <div class="map-embed">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040!2d-80.1862!3d40.2637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s115+W+Pike+St%2C+Canonsburg%2C+PA+15317!5e0!3m2!1sen!2sus!4v1"
-        title="Craft Collective Salon Canonsburg map"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+    <div class="loc-media">
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040!2d-80.1862!3d40.2637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s115+W+Pike+St%2C+Canonsburg%2C+PA+15317!5e0!3m2!1sen!2sus!4v1"
+          title="Craft Collective Salon Canonsburg map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="loc-gallery">
+        <!-- All three masters are portrait, so the 4:3 thumbnails are real
+             crops rather than mild trims. The front-room crop is biased
+             upward rather than centred: a centred cut of that frame is mostly
+             the back of the sofa and bare floor, and the room itself — the
+             loft, the brick wall, the colour stations — sits in the upper
+             half. Regenerate it the same way if it is ever re-derived. -->
+        <p class="info-label">Inside the Studio</p>
+        <ul class="loc-shots">
+        <li>
+          <a class="loc-shot" href="/images/canonsburg-front-room-1200x1600.jpg"
+             data-srcset="/images/canonsburg-front-room-600x800.jpg 600w, /images/canonsburg-front-room-1200x1600.jpg 1200w"
+             data-width="1200" data-height="1600">
+            <img src="/images/canonsburg-front-room-480x360.jpg" srcset="/images/canonsburg-front-room-320x240.jpg 320w, /images/canonsburg-front-room-480x360.jpg 480w, /images/canonsburg-front-room-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="The Canonsburg studio from the waiting area: a tan leather sofa on dark original plank floors, with colour stations, an exposed brick wall and a timber loft and open stair beyond." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        <li>
+          <a class="loc-shot" href="/images/canonsburg-styling-row-1200x1600.jpg"
+             data-srcset="/images/canonsburg-styling-row-600x800.jpg 600w, /images/canonsburg-styling-row-1200x1600.jpg 1200w"
+             data-width="1200" data-height="1600">
+            <img src="/images/canonsburg-styling-row-480x360.jpg" srcset="/images/canonsburg-styling-row-320x240.jpg 320w, /images/canonsburg-styling-row-480x360.jpg 480w, /images/canonsburg-styling-row-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="Styling chairs on mats down a row of antique dressers used as stations, beneath a wall of gilt-framed pictures, with the open timber stair and loft behind." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        <li>
+          <a class="loc-shot" href="/images/canonsburg-portrait-wall-1200x1600.jpg"
+             data-srcset="/images/canonsburg-portrait-wall-600x800.jpg 600w, /images/canonsburg-portrait-wall-1200x1600.jpg 1200w"
+             data-width="1200" data-height="1600">
+            <img src="/images/canonsburg-portrait-wall-480x360.jpg" srcset="/images/canonsburg-portrait-wall-320x240.jpg 320w, /images/canonsburg-portrait-wall-480x360.jpg 480w, /images/canonsburg-portrait-wall-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="A salvaged, paint-worn fireplace mantel lined with colour cans, under a hung group of gilt-framed portrait paintings, beside a leather sofa and an antique steamer trunk." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -595,6 +632,16 @@
       <p class="footer-copy">Best Hair Salon Pittsburgh PA | Balayage, Highlights, Color, Extensions | North Hills &amp; Canonsburg</p>
     </div>
   </footer>
+
+  <!-- Enlarged view for .loc-shot thumbnails. Progressive enhancement: with
+       JavaScript off each thumbnail is an ordinary link straight to the full
+       photograph, which is why the trigger is an <a> and not a <button>.
+       assets/site.js upgrades them to open this dialog instead. -->
+  <dialog id="loc-lightbox" class="lightbox" aria-label="Enlarged photograph">
+    <button type="button" class="lightbox-close" aria-label="Close photograph">&times;</button>
+    <img class="lightbox-img" src="" alt="" width="1200" height="1600" decoding="async" />
+  </dialog>
+
   <script src="/assets/site.js?v=755b7037" defer></script>
 <!-- cc:cta -->
   <div class="cta-bar" role="region" aria-label="Call or book an appointment">
