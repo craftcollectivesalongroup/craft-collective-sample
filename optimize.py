@@ -1240,6 +1240,9 @@ def service_shots(shots, name):
 # reserves zero vertical space until each image arrives, then reflows the page
 # under the reader — the single largest CLS source on the site.
 IMG_DIMS = {
+    # Local masters, keyed "l:<base>" — see _asset_key.
+    "l:salon-floor": (3916, 5874),
+
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),
     "u:1519735777090-ec97162dc266": (600, 368),
@@ -1308,7 +1311,15 @@ def _asset_key(src):
     if m:
         return "u:" + m.group(1)
     m = re.search(r"/media/([\w~.]+?)(?:/v1/|$)", src)
-    return "w:" + m.group(1) if m else None
+    if m:
+        return "w:" + m.group(1)
+    # Local artwork. Without this every /images/ path misses IMG_DIMS and
+    # img_ratio hands back its 1.0 fallback, which declares a portrait
+    # photograph square and builds the srcset around that.
+    m = re.search(r"^/images/(.+?)(?:-\d+x\d+)?\.(?:jpg|png)$|^/images/(.+?)$", src)
+    if m:
+        return "l:" + (m.group(1) or m.group(2))
+    return None
 
 
 def img_ratio(src, fallback=1.0):

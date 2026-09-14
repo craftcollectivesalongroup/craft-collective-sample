@@ -2715,3 +2715,17 @@ footer a.tel-link:focus {
   color: var(--gold);
   text-decoration-color: currentColor;
 }
+
+/* The homepage hero slot changes orientation across the breakpoints: portrait
+   beside the headline on desktop (roughly 0.64–0.80 depending on window
+   height), landscape 4:3 once the two columns stack at 900px. The photograph
+   is a 2:3 portrait, so desktop needs almost no crop and simply loses empty
+   floor off the bottom — but the stacked 4:3 slot keeps only half the frame,
+   and anchored at the top that half is all ceiling trusses. Dropping the
+   anchor to 45% moves the window to 22%–72% of the frame, which is where the
+   chairs, mirrors and the artwork at the far end actually are. */
+@media (max-width: 900px) {
+  .hero-image-panel img {
+    object-position: center 45%;
+  }
+}
