@@ -2695,3 +2695,23 @@ footer a.tel-link:focus {
 .award-badge:last-child {
   margin-bottom: 0;
 }
+
+/* One cell of the four-across trust band links out; the other three do not.
+   Inheriting the label's size and tracking keeps the row's rhythm, and the
+   gold plus a resting underline is what marks it as a link rather than a
+   stray tappable area. Only the words are the target — making the whole
+   cell clickable next to three inert ones reads as a bug, not an affordance. */
+.trust-link {
+  color: var(--gold-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(184,154,106,0.45);
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.trust-link:hover,
+.trust-link:focus-visible {
+  color: var(--gold);
+  text-decoration-color: currentColor;
+}

@@ -599,6 +599,17 @@ PAGE_FAQ = {
         ("What colour products do you use?",
          "Wella Professionals, exclusively. Our owner served on the Wella North America Signature Artist Team."),
     ],
+    "artist-team": [
+        ("Who at Craft Collective is on a brand artist team?",
+         "Kim Hughes and Sherry Maiolini. Both see clients at our North Hills studio at "
+         f"{NH_ADDR}."),
+        ("What is a brand artist team?",
+         "A roster of working hairdressers a brand selects to represent it — testing and "
+         "demonstrating its techniques and products. Members bring what they learn back "
+         "to the floor, which is the point of having them here."),
+        ("Can I book with Kim or Sherry?",
+         f"Yes. Book online 24 hours a day, or call {PHONE} and we will find you a slot."),
+    ],
     "hair-care-tips": [
         ("How often should I wash coloured hair?",
          "Two to three times a week for most people. Every wash costs pigment, so stretching washes with dry shampoo "
@@ -690,6 +701,7 @@ AREA_LINKS = [
 CORE_LINKS = [
     ("/hair-services-pittsburgh", "All Services"),
     ("/meet-the-team", "Meet the Team"),
+    ("/artist-team", "Artist Team"),
     ("/derek-piekarski", "Derek Piekarski"),
     ("/hair-salon-gallery-pittsburgh", "Gallery"),
     ("/reviews", "Reviews"),
@@ -1059,7 +1071,7 @@ TRUST_BAR = '''
       </div>
       <div class="trust-item">
         <span class="trust-value">2</span>
-        <span class="trust-label">Stylists on Wella Professionals and R+Co artist teams</span>
+        <span class="trust-label"><a class="trust-link" href="/artist-team">Stylists on Wella Professionals and R+Co artist teams</a></span>
       </div>
       <div class="trust-item">
         <span class="trust-value">2</span>
@@ -1746,6 +1758,11 @@ TITLE_OVERRIDES = {
         "and Canonsburg. Every colorist trained by Wella Professionals artist Derek Piekarski. "
         "5.0 stars from 809 reviews.",
     ),
+    "artist-team/index.html": (
+        "Wella Professionals & R+Co Artist Team | Craft Collective",
+        "Two Craft Collective stylists sit on the Wella Professionals and R+Co artist "
+        "teams. Meet Kim Hughes and Sherry Maiolini at our Pittsburgh North Hills studio.",
+    ),
     "hair-care-tips/index.html": (
         "Hair Care Tips from Pittsburgh Salon Stylists",
         "How to keep color from fading, control frizz in Pittsburgh humidity, and when to trim — "
@@ -2223,7 +2240,8 @@ def build_sitemap(paths):
         }.get(kind, ("0.7", "monthly"))
         if slug in ("book", "hair-services-pittsburgh", "derek-piekarski"):
             pri, freq = "0.9", "monthly"
-        if slug in ("reviews", "meet-the-team", "hair-salon-gallery-pittsburgh"):
+        if slug in ("reviews", "meet-the-team", "hair-salon-gallery-pittsburgh",
+                    "artist-team"):
             pri = "0.8"
         return (f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{today}</lastmod>\n"
                 f"    <changefreq>{freq}</changefreq>\n    <priority>{pri}</priority>\n  </url>")
