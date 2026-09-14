@@ -934,41 +934,54 @@ def service_schema(slug, url):
     }
 
 
-REVIEW_RE = re.compile(
-    r'<div class="review-card">\s*'
-    r'(?:<div class="review-stars">.*?</div>\s*)?'
-    r'<p class="review-text">(.*?)</p>\s*'
-    r'.*?<p class="review-name">(.*?)</p>',
-    re.S)
+# ---------------------------------------------------------------------------
+# REVIEW MARKUP IS DISABLED ON PURPOSE. DO NOT RE-ENABLE IT.
+#
+# This function used to scrape the .review-card blocks off /reviews and emit
+# them as schema.org Review nodes (with a hardcoded 5-star reviewRating) inside
+# an ItemList. It no longer does, and the code that built those nodes has been
+# deleted rather than commented out, so it cannot be switched back on by
+# flipping a flag.
+#
+# Why:
+#
+#   The reviews this salon displays are GOOGLE reviews. They are written by
+#   guests on Google's platform, they live on the Google Business Profile, and
+#   they are reproduced on this site as page CONTENT with attribution back to
+#   Google. They are third-party review data.
+#
+#   Google's structured data policy for reviews is explicit that review markup
+#   is for first-party reviews — reviews the site itself collected — and that a
+#   site must not mark up reviews it has taken from another source. Copying
+#   Google reviews into Review/AggregateRating markup on your own domain is the
+#   textbook version of what that policy forbids. It earns no rich result, and
+#   it is the kind of thing that gets structured data ignored site-wide or draws
+#   a manual action.
+#
+#   The same reasoning is why aggregateRating was removed from organization()
+#   and service_schema(). See the comments there; this is the third leg of the
+#   same decision.
+#
+# What this means in practice:
+#
+#   - Real Google reviews CAN be displayed on the page. That is content, and
+#     content is fine. Show them with visible "via Google" attribution.
+#   - They must NOT be re-emitted as Review, AggregateRating, or an ItemList of
+#     Review nodes. Displaying and marking up are different things.
+#   - process() still calls strip_schema(txt, {"ItemList"}) before this point,
+#     so any Review ItemList baked into a page by an older build is removed on
+#     the next pass. That is deliberate — leave it.
+#
+# If a genuine first-party review system is ever built (reviews collected on
+# this site, by this business, verifiably from real guests), Review markup
+# becomes legitimate again and this can be written fresh against that data.
+# Scraping the page's visible cards is not that, whatever the cards contain.
+# ---------------------------------------------------------------------------
 
 
 def reviews_schema(txt, url):
-    """Lift the reviews the page already displays into Review nodes."""
-    out = []
-    for body, who in REVIEW_RE.findall(txt)[:12]:
-        body = norm(" ".join(re.sub(r"<[^>]+>", " ", body).split())).strip('"\u201c\u201d ')
-        who = norm(" ".join(re.sub(r"<[^>]+>", " ", who).split()))
-        if len(body) < 40 or not who:
-            continue
-        out.append({
-            "@type": "Review",
-            "reviewBody": body,
-            "author": {"@type": "Person", "name": who},
-            "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
-            "itemReviewed": {"@id": f"{SITE}/#organization"},
-        })
-    if not out:
-        return None
-    return {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "@id": url + "#reviews",
-        "name": "Client reviews of Craft Collective Salon Group",
-        "itemListElement": [
-            {"@type": "ListItem", "position": i + 1, "item": r}
-            for i, r in enumerate(out)
-        ],
-    }
+    """Always returns None. Review markup is not emitted — see above."""
+    return None
 
 
 TEAM_CARD = re.compile(
@@ -2022,8 +2035,15 @@ def process(path):
         txt = strip_schema(txt, {"Service"})
         head_bits.append(jsonld(service_schema(slug, url)))
 
-    # Reviews and the team roster are lifted off the rendered page, so the
-    # markup can never claim testimonials the page does not actually show.
+    # The team roster is lifted off the rendered page, so the markup can never
+    # claim people the page does not actually show.
+    #
+    # Reviews are NOT lifted. reviews_schema() is disabled at source and always
+    # returns None — the displayed reviews are third-party Google reviews, and
+    # marking those up as first-party review data breaches Google's structured
+    # data policy. The full reasoning is at the reviews_schema() definition.
+    # The strip_schema call below also clears any Review ItemList left behind by
+    # an older build. Both are deliberate; read that comment before changing it.
     txt = strip_schema(txt, {"ItemList"})
     if slug == "reviews":
         rv = reviews_schema(txt, url)
