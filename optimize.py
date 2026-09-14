@@ -22,6 +22,7 @@ you like and the output is identical.
 import glob
 import html
 import json
+import math
 import os
 import re
 from datetime import date
@@ -1242,6 +1243,7 @@ def service_shots(shots, name):
 IMG_DIMS = {
     # Local masters, keyed "l:<base>" — see _asset_key.
     "l:salon-floor": (3916, 5874),
+    "l:derek-at-the-chair": (1600, 1200),
 
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),
@@ -1338,8 +1340,17 @@ def _variant(src, w, h):
         if (m := re.search(r"-(\d+)x(\d+)\.jpg$", p)))
     if not have:
         return src
-    fit = [c for c in have if c[0] >= w] or [have[-1]]
-    return "/images/" + fit[0][2]
+    # Shape first, size second. Several bases carry more than one crop at the
+    # same width — derek-at-the-chair has a 480x270 and a 480x360 — and picking
+    # on width alone hands a 16:9 file to a slot built for 4:3, so the photo
+    # changes crop between one breakpoint and the next. Compare shapes in log
+    # space, keep the closest, then take the smallest wide-enough file in it.
+    want = math.log(w / max(1, h))
+    shape = lambda c: round(abs(math.log(c[0] / c[1]) - want) / 0.05)
+    keep = min(shape(c) for c in have)
+    same = [c for c in have if shape(c) == keep]
+    fit = [c for c in same if c[0] >= w] or [same[-1]]
+    return "/images/" + min(fit, key=lambda c: c[0])[2]
 
 
 # role -> (candidate widths, sizes attribute, rendered aspect ratio or None to
