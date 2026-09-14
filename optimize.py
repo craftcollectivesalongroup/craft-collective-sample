@@ -33,21 +33,29 @@ PHONE_HREF = "+17245147231"
 EMAIL = "info@craftcollectivesalongroup.com"
 BOOKING = "https://phorest.com/book/salons/craftcollectivesalongroup"
 
-# PLACEHOLDER — the Google listing URL is not known yet.
+# The salon's Google listing, where the reviews live.
 #
-# ".invalid" is a reserved TLD and can never resolve. That is deliberate: a
-# guessed Maps link landing a client on the wrong salon is worse than a link
-# that plainly does not work. Replace before /reviews ships.
+# This is the documented api=1 Maps search form, not a link copied out of a
+# browser address bar. An address-bar URL carries the session that produced it
+# — gs_ssp, oq, gs_lcrp, sourceid and a #mpd panel fragment — which is both
+# unstable and a small leak of whoever's search it was. This form has no
+# session state in it and is the URL shape Google documents for the purpose.
 #
-# The build does not inject it — the review call-to-action is hand-authored,
+# Verified to resolve to Craft Collective Salon Group, 2014 Babcock Blvd,
+# Pittsburgh PA 15209, rated 5.0, phone (724) 514-7231.
+#
+# It is a search rather than an exact place reference. Google does not expose a
+# ChIJ-form Place ID for this listing anywhere reachable, so query_place_id is
+# not set; the full street address in the query makes the match unambiguous in
+# practice. The listing's feature ID is 0x8834f3284821ca9f:0xe8ccc74c24cef944,
+# and the equivalent exact link is https://maps.google.com/?cid=
+# 16775001841897240900 if an exact reference is ever wanted instead.
+#
+# The build does not inject this — the review call-to-action is hand-authored,
 # because running this script over main still rewrites all 90 pages. The same
-# sentinel appears in reviews/index.html and index.html; to set it, one command:
-#
-#   grep -rl GOOGLE_REVIEWS_URL_PENDING --include=*.html . | xargs sed -i '' \
-#     's|https://GOOGLE_REVIEWS_URL_PENDING.invalid|<real url>|g'
-#
-# then update this constant so the three stay in step.
-GOOGLE_REVIEWS_URL = "https://GOOGLE_REVIEWS_URL_PENDING.invalid"
+# URL appears in reviews/index.html and index.html, with & written as &amp;
+# because it sits in an href. Keep all three in step.
+GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Craft+Collective+Salon+Group+2014+Babcock+Blvd+Pittsburgh+PA+15209"
 
 NH_ADDR = "2014D Babcock Blvd, Pittsburgh, PA 15209"
 CB_ADDR = "115 W Pike St, Canonsburg, PA 15317"
