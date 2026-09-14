@@ -68,7 +68,6 @@
       footer { padding: 3rem 2rem;  position: relative; z-index: 10; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px) {
     .reviews-hero-badge { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; }
     .reviews-hero-rating { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: var(--gold); line-height: 1; }
     .reviews-hero-meta { color: rgba(247,244,239,0.5); font-size: 0.8rem; line-height: 1.6; }
@@ -418,24 +417,99 @@
     </div>
   </section>
 <!-- /cc:trust -->
-  <!-- Client reviews go here.
+  <!-- The real Google reviews are below.
 
-       The cards that were here were not real. They were written into the page
-       in April 2026 alongside four invented stylists, and several of them
-       praised those stylists by name; the stylists were deleted as fictional
-       and the reviews describing them were not. They have been removed.
+       History, so nobody re-introduces the problem: the cards that used to sit
+       here were not real. They were written into the page in April 2026
+       alongside four invented stylists, and several of them praised those
+       stylists by name; the stylists were later deleted as fictional and the
+       reviews describing them were not. All twenty were removed in September
+       2026.
 
-       To put real reviews back: one <div class="reviews-grid"> wrapping a
-       <div class="review-card"> per review, each holding .review-stars,
-       .review-text, and .review-author > .review-name + .review-detail. The
-       styling for all of that is still in place and unchanged.
+       What is here now is eight genuine reviews from the salon's Google
+       listing, reproduced verbatim: the reviewer's own wording and
+       punctuation, their name as Google displays it, and a "Google review"
+       attribution line on every card. Do not tidy the prose. The only edit
+       made to any of them was closing a stray space before a comma that came
+       from Google's own rendering.
 
-       Reviews copied from Google are shown as content only. They must NOT be
-       re-emitted as Review or AggregateRating markup — Google's structured
-       data policy does not allow a business to mark up reviews collected from
-       another site as its own. reviews_schema() in optimize.py builds Review
-       nodes from .review-card blocks, so it needs disabling before any are
-       added back. -->
+       They are CONTENT ONLY. They must NOT be re-emitted as Review or
+       AggregateRating markup: Google's structured data policy does not allow a
+       business to mark up reviews collected from another site as its own.
+       reviews_schema() in optimize.py has been disabled at source for exactly
+       this reason, and the reasoning is written out above that function. Read
+       it before touching any of this.
+
+       Card shape, for adding more: .reviews-grid wrapping one .review-card per
+       review, each holding .review-stars, .review-text, and .review-author
+       containing .review-name and .review-detail. -->
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;I&rsquo;ve been coming to Craft Collective for the past few years to see Delila. I can honestly say I have never had a bad experience. From the moment you walk in, you&rsquo;re immediately greeted by the friendly staff. The environment is very relaxing and looks like a museum with various portraits hanging on the walls. I absolutely love it here!&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Maria H.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;I&rsquo;ve seen Sherry for years now. She is hands down the best hairstylist I&rsquo;ve ever had. She is extremely talented, her color services and extensions are top tier, I would recommend her to everyone&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Cindy S.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;I love coming to Allison! She is super knowledgeable about curly and wavy hair, willing to try new fun things, and also takes some of my wilder impulses by talking through the realities of what a certain cut might do to my curls. The website is easy to book on, staff are friendly and helpful, and it&rsquo;s half the price of salons in the city. Highly recommend.&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Elizabeth M.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;A great experience! Kyra spent so much time with me getting the color just right and the cut was exactly what I was looking for! Highly recommend I already made my next appointment.&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Patricia Z.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;The team at Craft Collective is the best. Always so professional and accommodating. Derek is my stylist and is truly an expert in his field. I highly recommend this salon.&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Diane B.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;Amazing people and vibe through the entire Hair studio. Such amazing artwork and an overall great experience. I will definitely continue to go for from now on.&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">David B.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;Friendly atmosphere! Nicolette is the absolute best. Been going to her for years. She recently did my cut and color and looks great!&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Lori G.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&ldquo;Amazing salon! Everyone so friendly and go above and beyond to make you feel welcome. Love my stylist Angie, she truly is the BEST!&rdquo;</p>
+      <div class="review-author">
+        <p class="review-name">Janet B.</p>
+        <p class="review-detail">Google review</p>
+      </div>
+    </div>
+  </div>
 
   <section class="reviews-source" aria-labelledby="reviews-source-heading">
     <div class="reviews-source-inner">
