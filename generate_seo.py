@@ -237,13 +237,13 @@ def make_page(title, description, canonical, og_type, breadcrumbs, schema_json, 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>{SHARED_CSS}</style>
-  <link rel="stylesheet" href="/assets/site.css?v=0ff8c409" />
+  <link rel="stylesheet" href="/assets/site.css?v=8641a663" />
 </head>
 <body>
 {NAV_HTML}
 {body_html}
 {FOOTER_HTML}
-  <script src="/assets/site.js?v=ceb510cb" defer></script>
+  <script src="/assets/site.js?v=755b7037" defer></script>
 </body>
 </html>"""
 

@@ -1266,6 +1266,12 @@ IMG_DIMS = {
     # Local masters, keyed "l:<base>" — see _asset_key.
     "l:salon-floor": (3916, 5874),
     "l:derek-at-the-chair": (1600, 1200),
+    # The North Hills studio photographs. Each base carries 4:3 thumbnail crops
+    # (320/480/640 wide) plus full-frame versions for the lightbox, so _variant
+    # has two shapes to choose between and matches on shape before size.
+    "l:salon-portrait-room": (5584, 3666),
+    "l:salon-wash-stations": (4000, 6000),
+    "l:salon-color-bar": (5164, 3443),
 
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),
@@ -1385,6 +1391,11 @@ IMG_ROLES = {
     "card":        ([320, 480, 640, 800], "(min-width: 901px) 380px, (min-width: 601px) 50vw, 100vw", 4 / 3),
     "portrait":    ([280, 420, 560], "(min-width: 901px) 280px, (min-width: 601px) 50vw, 100vw", 1.0),
     "gallery":     ([320, 480, 640, 800], "(min-width: 901px) 380px, 50vw", 4 / 3),
+    # The location studio thumbnails are deliberately small — three across half
+    # of a 1200px block, so about 160px each, and never more than 45vw. Reusing
+    # "gallery" here would advertise 380px and pull the 640px file for a 157px
+    # slot. Widths stop at 640 because that is the largest 4:3 crop committed.
+    "loc-thumb":   ([320, 480, 640], "(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw", 4 / 3),
 }
 
 
@@ -1405,6 +1416,7 @@ def classify_img(tag, before):
         "blog-card-img": "card",
         "service-card-img": "card",
         "svc-shot": "gallery",
+        "loc-shot": "loc-thumb",
         "loc-hero-img": "hero-full",
         "blog-hero-img": "article",
     }.get(parent, "card")

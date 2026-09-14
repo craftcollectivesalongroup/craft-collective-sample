@@ -2808,3 +2808,153 @@ footer a.tel-link:focus {
   .reviews-source { padding: 3.5rem 1.25rem; }
   .reviews-source-copy { margin-bottom: 2rem; }
 }
+
+/* ============================================================== 19
+   LOCATION STUDIO PHOTOGRAPHS + LIGHTBOX
+
+   The location pages are a two-column block: contact details and hours down
+   the left, the map top right. The map is 4:3 and the left column is taller,
+   so the right column always ends with dead space. This fills it with a row of
+   small studio photographs, each opening full size.
+
+   Built as a reusable component, not a North Hills special: any location page
+   gets the same row by wrapping its .map-embed in .loc-media and adding a
+   .loc-gallery beside it. Canonsburg has no photographs yet, so it has none.
+
+   The thumbnails are 4:3 to rhyme with the map above them, and they are
+   deliberately small — around 160px in the desktop column. The photographs
+   are landscape and portrait mixed, so object-fit does the cropping rather
+   than shipping a second set of crops.
+   ------------------------------------------------------------------------ */
+
+.loc-media {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  min-width: 0;
+}
+
+.loc-gallery .info-label {
+  margin-bottom: 0.9rem;
+}
+
+.loc-shots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.loc-shots li {
+  margin: 0;
+}
+
+.loc-shot {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  cursor: zoom-in;
+}
+
+.loc-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.loc-shot:hover img,
+.loc-shot:focus-visible img {
+  transform: scale(1.06);
+}
+
+.loc-shot:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loc-shot img { transition: none; }
+  .loc-shot:hover img,
+  .loc-shot:focus-visible img { transform: none; }
+}
+
+/* Under ~520px three across leaves ~96px thumbnails, which is too small to
+   read a room in. Two across gives back half the width again. */
+@media (max-width: 520px) {
+  .loc-shots { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* -------------------------------------------------------------- lightbox */
+
+/* A <dialog> rather than a hand-rolled overlay: showModal() gives the focus
+   trap, the inert background and Escape-to-close for free, and the ::backdrop
+   pseudo-element means no extra scrim element in the markup. */
+
+.lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  /* The UA centres a modal dialog with margin:auto against inset:0. The site's
+     reset zeroes margins on everything, which pins it to the top-left corner
+     instead, so the centring is restored explicitly here. */
+  margin: auto;
+  max-width: min(94vw, 1200px);
+  max-height: 94vh;
+  overflow: visible;
+  color: var(--paper);
+}
+
+.lightbox::backdrop {
+  background: rgba(12, 14, 22, 0.9);
+}
+
+.lightbox img {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 88vh;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.75rem;
+  right: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(247, 244, 239, 0.35);
+  background: transparent;
+  color: rgba(247, 244, 239, 0.85);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* On a phone there is no room above the image for the close control, so it
+   sits inside the top-right corner of the frame instead. */
+@media (max-width: 600px) {
+  .lightbox-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(12, 14, 22, 0.65);
+  }
+}

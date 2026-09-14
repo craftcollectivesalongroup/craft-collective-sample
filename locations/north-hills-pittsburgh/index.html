@@ -115,7 +115,7 @@
       button, a[role="button"] { min-height: 44px; min-width: 44px; }
     }
       </style>
-  <link rel="stylesheet" href="/assets/site.css?v=9e7b82f8" />
+  <link rel="stylesheet" href="/assets/site.css?v=8641a663" />
 <!-- cc:head -->
   <meta name="theme-color" content="#1A2440" />
   <meta name="format-detection" content="telephone=yes" />
@@ -473,15 +473,46 @@
       </div>
       <a href="https://phorest.com/book/salons/craftcollectivesalongroup" target="_blank" rel="noreferrer noopener" class="btn-primary">Book Online Now</a>
     </div>
-    <div class="map-embed">
-      <iframe
-        src="https://maps.google.com/maps?q=2014D+Babcock+Blvd,+Pittsburgh,+PA+15209&t=&z=15&ie=UTF8&iwloc=&output=embed"
-        title="Craft Collective Salon Group North Hills Pittsburgh map"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        style="border:0;"
-        allowfullscreen>
-      </iframe>
+    <div class="loc-media">
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=2014D+Babcock+Blvd,+Pittsburgh,+PA+15209&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="Craft Collective Salon Group North Hills Pittsburgh map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          style="border:0;"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="loc-gallery">
+        <p class="info-label">Inside the Studio</p>
+        <ul class="loc-shots">
+        <li>
+          <a class="loc-shot" href="/images/salon-portrait-room-1600x1050.jpg"
+             data-srcset="/images/salon-portrait-room-800x525.jpg 800w, /images/salon-portrait-room-1600x1050.jpg 1600w"
+             data-width="1600" data-height="1050">
+            <img src="/images/salon-portrait-room-480x360.jpg" srcset="/images/salon-portrait-room-320x240.jpg 320w, /images/salon-portrait-room-480x360.jpg 480w, /images/salon-portrait-room-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="A styling room at Craft Collective with a wood-plank ceiling and warm lighting, its walls hung with gilt-framed paintings, antique mirrors and stained-glass panels above tan leather chairs at vintage dresser stations." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        <li>
+          <a class="loc-shot" href="/images/salon-wash-stations-1066x1600.jpg"
+             data-srcset="/images/salon-wash-stations-533x800.jpg 533w, /images/salon-wash-stations-1066x1600.jpg 1066w"
+             data-width="1066" data-height="1600">
+            <img src="/images/salon-wash-stations-480x360.jpg" srcset="/images/salon-wash-stations-320x240.jpg 320w, /images/salon-wash-stations-480x360.jpg 480w, /images/salon-wash-stations-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="Three backwash basins with tan leather recliners beneath a large framed botanical tapestry, with colour bottles lined up along the console beside them." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        <li>
+          <a class="loc-shot" href="/images/salon-color-bar-1600x1066.jpg"
+             data-srcset="/images/salon-color-bar-800x533.jpg 800w, /images/salon-color-bar-1600x1066.jpg 1600w"
+             data-width="1600" data-height="1066">
+            <img src="/images/salon-color-bar-480x360.jpg" srcset="/images/salon-color-bar-320x240.jpg 320w, /images/salon-color-bar-480x360.jpg 480w, /images/salon-color-bar-640x480.jpg 640w" sizes="(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw"
+                 alt="The main salon floor, styling chairs on mats down a wall of gilt mirrors and ring lights, with the colour bar and shelves of tube colour across the back wall." width="480" height="360" decoding="async" loading="lazy" />
+          </a>
+        </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -625,7 +656,17 @@
       <p class="footer-copy">Best Hair Salon Pittsburgh PA | Balayage, Highlights, Color, Extensions | North Hills &amp; Canonsburg</p>
     </div>
   </footer>
-  <script src="/assets/site.js?v=ceb510cb" defer></script>
+
+  <!-- Enlarged view for .loc-shot thumbnails. Progressive enhancement: with
+       JavaScript off each thumbnail is an ordinary link straight to the full
+       photograph, which is why the trigger is an <a> and not a <button>.
+       assets/site.js upgrades them to open this dialog instead. -->
+  <dialog id="loc-lightbox" class="lightbox" aria-label="Enlarged photograph">
+    <button type="button" class="lightbox-close" aria-label="Close photograph">&times;</button>
+    <img class="lightbox-img" src="" alt="" width="1600" height="1066" decoding="async" />
+  </dialog>
+
+  <script src="/assets/site.js?v=755b7037" defer></script>
 <!-- cc:cta -->
   <div class="cta-bar" role="region" aria-label="Call or book an appointment">
     <div class="cta-bar-inner">
