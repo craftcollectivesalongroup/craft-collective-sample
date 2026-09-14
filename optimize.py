@@ -876,14 +876,11 @@ def organization(page_url):
             "https://www.instagram.com/derek.piekarski",
             BOOKING,
         ],
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "bestRating": "5",
-            "worstRating": "1",
-            "ratingCount": "809",
-            "reviewCount": "809",
-        },
+        # No aggregateRating. The figure the site shows is the salon's own
+        # reading of its Google listing, not a rating this site computes, and a
+        # business marking up its own aggregate is what Google's review-snippet
+        # guidance exists to stop. It stays as visible text next to a link to
+        # the listing, where a reader can check it.
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": PHONE_HREF,
@@ -933,10 +930,6 @@ def service_schema(slug, url):
                 "availability": "https://schema.org/InStock",
                 "url": f"{SITE}/book",
             }],
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating", "ratingValue": "5.0", "bestRating": "5",
-            "ratingCount": "809", "reviewCount": "809",
         },
     }
 
