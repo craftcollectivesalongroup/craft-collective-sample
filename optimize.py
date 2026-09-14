@@ -122,6 +122,135 @@ BLOG_POSTS = {
 # FAQ content
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# CANONSBURG IS APPOINTMENT-ONLY TODAY. THAT IS EXPECTED TO CHANGE.
+#
+# The salon runs two studios. North Hills has published hours and takes online
+# bookings through Phorest. Canonsburg does not: it is appointment-only and
+# books by telephone, and the site says so in a lot of places. The owner has
+# said Canonsburg will move to regular hours and online booking at some point.
+#
+# This is the list of everything that has to change on that day. It is written
+# out because the list is much longer than it looks, and because most of it is
+# not where you would go looking for it.
+#
+# TWO THINGS PEOPLE MISS
+#
+#   1. The stylist-page FAQ. "Where does {name} work?" in stylist_faq() below
+#      says the Canonsburg studio runs by appointment, and it is generated onto
+#      EVERY STYLIST PAGE -- 38 of them at the time of writing. Change the one
+#      string, but understand that you are changing 38 pages, and that each one
+#      carries the sentence twice: once as visible text and once inside the
+#      page's FAQPage JSON-LD. Fixing the visible copy and forgetting the
+#      schema leaves the site telling Google something it no longer tells
+#      people.
+#
+#   2. /book. It is easy to think of this as a Canonsburg-page problem. It is
+#      not. book/index.html makes THREE separate assertions of its own -- the
+#      booking-embed subhead, the Hours value in the Canonsburg column, and the
+#      "Call to Book" button -- and it carries its own copy of the .appt-notice
+#      box, the same gold-bordered panel that sits on the Canonsburg location
+#      page. Two notice boxes exist. Both have to go.
+#
+# GENERATED HERE, REPLICATED EVERYWHERE (each appears twice per page: visible
+# .faq-answer text, and the FAQPage JSON-LD)
+#
+#   BOOK_A ................................ line  254    22 pages
+#   stylist_faq(), "Where does {name} work?" line  668    38 pages
+#   PAGE_FAQ["canonsburg"], the appointment
+#     question -- delete the Q&A outright
+#     rather than soften it ................ line  625     1 page
+#   PAGE_FAQ["book"], "Can I book online
+#     for both locations?" ................. line  698    1 page
+#   PAGE_FAQ["meet-the-team"], "Which
+#     location does each stylist work at?" . line  796     1 page
+#   The Canonsburg title/description entry . line 1936     1 page, 3 tags
+#     (description, og:description and twitter:description, which land at
+#      locations/canonsburg/index.html lines 7, 12 and 21)
+#
+# HAND-AUTHORED, NOT GENERATED -- eleven lines the build will never touch
+#
+#   index.html:1299 .......... "By appointment only" on the homepage card
+#   index.html:1302 .......... "Call to Book" -> tel:, becomes the Phorest button
+#   index.html:1319 .......... homepage FAQ answer. Visible only; the homepage
+#                              FAQPage node does not carry this one, so it is a
+#                              single edit rather than two
+#   locations/canonsburg/index.html:434-436 ... the .appt-notice box
+#   locations/canonsburg/index.html:447 ....... Booking info-value
+#   locations/canonsburg/index.html:449 ....... "Call to Book" button
+#   locations/north-hills-pittsburgh/index.html:546 ... the reciprocal
+#                              "Also serving Canonsburg" card detail line
+#   book/index.html:675 ...... booking-embed subhead
+#   book/index.html:727-729 .. the second .appt-notice box
+#   book/index.html:744 ...... Hours info-value
+#   book/index.html:746 ...... "Call to Book" button
+#
+#   Line numbers drift. Grep is the reliable way in:
+#     grep -rn "by appointment\|appointment only\|Call to Book\|appt-notice" \
+#       --include=*.html .
+#
+# THE TRAP: THE HOURS BLOCK BRINGS ITS OWN CSS
+#
+#   Canonsburg has no Hours block at all. Its info column is Address, Phone,
+#   Booking. North Hills has Address, Phone, Email, Hours, Booking. You will be
+#   adding a block, not editing one -- copy the markup from
+#   locations/north-hills-pittsburgh/index.html (the .info-block holding
+#   .hours-grid and its seven .hours-day / .hours-time pairs).
+#
+#   The styling does not come with it. .hours-grid, .hours-day and .hours-time
+#   are defined ONLY in the North Hills page's own inline <style>, near the top
+#   of that file. assets/site.css carries just the narrow-screen stacking
+#   override for them, not the base rules. Paste the markup into Canonsburg
+#   without those three declarations and you get an unstyled two-column mess.
+#
+#   The right fix at that point is to move the three rules into site.css once
+#   and drop the inline copy -- but site.css is cache-busted by hand on 91
+#   pages, so that is a deliberate decision, not something to do casually.
+#
+#   Canonsburg has no Email block either, if the two info columns are meant to
+#   match completely.
+#
+# SCHEMA: BOTH LOCATIONS OR NEITHER
+#
+#   Nothing needs changing. openingHours appears in zero built pages today. The
+#   two Place nodes in organization() carry address and telephone only, for
+#   both studios, so the markup makes no claim about hours either way.
+#
+#   Adding openingHoursSpecification is therefore a decision rather than an
+#   edit -- and if you add it for Canonsburg you must add it for North Hills in
+#   the same pass. North Hills already publishes its hours as visible text, so
+#   there is no obstacle. Adding it to one and not the other rebuilds, inside
+#   the structured data, exactly the imbalance that was deliberately taken out
+#   of the visible page -- and it is far harder to spot there.
+#
+#   generate_seo.py has an openingHoursSpecification block. That file is
+#   superseded scaffolding with a DO-NOT-RUN header. It is not a route to
+#   changing anything.
+#
+# WHAT DOES NOT CHANGE
+#
+#   vercel.json; sitemap.xml (both locations are already priority 0.8); the
+#   navigation; the studio photographs, galleries and hero bands; the
+#   .locations-grid parity CSS in site.css; and the AREAS entries that mention
+#   drive time to Canonsburg -- those are geography, not booking policy.
+#
+# HOW LONG THIS TAKES, AND WHY
+#
+#   With the build runnable: edit the six strings above, run this script once,
+#   then do the eleven hand-authored lines and the Hours block. Ten minutes.
+#
+#   Without it: about half a day. The build pass on main is behind the pages it
+#   generates, so running it over them regresses the site, and the ~60
+#   generated instances have to be hand-mirrored instead -- importing this
+#   module and calling faq_html(), faq_schema() and stylist_faq() directly,
+#   then splicing the output into each file. Thirty-eight of those are stylist
+#   pages.
+#
+#   That difference -- ten minutes against half a day, for one ordinary change
+#   to one fact about the business -- is the running cost of the build repair
+#   not being merged. It is worth quoting to whoever can merge it.
+# ---------------------------------------------------------------------------
+
 BOOK_A = (
     f"Book online 24/7 at our booking page, or call {PHONE}. Online booking covers our "
     f"North Hills studio at {NH_ADDR}; our Canonsburg studio at {CB_ADDR} runs by "
