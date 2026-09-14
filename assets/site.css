@@ -2958,3 +2958,97 @@ footer a.tel-link:focus {
     background: rgba(12, 14, 22, 0.65);
   }
 }
+
+/* ============================================================== 20
+   HOMEPAGE LOCATION CARDS — PARITY
+
+   The two cards were already identical in treatment, but the front page only
+   ever showed one of the two rooms: every photograph on it was North Hills.
+   Each card now carries a photograph of its own studio and a link through to
+   its own location page, which neither had.
+
+   Every selector here is scoped to .locations-grid on purpose. The bare
+   .location-card class is shared with the "Also serving ..." block at the
+   bottom of both location pages, which has a different internal structure and
+   must not pick these up.
+
+   Parity is the whole point of this section, so the photograph sits in a fixed
+   16:9 box with object-fit rather than flowing at its own ratio. The two
+   photographs are both 3:2 today, but a future replacement of a different
+   shape must not make one card taller than the other.
+
+   What is deliberately NOT equalised: Canonsburg keeps "By appointment only"
+   and a tel: call-to-action, because it is genuinely appointment-only and a
+   Phorest link would send people to the wrong booking system.
+   ------------------------------------------------------------------------ */
+
+.locations-grid .location-shot {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: 2.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(184, 154, 106, 0.15);
+}
+
+.locations-grid .location-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.locations-grid .location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* The button carries its own top margin in the page's stylesheet; inside the
+   flex row that would push it out of line with the link beside it. */
+.locations-grid .location-cta {
+  margin-top: 0;
+}
+
+.locations-grid .location-view {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(184, 154, 106, 0.45);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.locations-grid .location-view:hover,
+.locations-grid .location-view:focus-visible {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold-light);
+}
+
+/* Stacked cards on a phone: the two actions sit on one line if they fit and
+   wrap cleanly if they do not, and the photograph loses a little height so the
+   card does not become a scroll of its own. */
+@media (max-width: 600px) {
+  .locations-grid .location-shot {
+    aspect-ratio: 3 / 2;
+    margin-bottom: 1.75rem;
+  }
+  .locations-grid .location-actions {
+    gap: 1.25rem;
+  }
+}
+
+/* Below ~380px "North Hills, Pittsburgh" wraps to two lines while "Canonsburg"
+   stays on one, and that is the single place the two cards stop matching —
+   everything else in them (photograph, eyebrow, address block, actions) is
+   already identical to the pixel. Reserve the second line on both. */
+@media (max-width: 380px) {
+  .locations-grid .location-name {
+    min-height: 2.45em;
+  }
+}

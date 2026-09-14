@@ -1220,7 +1220,29 @@ PAGE_ART = {
     "pittsburgh-hair-salon-guide-2026": (SALON["interior"], "Inside Craft Collective Salon Group, Pittsburgh North Hills"),
 }
 
-# Location pages alternate so neighbouring areas do not look identical.
+# The two studios show themselves. Everything else on a location page is
+# generic to the group, so the band under the masthead is the one place each
+# page can be about its own room -- North Hills the warehouse floor, Canonsburg
+# the loft and the brick wall. Both photographs are 3:2, which survives the
+# band's 21:9 desktop crop and its 4:3 phone crop with the room still legible.
+# These are real studio photographs and must not be swapped for stock or for a
+# model shot; the twenty area pages below are a different case, since there is
+# no room to show for an area we merely serve.
+STUDIO_ART = {
+    "north-hills-pittsburgh": (
+        "/images/salon-color-bar-1600x1066.jpg",
+        "The main floor of the North Hills studio: styling chairs on mats down a "
+        "wall of gilt mirrors and ring lights, with the colour bar and shelves of "
+        "tube colour across the back wall."),
+    "canonsburg": (
+        "/images/canonsburg-studio-wide-1600x1067.jpg",
+        "The Canonsburg studio: colour stations, mirrors and backwash chairs on "
+        "dark original plank floors, beneath a timber loft and stair and an "
+        "exposed brick wall."),
+}
+
+# The remaining location pages are areas served, not studios, and alternate so
+# neighbouring areas do not look identical.
 AREA_ART = [
     (SALON["interior"], "Craft Collective Salon Group studio, Pittsburgh North Hills"),
     (SALON["balayage"], "Balayage by Craft Collective Salon Group for {} clients"),
@@ -1287,6 +1309,11 @@ IMG_DIMS = {
     "l:canonsburg-styling-row": (1932, 2576),
     "l:canonsburg-front-room": (1932, 2576),
     "l:canonsburg-portrait-wall": (1932, 2576),
+    # The landscape band cut of the Canonsburg front room, carried under its own
+    # base name. The master is portrait, so a derivative filed under the same
+    # base would have IMG_DIMS reporting 3:4 and _variant would hand the hero
+    # band a portrait file for a 21:9 slot.
+    "l:canonsburg-studio-wide": (1932, 1288),
 
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),
@@ -1411,6 +1438,12 @@ IMG_ROLES = {
     # "gallery" here would advertise 380px and pull the 640px file for a 157px
     # slot. Widths stop at 640 because that is the largest 4:3 crop committed.
     "loc-thumb":   ([320, 480, 640], "(min-width: 901px) 160px, (min-width: 521px) 30vw, 45vw", 4 / 3),
+    # The two location cards on the homepage. Content width inside the card's
+    # 3rem padding is about 500px in the two-column layout and 625px when the
+    # grid collapses to one column at 900px, which is why the middle band is
+    # the widest of the three. The photographs are 3:2 and the card slot is
+    # 16:9, so object-fit trims a little top and bottom.
+    "loc-card":    ([640, 960, 1280], "(min-width: 901px) 500px, (min-width: 601px) 630px, 300px", 3 / 2),
 }
 
 
@@ -1432,6 +1465,7 @@ def classify_img(tag, before):
         "service-card-img": "card",
         "svc-shot": "gallery",
         "loc-shot": "loc-thumb",
+        "location-shot": "loc-card",
         "loc-hero-img": "hero-full",
         "blog-hero-img": "article",
     }.get(parent, "card")
@@ -2222,6 +2256,8 @@ def process(path):
     art = None
     if kind == "service" and slug in SERVICE_ART:
         art = SERVICE_ART[slug][:2]
+    elif kind == "location" and slug in STUDIO_ART:
+        art = STUDIO_ART[slug]
     elif kind == "location":
         i = sorted(AREAS).index(slug) % len(AREA_ART) if slug in AREAS else 0
         src, alt = AREA_ART[i]
