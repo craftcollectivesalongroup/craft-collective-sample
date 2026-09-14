@@ -33,6 +33,22 @@ PHONE_HREF = "+17245147231"
 EMAIL = "info@craftcollectivesalongroup.com"
 BOOKING = "https://phorest.com/book/salons/craftcollectivesalongroup"
 
+# PLACEHOLDER — the Google listing URL is not known yet.
+#
+# ".invalid" is a reserved TLD and can never resolve. That is deliberate: a
+# guessed Maps link landing a client on the wrong salon is worse than a link
+# that plainly does not work. Replace before /reviews ships.
+#
+# The build does not inject it — the review call-to-action is hand-authored,
+# because running this script over main still rewrites all 90 pages. The same
+# sentinel appears in reviews/index.html and index.html; to set it, one command:
+#
+#   grep -rl GOOGLE_REVIEWS_URL_PENDING --include=*.html . | xargs sed -i '' \
+#     's|https://GOOGLE_REVIEWS_URL_PENDING.invalid|<real url>|g'
+#
+# then update this constant so the three stay in step.
+GOOGLE_REVIEWS_URL = "https://GOOGLE_REVIEWS_URL_PENDING.invalid"
+
 NH_ADDR = "2014D Babcock Blvd, Pittsburgh, PA 15209"
 CB_ADDR = "115 W Pike St, Canonsburg, PA 15317"
 HOURS = "Tuesday-Friday 9am-7pm, Saturday 9am-5pm"

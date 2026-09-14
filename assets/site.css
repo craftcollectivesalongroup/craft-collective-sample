@@ -2774,6 +2774,30 @@ footer a.tel-link:focus {
 }
 
 /* The homepage section centres its heading already; the link follows it. */
+/* The rating is the one genuine piece of proof either block has, so it does
+   the visual work the cards used to. */
+.reviews-source-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin: 0 0 2.5rem;
+}
+
+.reviews-source-stars {
+  color: var(--gold-deep);
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+}
+
+.reviews-source-figure {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.testimonials-inner > .btn-primary,
 .testimonials-inner > .btn-ghost {
   display: inline-flex;
   align-items: center;
