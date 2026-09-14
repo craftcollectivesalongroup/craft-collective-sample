@@ -670,14 +670,14 @@ PAGE_FAQ = {
          "5.0 out of 5 stars across 809 client reviews, for balayage, highlights, colour correction and precision "
          "cutting."),
         ("Where can I read reviews?",
-         "Reviews appear on this page and on Google, and our work is posted on Instagram at "
-         "@craftcollectivesalongroup."),
+         "On our Google listing, where every review is published in full. Our work is posted on "
+         "Instagram at @craftcollectivesalongroup."),
         ("Can I leave a review?",
          "Please do — Google reviews help other Pittsburgh clients find a stylist who does the kind of work they want."),
         ("What do clients say most often?",
          "Two things come up repeatedly: that the consultation is genuinely thorough, and that colour grows out well "
          "enough to stretch the time between appointments."),
-        ("How do I book after reading these?", BOOK_A),
+        ("How do I book an appointment?", BOOK_A),
     ],
 }
 
