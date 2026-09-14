@@ -601,8 +601,8 @@ PAGE_FAQ = {
     ],
     "artist-team": [
         ("Who at Craft Collective is on a brand artist team?",
-         "Kim Hughes and Sherry Maiolini. Both see clients at our North Hills studio at "
-         f"{NH_ADDR}."),
+         "Kim Hughes is on the R+Co artist team and Sherry Maiolini is on the Wella "
+         f"Professionals artist team. Both see clients at our North Hills studio at {NH_ADDR}."),
         ("What is a brand artist team?",
          "A roster of working hairdressers a brand selects to represent it — testing and "
          "demonstrating its techniques and products. Members bring what they learn back "
