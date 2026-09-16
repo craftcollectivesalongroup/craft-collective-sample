@@ -3259,3 +3259,16 @@ footer a.tel-link:focus {
     font-size: 0.64rem;
   }
 }
+
+/* Caveat under an hours grid. Monday at North Hills runs with limited staff;
+   that belongs with the hours but not inside them — a longer string in a
+   .hours-time cell reads as a correction to the time rather than a note about
+   the day, and the grid is meant to be scannable. Outside the grid it also
+   cannot affect the day/time column alignment at any width. */
+.hours-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--mid);
+  font-weight: 300;
+}

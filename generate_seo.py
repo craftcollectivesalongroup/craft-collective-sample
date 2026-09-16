@@ -237,7 +237,7 @@ def make_page(title, description, canonical, og_type, breadcrumbs, schema_json, 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>{SHARED_CSS}</style>
-  <link rel="stylesheet" href="/assets/site.css?v=8ac02427" />
+  <link rel="stylesheet" href="/assets/site.css?v=18193c58" />
 </head>
 <body>
 {NAV_HTML}
@@ -390,7 +390,7 @@ def gen_location_pages():
           <strong>Canonsburg:</strong> {CB_ADDRESS}, Canonsburg PA {CB_ZIP}<br>
           <strong>Phone:</strong> <a href="tel:{PHONE_TEL}">{PHONE}</a><br>
           <strong>Email:</strong> <a href="mailto:{EMAIL}">{EMAIL}</a><br>
-          <strong>Hours:</strong> Tue-Fri 9am-7pm, Sat 9am-5pm<br>
+          <strong>Hours:</strong> Mon 10am-6pm, Tue-Thu 10am-9pm, Fri 9am-5pm, Sat 9am-4pm<br>
           <strong>Booking:</strong> <a href="https://phorest.com/book/salons/craftcollectivesalongroup" target="_blank" rel="noreferrer noopener">Book Online 24/7</a>
         </p>
       </div>
@@ -613,7 +613,7 @@ def gen_service_pages():
           <strong>North Hills:</strong> {NH_ADDRESS}, Pittsburgh PA {NH_ZIP}<br>
           <strong>Canonsburg:</strong> {CB_ADDRESS}, Canonsburg PA {CB_ZIP}<br>
           <strong>Phone:</strong> <a href="tel:{PHONE_TEL}">{PHONE}</a><br>
-          <strong>Hours:</strong> Tue-Fri 9am-7pm, Sat 9am-5pm<br>
+          <strong>Hours:</strong> Mon 10am-6pm, Tue-Thu 10am-9pm, Fri 9am-5pm, Sat 9am-4pm<br>
           <strong>Booking:</strong> <a href="https://phorest.com/book/salons/craftcollectivesalongroup" target="_blank" rel="noreferrer noopener">Book Online 24/7</a>
         </p>
       </div>

@@ -59,7 +59,8 @@ GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Craft+Coll
 
 NH_ADDR = "2014D Babcock Blvd, Pittsburgh, PA 15209"
 CB_ADDR = "115 W Pike St, Canonsburg, PA 15317"
-HOURS = "Tuesday-Friday 9am-7pm, Saturday 9am-5pm"
+HOURS = ("Monday 10am-6pm, Tuesday-Thursday 10am-9pm, Friday 9am-5pm, "
+         "Saturday 9am-4pm")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -669,7 +670,7 @@ def area_faq(slug):
              f"Our North Hills studio is at {NH_ADDR}, on Babcock Blvd just off McKnight Road. Free parking is "
              "available on site."),
             ("What are your North Hills salon hours?",
-             f"{HOURS}. We are closed Sunday and Monday. Online booking is open 24/7 even when the salon is not."),
+             f"{HOURS}. We are closed Sunday. Online booking is open 24/7 even when the salon is not."),
             ("Do I need an appointment or can I walk in?",
              "Walk-ins are taken when there is availability, but color services in particular book out well ahead, "
              f"so we recommend booking. Reserve online any time or call {PHONE}."),
@@ -713,7 +714,7 @@ def area_faq(slug):
          "Balayage, highlights and lowlights, blonding, dimensional and corrective color, precision haircuts, "
          "keratin smoothing treatments, hair extensions, blowouts and bridal styling."),
         ("What are your hours?",
-         f"{HOURS}, closed Sunday and Monday. Online booking stays open 24 hours a day."),
+         f"{HOURS}, closed Sunday. Online booking stays open 24 hours a day."),
     ]
 
 
@@ -752,7 +753,7 @@ PAGE_FAQ = {
         ("What services do you offer?",
          "Balayage, highlights, blonding, dimensional and corrective color, precision haircuts, keratin smoothing, "
          "hair extensions, blowouts and bridal styling, plus nails, skin and lash services."),
-        ("What are your hours?", f"{HOURS}. Closed Sunday and Monday. Online booking is open 24/7."),
+        ("What are your hours?", f"{HOURS}. Closed Sunday. Online booking is open 24/7."),
         ("How do I book?", BOOK_A),
     ],
     "book": [
@@ -2028,7 +2029,8 @@ TITLE_OVERRIDES = {
     "locations/north-hills-pittsburgh/index.html": (
         "Hair Salon North Hills Pittsburgh | Babcock Blvd",
         "Craft Collective Salon Group in Pittsburgh's North Hills — 2014D Babcock Blvd, free "
-        "parking, open Tue-Fri 9-7 and Sat 9-5. Balayage, highlights, color, keratin and "
+        "parking, open Mon 10-6, Tue-Thu 10-9, Fri 9-5 and Sat 9-4. Balayage, highlights, "
+        "color, keratin and "
         f"extensions. Book online 24/7 or call {PHONE}.",
     ),
     "locations/canonsburg/index.html": (
