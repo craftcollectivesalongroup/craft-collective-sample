@@ -49,7 +49,7 @@
 
   /* Brand gold, in two mixes.
 
-     Page CSS reaches for var(--gold) far more often as a *text* colour than
+     Page CSS reaches for var(--gold) far more often as a *text* color than
      as a fill — stylist roles, "Learn More" links, section labels, star rows —
      across selectors too varied to enumerate. At #b08d57 every one of those
      lands at 3.09:1 on white, under AA. So the token defaults to the
@@ -789,7 +789,7 @@ h3 em {
 /* --------------------------------------------------- 4c-bis. gold fills */
 
 /* The closed set of surfaces painted with the brand gold. Everything here
-   also states its own text colour, because ink on gold is the only pairing
+   also states its own text color, because ink on gold is the only pairing
    on that ground that clears AA. */
 .nav-book,
 .nav-book-mobile,
@@ -807,7 +807,7 @@ h3 em {
 
 /* `:not([class*='btn'])` again: the contact strip contains a .btn-dark, and
    forcing ink on it painted ink type onto an ink button. Buttons carry their
-   own ground and so must be exempt from any container-level colour. */
+   own ground and so must be exempt from any container-level color. */
 .about-image-badge,
 .about-image-badge .badge-num,
 .about-image-badge .badge-text,
@@ -837,7 +837,7 @@ h3 em {
 /* Reversed context: the footer and nav keep the dark ground, so gold there has
    to move the other way — the text-safe mix is 3.5:1 against #1A2440. This is
    a bare `footer a` on purpose: it is the catch-all for links the theme layer
-   has not named, and every footer link class that wants a different colour
+   has not named, and every footer link class that wants a different color
    (.footer-links a) outranks it on specificity anyway. */
 footer .footer-col-head,
 footer .section-label,
@@ -1502,7 +1502,7 @@ footer {
 
 /* The four values are set in different faces and sizes (stars, a word, two
    numerals), so a fixed box keeps their baselines on one line across the row
-   instead of letting each float to the centre of its own label height. */
+   instead of letting each float to the center of its own label height. */
 .trust-value {
   display: flex;
   align-items: center;
@@ -2599,7 +2599,7 @@ footer {
 
 /* The stylist photos are square crops, framed on each sitter's own face so the
    head sits at the same height and the same scale across all thirty-nine. The
-   card has to honour that or the work is thrown away at the last step: a
+   card has to honor that or the work is thrown away at the last step: a
    fixed-height well re-crops the square to a letterbox band and puts the
    frame back where the CSS wants it rather than where the face is. A square
    well shows the crop exactly as cut. */
@@ -2690,7 +2690,7 @@ footer a.tel-link:focus {
    the booking button that used to sit under it. With that button gone the
    margin is trailing: 88px of dead space under the badge on a phone against
    the 48px the padding intends, and a 20px upward shift of the whole block
-   where the hero centres it vertically. Scoped to :last-child so the spacing
+   where the hero centers it vertically. Scoped to :last-child so the spacing
    comes back on its own if anything is ever placed after it again. */
 .award-badge:last-child {
   margin-bottom: 0;
@@ -2773,7 +2773,7 @@ footer a.tel-link:focus {
   text-wrap: pretty;
 }
 
-/* The homepage section centres its heading already; the link follows it. */
+/* The homepage section centers its heading already; the link follows it. */
 /* The rating is the one genuine piece of proof either block has, so it does
    the visual work the cards used to. */
 .reviews-source-proof {
@@ -2901,7 +2901,7 @@ footer a.tel-link:focus {
   border: none;
   padding: 0;
   background: transparent;
-  /* The UA centres a modal dialog with margin:auto against inset:0. The site's
+  /* The UA centers a modal dialog with margin:auto against inset:0. The site's
      reset zeroes margins on everything, which pins it to the top-left corner
      instead, so the centring is restored explicitly here. */
   margin: auto;
@@ -3064,7 +3064,7 @@ footer a.tel-link:focus {
        North Hills / Canonsburg
 
    This replaced an earlier plan for a gold outline plus a key. Stating the
-   fact is better than encoding it in a colour: there is no key to have missed,
+   fact is better than encoding it in a color: there is no key to have missed,
    nothing to misread if you cannot separate gold from the card edge, nothing
    extra for a screen reader, and — the point the owner actually cared about —
    a stylist who works at both can no longer be mistaken for Canonsburg-only.
@@ -3185,7 +3185,7 @@ footer a.tel-link:focus {
   display: none;
 }
 
-/* Colour is reinforcement here, not the carrier of meaning — the words say it
+/* Color is reinforcement here, not the carrier of meaning — the words say it
    outright — so this is purely a legibility question, and both tones clear AA
    for normal text on all three card grounds:
 
@@ -3196,7 +3196,7 @@ footer a.tel-link:focus {
    and buttons and manages only 3.09:1 as text. The palette already draws that
    line; see the note on the tokens above. The separator and the word "only"
    stay in the label's own --mid (6.38:1), so the two studio names are the only
-   coloured words and the grammar around them recedes. */
+   colored words and the grammar around them recedes. */
 .studio-nh { color: var(--ink); font-weight: 500; }
 .studio-cb { color: var(--gold); font-weight: 500; }
 
@@ -3204,7 +3204,7 @@ footer a.tel-link:focus {
    stylist's own page.
 
    Same markup, same attribute, same three strings, and — after checking — the
-   same colours as the card.
+   same colors as the card.
 
    The trap here: the stylist page's own inline stylesheet says
    .hero { background: var(--black) } with the name in --off-white, which reads
@@ -3221,7 +3221,7 @@ footer a.tel-link:focus {
        --gold #866336  (Canonsburg)          5.18:1
        --mid  #565F75  (slash and "only")    6.07:1
 
-   Those colours come from the shared .studio-nh / .studio-cb rules above, so
+   Those colors come from the shared .studio-nh / .studio-cb rules above, so
    there is nothing to override here — only the block's own placement.
 
    Position: directly under the name, above the italic .title line, so the hero

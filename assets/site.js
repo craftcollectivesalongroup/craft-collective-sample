@@ -1,4 +1,4 @@
-/* Craft Collective Salon Group — shared behaviour.
+/* Craft Collective Salon Group — shared behavior.
    Loaded with `defer`, so it runs after each page's inline scripts have
    registered their own listeners. */
 (function () {

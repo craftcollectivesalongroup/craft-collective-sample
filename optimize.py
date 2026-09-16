@@ -171,7 +171,7 @@ def studio_label(cls):
 
     Four spans rather than one string: CSS shows the parts that apply and
     hides the rest, so the attribute drives the wording, and the two studio
-    names can take their own colours. The spacing lives inside the spans, so
+    names can take their own colors. The spacing lives inside the spans, so
     hiding a part hides its spacing with it."""
     return (f'<p class="{cls}">'
             '<span class="studio-nh">North Hills</span>'
@@ -326,13 +326,13 @@ SERVICE_FAQ = {
          "Balayage pricing at Craft Collective depends on hair length, density and how much lift you want. "
          "Because every head of hair takes a different amount of product and time, we quote at consultation "
          f"rather than from a flat price list. Call {PHONE} or book a free consultation and we will give you "
-         "an exact number before any colour is mixed."),
+         "an exact number before any color is mixed."),
         ("How long does a balayage appointment take?",
          "Plan on 2.5 to 4 hours. That covers the consultation, the freehand painting itself, processing, a "
          "custom toner to perfect the shade, a deep conditioning treatment and a blowout finish. A first-time "
          "transformation from dark to bright blonde may be booked across two sessions to protect hair integrity."),
         ("How often do I need to come back for balayage?",
-         "Most balayage clients go 12 to 16 weeks between appointments. Because the colour is painted rather "
+         "Most balayage clients go 12 to 16 weeks between appointments. Because the color is painted rather "
          "than foiled from the root, there is no hard regrowth line, so it grows out softly. A gloss or toner "
          "refresh at around week eight keeps the tone from going brassy between full appointments."),
         ("Is balayage better than highlights for my hair?",
@@ -340,10 +340,10 @@ SERVICE_FAQ = {
          "brighter, more uniform lift from the root. Fine hair and clients wanting maximum brightness often do "
          "better in foils, and many people get the best result from a combination. Read our "
          "balayage vs highlights guide, or ask at your consultation."),
-        ("Do you do balayage on dark or previously coloured hair?",
+        ("Do you do balayage on dark or previously colored hair?",
          "Yes. Dark bases and box-dye history are among the most common things we work with. Depending on how "
          "much existing pigment is in the hair, we may build the result over two or three appointments so the "
-         "hair stays healthy. Our colourists are trained by Derek Piekarski, who taught colour technique for "
+         "hair stays healthy. Our colorists are trained by Derek Piekarski, who taught color technique for "
          "Wella Professionals across North America."),
     ],
     "highlights-pittsburgh": [
@@ -370,24 +370,24 @@ SERVICE_FAQ = {
          "soft. Ask for a dimensional or lived-in blonde at your consultation."),
     ],
     "hair-color-pittsburgh": [
-        ("What hair colour services do you offer?",
-         "Single-process colour, root touch-ups, all-over grey coverage, dimensional colour, lived-in colour, "
-         "glossing and toning, fashion and vivid shades, and full colour correction. We colour exclusively with "
+        ("What hair color services do you offer?",
+         "Single-process color, root touch-ups, all-over gray coverage, dimensional color, lived-in color, "
+         "glossing and toning, fashion and vivid shades, and full color correction. We color exclusively with "
          "Wella Professionals."),
-        ("How much does hair colour cost in Pittsburgh?",
-         f"A root touch-up sits at the lower end and a multi-step correction at the higher end. Because colour "
+        ("How much does hair color cost in Pittsburgh?",
+         f"A root touch-up sits at the lower end and a multi-step correction at the higher end. Because color "
          f"work is priced by time and product, we quote at consultation. Call {PHONE} or book a consultation "
          "online and you will have an exact price before we begin."),
-        ("Can you fix a box dye or a colour from another salon?",
-         "Yes — corrective colour is one of our specialities. Bring photos of what you have now and what you want. "
+        ("Can you fix a box dye or a color from another salon?",
+         "Yes — corrective color is one of our specialities. Bring photos of what you have now and what you want. "
          "Depending on how much artificial pigment is in the hair, a correction may take one long appointment or "
          "a series of sessions. We will not promise a result in one visit if getting there safely takes two."),
-        ("How do I keep my colour from fading?",
-         "Wash with sulphate-free colour-safe shampoo, turn the water temperature down, use heat protectant before "
-         "hot tools, and book a gloss between colour appointments. We will send you home with product recommendations "
+        ("How do I keep my color from fading?",
+         "Wash with sulphate-free color-safe shampoo, turn the water temperature down, use heat protectant before "
+         "hot tools, and book a gloss between color appointments. We will send you home with product recommendations "
          "matched to your specific formula."),
-        ("How often should I get my colour done?",
-         "Root touch-ups every 4 to 6 weeks, all-over colour every 6 to 8 weeks, and dimensional or painted colour "
+        ("How often should I get my color done?",
+         "Root touch-ups every 4 to 6 weeks, all-over color every 6 to 8 weeks, and dimensional or painted color "
          "every 12 to 16 weeks. Your stylist will set a rhythm around your hair and your schedule at the first visit."),
     ],
     "hair-extensions-pittsburgh": [
@@ -395,8 +395,8 @@ SERVICE_FAQ = {
          "We fit hand-tied wefts, tape-in extensions and individual bonds, and we will recommend a method based on "
          "your hair density, lifestyle and budget rather than defaulting to one system for everyone."),
         ("How much do hair extensions cost in Pittsburgh?",
-         "Extension pricing has two parts: the hair itself and the labour to install it. Both scale with how many "
-         "rows or wefts you need. A consultation is required before booking so we can colour-match, estimate the "
+         "Extension pricing has two parts: the hair itself and the labor to install it. Both scale with how many "
+         "rows or wefts you need. A consultation is required before booking so we can color-match, estimate the "
          f"amount of hair and give you a firm total. Call {PHONE} to arrange one."),
         ("How long do hair extensions last?",
          "The hair itself typically lasts 6 to 12 months with proper care. Move-up appointments to reposition the "
@@ -421,9 +421,9 @@ SERVICE_FAQ = {
         ("How much does a keratin treatment cost in Pittsburgh?",
          f"Pricing scales with hair length and density since both change how much solution and processing time the "
          f"service takes. We quote at consultation. Call {PHONE} or book online for an exact figure."),
-        ("Can I get a keratin treatment on coloured hair?",
-         "Yes. If you are colouring and smoothing in the same visit, colour first and smooth second. Many clients "
-         "find keratin actually helps colour last longer because the sealed cuticle holds pigment better."),
+        ("Can I get a keratin treatment on colored hair?",
+         "Yes. If you are coloring and smoothing in the same visit, color first and smooth second. Many clients "
+         "find keratin actually helps color last longer because the sealed cuticle holds pigment better."),
         ("How soon can I wash my hair after a keratin treatment?",
          "Follow your stylist's instruction for the specific formula used — with most of the systems we carry you "
          "can wash the same day, while a few require waiting. Either way, switch to a sulphate-free shampoo "
@@ -431,7 +431,7 @@ SERVICE_FAQ = {
     ],
     "haircuts-pittsburgh": [
         ("How much is a haircut in Pittsburgh at Craft Collective?",
-         f"Haircut pricing varies by stylist level and by whether you are booking a cut alone or a cut with a colour "
+         f"Haircut pricing varies by stylist level and by whether you are booking a cut alone or a cut with a color "
          f"service. Call {PHONE} or book online and we will confirm the price for the stylist you choose."),
         ("How long does a haircut appointment take?",
          "Around 45 minutes to an hour for a cut and style. That includes a consultation about how you actually wear "
@@ -440,7 +440,7 @@ SERVICE_FAQ = {
          "Every 6 to 8 weeks for short cuts and precision shapes, and every 10 to 12 weeks for longer hair where you "
          "are mainly maintaining ends. If you are growing your hair out, regular dusting of the ends actually helps."),
         ("Do you cut curly hair?",
-         "Yes. Several of our stylists specialise in curly and textured hair and cut dry so the shape is built around "
+         "Yes. Several of our stylists specialize in curly and textured hair and cut dry so the shape is built around "
          "how the curl actually falls. Mention curl when you book so we can match you to the right stylist."),
         ("Can I book a haircut with a specific stylist?",
          "Yes — our whole team has individual profiles with their specialities, and online booking lets you pick by "
@@ -476,23 +476,23 @@ SERVICE_FAQ = {
         ("Do you travel to the venue?",
          "On-location styling is available for wedding parties depending on date, party size and travel distance. "
          "Ask when you enquire and we will confirm availability for your date."),
-        ("Should I colour my hair before the wedding?",
-         "Yes — book colour for two to three weeks before the date. That gives the tone time to settle, leaves room "
+        ("Should I color my hair before the wedding?",
+         "Yes — book color for two to three weeks before the date. That gives the tone time to settle, leaves room "
          "for a small adjustment if you want one, and means your roots are fresh in the photographs."),
     ],
     "mens-grooming-pittsburgh": [
         ("What men's services do you offer?",
-         "Precision cuts, scissor and clipper work, fades, beard shaping and trims, grey blending, and men's colour "
+         "Precision cuts, scissor and clipper work, fades, beard shaping and trims, gray blending, and men's color "
          "including highlights and lowlights."),
         ("How much is a men's haircut in Pittsburgh?",
-         f"Pricing depends on the stylist and whether you are adding beard work or colour. Call {PHONE} or book "
+         f"Pricing depends on the stylist and whether you are adding beard work or color. Call {PHONE} or book "
          "online for the exact price."),
         ("How often should men get a haircut?",
          "Every 3 to 4 weeks for a fade or a tight taper to keep the line sharp, and every 6 to 8 weeks for longer "
          "or textured cuts."),
-        ("Do you offer grey blending for men?",
-         "Yes. Grey blending softens grey rather than covering it completely, so it grows out without an obvious line "
-         "and looks like your own hair rather than a dye job. It is one of our most requested men's colour services."),
+        ("Do you offer gray blending for men?",
+         "Yes. Gray blending softens gray rather than covering it completely, so it grows out without an obvious line "
+         "and looks like your own hair rather than a dye job. It is one of our most requested men's color services."),
         ("Can I book a men's cut with beard work in one appointment?",
          "Yes — book the cut and mention beard work in the notes, or call us and we will schedule the extra time so "
          "you are not rushed."),
@@ -501,15 +501,15 @@ SERVICE_FAQ = {
 
 BLOG_FAQ = {
     "best-balayage-pittsburgh": [
-        ("What makes a good balayage colourist?",
+        ("What makes a good balayage colorist?",
          "Freehand painting cannot be foiled into place afterwards, so the placement has to be right the first time. "
          "That means an eye for where light naturally falls on your specific head shape, plus enough chemistry "
-         "knowledge to know how far a given hair can lift safely. Ask to see a colourist's own portfolio on hair "
+         "knowledge to know how far a given hair can lift safely. Ask to see a colorist's own portfolio on hair "
          "similar to yours, not the salon's collective feed."),
         ("How much should balayage cost in Pittsburgh?",
          "Pittsburgh balayage pricing scales with hair length, density and how much lift is involved rather than "
          f"sitting at one flat rate. Book a consultation at Craft Collective, or call {PHONE}, and we will quote "
-         "your hair specifically before any colour is mixed."),
+         "your hair specifically before any color is mixed."),
         ("How long does balayage last?",
          "Twelve to sixteen weeks between full appointments for most clients, with a gloss around week eight to keep "
          "the tone from warming up. The painted grow-out is exactly why balayage is lower maintenance than foils."),
@@ -536,19 +536,19 @@ BLOG_FAQ = {
          "foils. A consultation settles it in ten minutes."),
     ],
     "best-hair-care-products-color-treated-2026": [
-        ("What shampoo is best for colour-treated hair?",
-         "A sulphate-free, colour-safe shampoo. Sulphates are the detergents that strip pigment fastest, so switching "
-         "shampoo does more for colour longevity than any other single change. Your stylist will match a specific "
+        ("What shampoo is best for color-treated hair?",
+         "A sulphate-free, color-safe shampoo. Sulphates are the detergents that strip pigment fastest, so switching "
+         "shampoo does more for color longevity than any other single change. Your stylist will match a specific "
          "product to your formula."),
         ("Do purple shampoos actually work?",
-         "Yes, on blonde and lightened hair — purple pigment counteracts the yellow tones that develop as colour "
+         "Yes, on blonde and lightened hair — purple pigment counteracts the yellow tones that develop as color "
          "oxidises. Use it once or twice a week, not daily; overuse leaves a dull violet cast and does nothing for "
          "the underlying condition."),
-        ("How often should I wash colour-treated hair?",
+        ("How often should I wash color-treated hair?",
          "Two to three times a week for most people. Every wash costs you some pigment, so stretching washes with dry "
-         "shampoo genuinely extends the life of a colour service."),
+         "shampoo genuinely extends the life of a color service."),
         ("Are salon products worth it over drugstore?",
-         "For colour-treated hair, generally yes — the difference is pigment-safe surfactants and higher-quality "
+         "For color-treated hair, generally yes — the difference is pigment-safe surfactants and higher-quality "
          "conditioning agents, not the label. What matters most is that the product suits your specific formula, "
          "which is why we recommend per client rather than blanket."),
     ],
@@ -558,8 +558,8 @@ BLOG_FAQ = {
          "wefts suit most medium-to-thick hair, tape-ins sit flattest on finer hair, and individual bonds give the "
          "most placement flexibility. A consultation is where this gets decided."),
         ("How much do extensions cost in Pittsburgh?",
-         "Two costs: the hair, and the labour to install it. Both scale with how much hair you need. Every extension "
-         f"client at Craft Collective starts with a consultation so we can colour-match and quote exactly. Call {PHONE}."),
+         "Two costs: the hair, and the labor to install it. Both scale with how much hair you need. Every extension "
+         f"client at Craft Collective starts with a consultation so we can color-match and quote exactly. Call {PHONE}."),
         ("How long do extensions take to install?",
          "Two to four hours for a first full install, depending on method and how many rows you need. Move-up "
          "appointments afterwards are shorter."),
@@ -570,9 +570,9 @@ BLOG_FAQ = {
     "how-to-choose-hair-salon-pittsburgh": [
         ("What should I look for in a Pittsburgh hair salon?",
          "Three things: verifiable credentials rather than marketing language, a portfolio showing hair like yours, "
-         "and a real consultation before any chemical service. A salon that will not consult before colouring is a "
+         "and a real consultation before any chemical service. A salon that will not consult before coloring is a "
          "salon guessing at your result."),
-        ("How do I find a good colourist near me?",
+        ("How do I find a good colorist near me?",
          "Look at individual stylist portfolios, not just the salon's feed — you book a person, not a building. At "
          "Craft Collective every stylist has their own page listing their specialities so you can match before you book."),
         ("What questions should I ask at a consultation?",
@@ -586,14 +586,14 @@ BLOG_FAQ = {
         ("How often should men get a haircut?",
          "Every 3 to 4 weeks for fades and tight tapers where the line goes soft quickly, and every 6 to 8 weeks for "
          "longer or textured cuts."),
-        ("What is grey blending for men?",
-         "A low-commitment colour service that softens grey rather than covering it. Because it is a blend rather than "
+        ("What is gray blending for men?",
+         "A low-commitment color service that softens gray rather than covering it. Because it is a blend rather than "
          "a block of pigment, it grows out with no visible line and reads as your own hair."),
         ("Do you do beard trims?",
          "Yes — beard shaping and trims, either on their own or added to a cut appointment. Mention it when booking so "
          "we schedule the extra time."),
         ("How much is a men's haircut in Pittsburgh?",
-         f"Pricing depends on the stylist and whether you are adding beard work or colour. Call {PHONE} or book online "
+         f"Pricing depends on the stylist and whether you are adding beard work or color. Call {PHONE} or book online "
          "for exact pricing."),
     ],
     "pittsburgh-wedding-hair": [
@@ -603,7 +603,7 @@ BLOG_FAQ = {
         ("Do I really need a bridal hair trial?",
          "Yes. A trial is where you find out how your hair holds through a long day, how the style photographs under "
          "flash, and how it sits with your veil. It is much better to discover a problem at the trial than on the morning."),
-        ("When should I colour my hair before my wedding?",
+        ("When should I color my hair before my wedding?",
          "Two to three weeks before. The tone settles, the roots are fresh in photographs, and there is still time for "
          "a small adjustment if you want one."),
         ("Can you style my bridesmaids too?",
@@ -622,14 +622,14 @@ BLOG_FAQ = {
          "A trim to take off split ends, a bond-building or protein treatment depending on whether the damage is "
          "structural or moisture-related, and a lighter conditioner as the humidity rises. Your stylist can tell which "
          "of the two your hair actually needs."),
-        ("Should I change my hair colour for spring?",
+        ("Should I change my hair color for spring?",
          "Many clients go a shade or two brighter as the light changes. Balayage is the usual route because it adds "
          "brightness without committing you to a hard root line through the summer."),
     ],
     "top-hair-trends-pittsburgh-2026": [
-        ("What hair colours are trending in 2026?",
+        ("What hair colors are trending in 2026?",
          "Lived-in dimensional blondes, soft expensive brunettes with subtle warmth, and face-framing money pieces "
-         "continue to dominate. The common thread is low-maintenance grow-out — clients want colour that looks "
+         "continue to dominate. The common thread is low-maintenance grow-out — clients want color that looks "
          "deliberate at week twelve, not just at week one."),
         ("What haircuts are popular right now?",
          "Long layered shapes with movement, blunt collarbone cuts, and the modern shag with curtain fringe. Texture "
@@ -642,17 +642,17 @@ BLOG_FAQ = {
          "every six weeks is the wrong trend if you can only come in twice a year — and a good stylist will say so."),
     ],
     "what-is-corrective-color": [
-        ("What is corrective colour?",
-         "Any service that fixes an unwanted colour result — banding, brassiness, uneven box dye, a failed at-home "
-         "attempt, or colour from another salon that did not land. It is technical work: you are removing and "
-         "rebalancing existing pigment, not just applying new colour on top."),
-        ("How much does corrective colour cost?",
-         "More than a standard colour service, because it takes more time and more product, and sometimes more than "
+        ("What is corrective color?",
+         "Any service that fixes an unwanted color result — banding, brassiness, uneven box dye, a failed at-home "
+         "attempt, or color from another salon that did not land. It is technical work: you are removing and "
+         "rebalancing existing pigment, not just applying new color on top."),
+        ("How much does corrective color cost?",
+         "More than a standard color service, because it takes more time and more product, and sometimes more than "
          f"one appointment. We quote after seeing your hair in person. Call {PHONE} to arrange a consultation."),
         ("Can you fix box dye?",
          "Usually, yes — it is one of the most common things we correct. Box dye deposits a lot of pigment unevenly, "
          "so removing it safely can take more than one session. We will tell you honestly how many."),
-        ("How long does corrective colour take?",
+        ("How long does corrective color take?",
          "A straightforward correction runs three to five hours. A significant change — very dark to blonde, for "
          "example — is often staged across two or three appointments, several weeks apart, to keep the hair healthy."),
     ],
@@ -671,10 +671,10 @@ def area_faq(slug):
             ("What are your North Hills salon hours?",
              f"{HOURS}. We are closed Sunday and Monday. Online booking is open 24/7 even when the salon is not."),
             ("Do I need an appointment or can I walk in?",
-             "Walk-ins are taken when there is availability, but colour services in particular book out well ahead, "
+             "Walk-ins are taken when there is availability, but color services in particular book out well ahead, "
              f"so we recommend booking. Reserve online any time or call {PHONE}."),
             ("What services are available at the North Hills location?",
-             "The full menu: balayage, highlights, blonding, dimensional and corrective colour, precision haircuts, "
+             "The full menu: balayage, highlights, blonding, dimensional and corrective color, precision haircuts, "
              "keratin smoothing, hair extensions, blowouts and bridal styling, plus nails, skin and lash services."),
             ("Is parking available?",
              "Yes — free on-site parking at the Babcock Blvd studio, directly outside the salon."),
@@ -683,20 +683,20 @@ def area_faq(slug):
     if slug == "canonsburg":
         return [
             ("Where is your Canonsburg salon?",
-             f"Our Canonsburg studio is at {CB_ADDR}, in the centre of town on W Pike St, serving Washington County "
+             f"Our Canonsburg studio is at {CB_ADDR}, in the center of town on W Pike St, serving Washington County "
              "and the South Hills."),
             ("Do I need an appointment for the Canonsburg location?",
              f"Yes — Canonsburg operates by appointment only. Call {PHONE} to schedule with one of our stylists. "
              "Online booking currently covers our North Hills studio."),
             ("What services do you offer in Canonsburg?",
-             "The same services and the same standard as North Hills: balayage, highlights, blonding, colour "
+             "The same services and the same standard as North Hills: balayage, highlights, blonding, color "
              "correction, precision cutting, keratin treatments and extensions."),
             ("Which areas does the Canonsburg salon serve?",
              "Canonsburg, Peters Township, McMurray, Cecil Township, Washington PA, Upper St. Clair, Bethel Park, "
              "Mt. Lebanon and the wider South Hills."),
             ("Is it the same team as the North Hills salon?",
              "Yes. Both studios are Craft Collective Salon Group, trained to the same standard under owner Derek "
-             "Piekarski, and both use Wella Professionals colour."),
+             "Piekarski, and both use Wella Professionals color."),
         ]
 
     return [
@@ -706,11 +706,11 @@ def area_faq(slug):
         (f"What is the best hair salon near {name}?",
          f"Craft Collective Salon Group is rated 5.0 stars across 809 reviews and is led by Derek Piekarski, a former "
          f"Wella Professionals North America Signature Artist. {name} clients come to us for balayage, highlights, "
-         f"blonding, colour correction and precision cutting."),
+         f"blonding, color correction and precision cutting."),
         (f"How do I book an appointment from {name}?",
          BOOK_A),
         (f"What services can {name} clients book?",
-         "Balayage, highlights and lowlights, blonding, dimensional and corrective colour, precision haircuts, "
+         "Balayage, highlights and lowlights, blonding, dimensional and corrective color, precision haircuts, "
          "keratin smoothing treatments, hair extensions, blowouts and bridal styling."),
         ("What are your hours?",
          f"{HOURS}, closed Sunday and Monday. Online booking stays open 24 hours a day."),
@@ -719,13 +719,13 @@ def area_faq(slug):
 
 def stylist_faq(name, role, specialties):
     spec = ", ".join(specialties[:-1]) + " and " + specialties[-1] if len(specialties) > 1 else (
-        specialties[0] if specialties else "hair colour and cutting")
+        specialties[0] if specialties else "hair color and cutting")
     first = name.split()[0]
     return [
         (f"How do I book an appointment with {name}?",
          f"Book {first} directly through our online booking, which is open 24 hours a day, or call {PHONE} and we "
          f"will find you a slot. New clients are welcome."),
-        (f"What does {name} specialise in?",
+        (f"What does {name} specialize in?",
          f"{first} works in {spec}. Every appointment starts with a consultation, so bring photos of what you want "
          "and be honest about how much maintenance you are up for."),
         (f"Where does {name} work?",
@@ -734,10 +734,9 @@ def stylist_faq(name, role, specialties):
         ("What should I expect at my first appointment?",
          f"A consultation before anything else — {first} will look at your hair's history and condition, talk through "
          "what is realistic in one visit versus what needs staging, and quote you before starting. Allow extra time "
-         "if you are booking colour for the first time."),
-        ("What colour line does the salon use?",
-         "Wella Professionals, exclusively. Owner Derek Piekarski served on the Wella North America Signature Artist "
-         "Team and trained colourists for the brand across North America."),
+         "if you are booking color for the first time."),
+        ("What color line does the salon use?",
+         "We proudly utilize Wella Professionals, R+Co, and some Aveda color."),
     ]
 
 
@@ -746,12 +745,12 @@ PAGE_FAQ = {
         ("What makes Craft Collective different from other Pittsburgh salons?",
          "Our owner, Derek Piekarski, spent years training other stylists — he served on the Wella Professionals "
          "North America Signature Artist Team and was North America Manager of Technical Capabilities for Aveda. "
-         "Every colourist on our floor has been trained by him personally, to the same standard."),
+         "Every colorist on our floor has been trained by him personally, to the same standard."),
         ("Where are your salons located?",
          f"Two studios: {NH_ADDR} in Pittsburgh's North Hills, and {CB_ADDR} in Canonsburg. We see clients from "
          "across greater Pittsburgh."),
         ("What services do you offer?",
-         "Balayage, highlights, blonding, dimensional and corrective colour, precision haircuts, keratin smoothing, "
+         "Balayage, highlights, blonding, dimensional and corrective color, precision haircuts, keratin smoothing, "
          "hair extensions, blowouts and bridal styling, plus nails, skin and lash services."),
         ("What are your hours?", f"{HOURS}. Closed Sunday and Monday. Online booking is open 24/7."),
         ("How do I book?", BOOK_A),
@@ -762,10 +761,10 @@ PAGE_FAQ = {
          "Online booking currently covers our North Hills studio on Babcock Blvd. The Canonsburg studio on W Pike St "
          f"runs by appointment — call {PHONE} to schedule there."),
         ("How far in advance should I book?",
-         "Two to three weeks for colour services, and longer for Saturdays or for bridal. Cuts can often be "
+         "Two to three weeks for color services, and longer for Saturdays or for bridal. Cuts can often be "
          "accommodated sooner. Weddings should be booked six to nine months ahead."),
         ("Do you take walk-ins?",
-         "When there is availability, yes — but colour appointments in particular fill well ahead, so booking is "
+         "When there is availability, yes — but color appointments in particular fill well ahead, so booking is "
          "always safer."),
         ("What is your cancellation policy?",
          f"We ask for at least 24 hours' notice so the slot can be offered to someone else. Call {PHONE} as soon as "
@@ -776,18 +775,18 @@ PAGE_FAQ = {
          "Our stylists, led by owner Derek Piekarski — a former Wella Professionals North America Signature Artist "
          "and Master Trainer. Everything here comes from work done on the salon floor in Pittsburgh."),
         ("What topics do you cover?",
-         "Colour technique, balayage and highlights, hair care for coloured hair, extensions, keratin smoothing, "
+         "Color technique, balayage and highlights, hair care for colored hair, extensions, keratin smoothing, "
          "seasonal care for Pittsburgh's climate, and trend guides."),
         ("Can I book a consultation about something I read here?",
          f"Yes — that is what the articles are for. Book online 24/7 or call {PHONE} and mention what you have been "
          "reading."),
         ("Do you offer product recommendations?",
-         "Yes, both in our articles and in person. Recommendations in the salon are matched to your specific colour "
+         "Yes, both in our articles and in person. Recommendations in the salon are matched to your specific color "
          "formula and hair condition rather than given as blanket advice."),
     ],
     "derek-piekarski": [
         ("Who is Derek Piekarski?",
-         "Derek Piekarski is the owner of Craft Collective Salon Group and a globally recognised hairdresser. He "
+         "Derek Piekarski is the owner of Craft Collective Salon Group and a globally recognized hairdresser. He "
          "served on the North America Signature Artist Team for Wella Professionals and was North America Manager "
          "of Technical Capabilities for Aveda / Estée Lauder."),
         ("What awards has Derek won?",
@@ -796,24 +795,24 @@ PAGE_FAQ = {
          "Craft video series."),
         ("Can I book an appointment with Derek?",
          f"Yes. If you have any questions, please call the salon directly at {PHONE}."),
-        ("What does Derek specialise in?",
-         "Although most of Derek's career was spent travelling and teaching hair colour theory and techniques, he has "
+        ("What does Derek specialize in?",
+         "Although most of Derek's career was spent traveling and teaching hair color theory and techniques, he has "
          "always been an avid cutter — from short hair to long, from a blade to scissors. Derek is now available at "
-         "Craft Collective specialising in hair cutting only."),
+         "Craft Collective specializing in hair cutting only."),
     ],
     "hair-salon-gallery-pittsburgh": [
         ("Is the work in this gallery done at your salon?",
          "Yes — everything shown is work by Craft Collective stylists at our Pittsburgh North Hills and Canonsburg "
          "studios."),
         ("Can I bring a photo from the gallery to my appointment?",
-         "Please do. Reference photos are the single most useful thing you can bring to a colour consultation, and "
+         "Please do. Reference photos are the single most useful thing you can bring to a color consultation, and "
          "your stylist can tell you immediately what it takes to get there on your hair."),
         ("How do I book the look I want?",
          BOOK_A),
         ("Will my hair look exactly like the photo?",
-         "Your starting colour, hair history and texture all affect the outcome. A good consultation is where we tell "
+         "Your starting color, hair history and texture all affect the outcome. A good consultation is where we tell "
          "you honestly what is achievable in one appointment and what needs staging over two or three."),
-        ("What colour products do you use?",
+        ("What color products do you use?",
          "Wella Professionals, exclusively. Our owner served on the Wella North America Signature Artist Team."),
     ],
     "artist-team": [
@@ -828,18 +827,18 @@ PAGE_FAQ = {
          f"Yes. Book online 24 hours a day, or call {PHONE} and we will find you a slot."),
     ],
     "hair-care-tips": [
-        ("How often should I wash coloured hair?",
+        ("How often should I wash colored hair?",
          "Two to three times a week for most people. Every wash costs pigment, so stretching washes with dry shampoo "
-         "meaningfully extends the life of a colour service."),
-        ("What products protect colour-treated hair?",
-         "Sulphate-free colour-safe shampoo first — it makes more difference than anything else — plus a heat "
+         "meaningfully extends the life of a color service."),
+        ("What products protect color-treated hair?",
+         "Sulphate-free color-safe shampoo first — it makes more difference than anything else — plus a heat "
          "protectant before hot tools and a weekly deep conditioner. Your stylist will match specifics to your formula."),
         ("How do I stop frizz in Pittsburgh humidity?",
          "Reduce heat damage, keep moisture balance up with regular conditioning, and consider a keratin smoothing "
          "treatment, which controls frizz for three to five months."),
         ("How often should I trim my hair?",
          "Every 6 to 8 weeks for short shapes and every 10 to 12 weeks for long hair. If you are growing your hair "
-         "out, regular dusting of the ends prevents splits travelling up the shaft."),
+         "out, regular dusting of the ends prevents splits traveling up the shaft."),
         ("Can I fix damaged hair at home?",
          "Bond-building and protein treatments help, but only if the damage is the type they address. Bring damaged "
          "hair in and we will tell you whether it needs protein, moisture, or simply cutting off."),
@@ -854,24 +853,24 @@ PAGE_FAQ = {
          f"Yes, online booking lets you choose by name. If you are new and unsure who to pick, call {PHONE} and we "
          "will match you."),
         ("Are all your stylists trained the same way?",
-         "Yes. Every colourist is trained directly by owner Derek Piekarski, formerly of the Wella Professionals "
+         "Yes. Every colorist is trained directly by owner Derek Piekarski, formerly of the Wella Professionals "
          "North America Signature Artist Team, using the curriculum he taught to professionals internationally."),
         ("Which location does each stylist work at?",
          f"Most of the team is at our North Hills studio at {NH_ADDR}; the Canonsburg studio at {CB_ADDR} runs by "
          f"appointment. Call {PHONE} to confirm for a specific stylist."),
         ("Do you take new clients?",
-         "Yes, at both studios and across the team. New colour clients should allow extra time at the first visit "
+         "Yes, at both studios and across the team. New color clients should allow extra time at the first visit "
          "for a full consultation."),
     ],
     "pittsburgh-hair-salon-guide-2026": [
         ("How do I choose a hair salon in Pittsburgh?",
          "Look for verifiable credentials rather than marketing language, a stylist portfolio showing hair like yours, "
-         "and a real consultation before any chemical service. A salon that will not consult before colouring is "
+         "and a real consultation before any chemical service. A salon that will not consult before coloring is "
          "guessing at your result."),
-        ("What should a colour consultation cover?",
+        ("What should a color consultation cover?",
          "Your hair's history, what is achievable in one appointment versus what needs staging, the maintenance the "
          "result will require, and a price — before anything is mixed."),
-        ("How much does hair colour cost in Pittsburgh?",
+        ("How much does hair color cost in Pittsburgh?",
          "It scales with length, density and complexity rather than sitting at a flat rate, which is why reputable "
          f"salons quote at consultation. Call {PHONE} and we will book you one."),
         ("What neighbourhoods do you serve?",
@@ -883,7 +882,7 @@ PAGE_FAQ = {
     ],
     "reviews": [
         ("How is Craft Collective Salon Group rated?",
-         "5.0 out of 5 stars across 809 client reviews, for balayage, highlights, colour correction and precision "
+         "5.0 out of 5 stars across 809 client reviews, for balayage, highlights, color correction and precision "
          "cutting."),
         ("Where can I read reviews?",
          "On our Google listing, where every review is published in full. Our work is posted on "
@@ -891,7 +890,7 @@ PAGE_FAQ = {
         ("Can I leave a review?",
          "Please do — Google reviews help other Pittsburgh clients find a stylist who does the kind of work they want."),
         ("What do clients say most often?",
-         "Two things come up repeatedly: that the consultation is genuinely thorough, and that colour grows out well "
+         "Two things come up repeatedly: that the consultation is genuinely thorough, and that color grows out well "
          "enough to stretch the time between appointments."),
         ("How do I book an appointment?", BOOK_A),
     ],
@@ -1015,8 +1014,8 @@ def organization(page_url):
         "email": EMAIL,
         "description": (
             "Craft Collective Salon Group is a hair salon group serving the greater Pittsburgh "
-            "area, specialising in balayage, highlights, blonding, dimensional and corrective "
-            "colour, keratin smoothing, hair extensions and precision cutting. Led by Derek "
+            "area, specializing in balayage, highlights, blonding, dimensional and corrective "
+            "color, keratin smoothing, hair extensions and precision cutting. Led by Derek "
             "Piekarski, formerly of the Wella Professionals North America Signature Artist Team."
         ),
         "logo": {"@type": "ImageObject", "url": f"{SITE}/images/logo.png"},
@@ -1361,19 +1360,19 @@ SERVICE_ART = {
          (STOCK["caramel"], "Partial highlights framing the face, Pittsburgh salon"),
          (STOCK["honey"], "Full head of foils finished with a custom toner, Pittsburgh")]),
     "hair-color-pittsburgh": (
-        SALON["auburn"], "Rich auburn hair colour transformation at Craft Collective, Pittsburgh",
-        [(STOCK["red"], "Dimensional red hair colour, Craft Collective Pittsburgh"),
-         (STOCK["livedin"], "Lived-in dimensional colour, Pittsburgh salon"),
-         (SALON["platinum"], "Platinum colour transformation, Pittsburgh")]),
+        SALON["auburn"], "Rich auburn hair color transformation at Craft Collective, Pittsburgh",
+        [(STOCK["red"], "Dimensional red hair color, Craft Collective Pittsburgh"),
+         (STOCK["livedin"], "Lived-in dimensional color, Pittsburgh salon"),
+         (SALON["platinum"], "Platinum color transformation, Pittsburgh")]),
     "hair-extensions-pittsburgh": (
         STOCK["extensions"], "Hand-tied hair extensions fitted at Craft Collective Salon Group, Pittsburgh",
         [(STOCK["length"], "Length and volume added with hand-tied wefts, Pittsburgh"),
-         (STOCK["livedin"], "Extensions colour-matched to existing balayage, Pittsburgh"),
+         (STOCK["livedin"], "Extensions color-matched to existing balayage, Pittsburgh"),
          (SALON["interior"], "Extension fitting at the Craft Collective studio, Pittsburgh")]),
     "keratin-treatment-pittsburgh": (
         SALON["bob"], "Smooth, frizz-free finish after a keratin treatment, Pittsburgh",
         [(STOCK["layers"], "Keratin-smoothed layers holding through Pittsburgh humidity"),
-         (STOCK["livedin"], "Frizz-free smoothing on coloured hair, Pittsburgh salon"),
+         (STOCK["livedin"], "Frizz-free smoothing on colored hair, Pittsburgh salon"),
          (SALON["interior"], "Keratin smoothing service at Craft Collective, Pittsburgh")]),
     "haircuts-pittsburgh": (
         SALON["bob"], "Precision bob haircut at Craft Collective Salon Group, Pittsburgh",
@@ -1384,7 +1383,7 @@ SERVICE_ART = {
         STOCK["station"], "Blowout and styling at the Craft Collective styling station, Pittsburgh",
         [(SALON["bob"], "Smooth blowout finish, Craft Collective Pittsburgh"),
          (STOCK["layers"], "Round-brush blowout with movement, Pittsburgh salon"),
-         (STOCK["livedin"], "Blowout on lived-in blonde colour, Pittsburgh")]),
+         (STOCK["livedin"], "Blowout on lived-in blonde color, Pittsburgh")]),
     "bridal-hair-pittsburgh": (
         STOCK["bridal"], "Bridal hair styling at Craft Collective Salon Group, Pittsburgh",
         [(STOCK["honey"], "Soft bridal waves styled in Pittsburgh"),
@@ -1399,7 +1398,7 @@ SERVICE_ART = {
 
 BLOG_ART = {
     "mens-grooming-trends-2026": (STOCK["mens"], "Men's textured crop and fade, Craft Collective Salon Group Pittsburgh"),
-    "spring-hair-care-pittsburgh": (STOCK["sunkissed"], "Sun-kissed spring hair colour by Craft Collective, Pittsburgh"),
+    "spring-hair-care-pittsburgh": (STOCK["sunkissed"], "Sun-kissed spring hair color by Craft Collective, Pittsburgh"),
     "top-hair-trends-pittsburgh-2026": (STOCK["livedin"], "Lived-in dimensional blonde, a leading 2026 Pittsburgh hair trend"),
 }
 
@@ -1408,7 +1407,7 @@ PAGE_ART = {
     "reviews": (SALON["balayage"], "Balayage work reviewed by Craft Collective clients in Pittsburgh"),
     "book": (SALON["interior"], "The Craft Collective Salon Group studio on Babcock Blvd, Pittsburgh"),
     "faq": (STOCK["station"], "Styling station at Craft Collective Salon Group, Pittsburgh"),
-    "hair-care-tips": (STOCK["sunkissed"], "Colour-treated hair cared for by Craft Collective, Pittsburgh"),
+    "hair-care-tips": (STOCK["sunkissed"], "Color-treated hair cared for by Craft Collective, Pittsburgh"),
     "pittsburgh-hair-salon-guide-2026": (SALON["interior"], "Inside Craft Collective Salon Group, Pittsburgh North Hills"),
 }
 
@@ -1424,11 +1423,11 @@ STUDIO_ART = {
     "north-hills-pittsburgh": (
         "/images/salon-color-bar-1600x1066.jpg",
         "The main floor of the North Hills studio: styling chairs on mats down a "
-        "wall of gilt mirrors and ring lights, with the colour bar and shelves of "
-        "tube colour across the back wall."),
+        "wall of gilt mirrors and ring lights, with the color bar and shelves of "
+        "tube color across the back wall."),
     "canonsburg": (
         "/images/canonsburg-studio-wide-1600x1067.jpg",
-        "The Canonsburg studio: colour stations, mirrors and backwash chairs on "
+        "The Canonsburg studio: color stations, mirrors and backwash chairs on "
         "dark original plank floors, beneath a timber loft and stair and an "
         "exposed brick wall."),
 }
@@ -1497,7 +1496,7 @@ IMG_DIMS = {
     # The Canonsburg studio photographs. Same arrangement: 4:3 thumbnail crops
     # plus full-frame files. All three masters are portrait, so the thumbnail
     # crop is doing real work — see the note in the page markup about the
-    # front-room crop being biased upward rather than centred.
+    # front-room crop being biased upward rather than centered.
     "l:canonsburg-styling-row": (1932, 2576),
     "l:canonsburg-front-room": (1932, 2576),
     "l:canonsburg-portrait-wall": (1932, 2576),
@@ -1989,7 +1988,7 @@ TITLE_OVERRIDES = {
     ),
     "services/hair-color-pittsburgh/index.html": (
         "Hair Color Pittsburgh PA | Correction & Glossing",
-        "Hair color in Pittsburgh: single-process, grey coverage, dimensional color, glossing and "
+        "Hair color in Pittsburgh: single-process, gray coverage, dimensional color, glossing and "
         "full color correction at Craft Collective Salon Group. Wella Professionals exclusively. "
         f"Book online or call {PHONE}.",
     ),
@@ -2023,7 +2022,7 @@ TITLE_OVERRIDES = {
     ),
     "services/mens-grooming-pittsburgh/index.html": (
         "Men's Haircuts Pittsburgh PA | Fades & Beard Trims",
-        "Men's grooming in Pittsburgh: precision cuts, fades, beard shaping and grey blending at "
+        "Men's grooming in Pittsburgh: precision cuts, fades, beard shaping and gray blending at "
         f"Craft Collective Salon Group. North Hills & Canonsburg. Book online or call {PHONE}.",
     ),
     "locations/north-hills-pittsburgh/index.html": (
@@ -2081,7 +2080,7 @@ TITLE_OVERRIDES = {
     ),
     "blog/index.html": (
         "Hair Care Blog | Pittsburgh Salon Advice",
-        "Colour technique, hair care and trend guides from the stylists at Craft Collective Salon "
+        "Color technique, hair care and trend guides from the stylists at Craft Collective Salon "
         "Group in Pittsburgh — balayage, highlights, extensions, keratin and seasonal care for "
         "Pittsburgh's climate.",
     ),
@@ -2104,7 +2103,7 @@ TITLE_OVERRIDES = {
     "pittsburgh-hair-salon-guide-2026/index.html": (
         "Pittsburgh Hair Salon Guide 2026 | How to Choose a Colorist",
         "How to choose a hair salon in Pittsburgh in 2026: credentials that matter, what a real "
-        "colour consultation covers, what colour actually costs, and the neighbourhoods served by "
+        "color consultation covers, what color actually costs, and the neighbourhoods served by "
         "Craft Collective Salon Group.",
     ),
 }
@@ -2159,7 +2158,7 @@ def stylist_meta(slug, txt):
             f"{nm} | {short_role} Pittsburgh | Craft Collective",
             f"{nm} | {short_role} Pittsburgh | Craft Collective Salon",
         ),
-        f"Book {nm}, {role.lower()} at Craft Collective Salon Group in Pittsburgh. Specialising in "
+        f"Book {nm}, {role.lower()} at Craft Collective Salon Group in Pittsburgh. Specializing in "
         f"{sp}. Trained by Wella Professionals artist Derek Piekarski. Book online or call {PHONE}.",
     )
 
@@ -2372,7 +2371,7 @@ def process(path):
 
     # ---- 3. body ----------------------------------------------------------
 
-    # Inline colour overrides were written for the dark theme. An inline style
+    # Inline color overrides were written for the dark theme. An inline style
     # attribute outranks every stylesheet rule, so these have to be rewritten
     # rather than overridden — but only inside the body, never inside <style>,
     # where the same declarations are load-bearing for the nav and footer.
@@ -2545,7 +2544,7 @@ def process(path):
     # question AND the same code runs again, so the first click toggled open
     # and straight back closed. Rather than work around a duplicate listener,
     # the inline handlers come out and assets/site.js owns every accordion on
-    # the site, which also gives these pages the independent-toggle behaviour
+    # the site, which also gives these pages the independent-toggle behavior
     # and the max-height fix the generated blocks already have.
     txt = re.sub(
         r'[ \t]*<script>(?:(?!</script>).)*?\.faq-question(?:(?!</script>).)*?</script>[ \t]*\n?',
