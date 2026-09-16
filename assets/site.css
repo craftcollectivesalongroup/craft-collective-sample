@@ -3052,3 +3052,118 @@ footer a.tel-link:focus {
     min-height: 2.45em;
   }
 }
+
+/* ============================================================== 21
+   MEET THE TEAM — CANONSBURG BOOKING MARKER
+
+   Some stylists take bookings at the Canonsburg studio as well as North Hills.
+   Those cards carry a gold outline, and a key beside the section heading says
+   what the outline means.
+
+   TO TAG A STYLIST: add data-studio="canonsburg" to their .team-card in
+   meet-the-team/index.html. That is the whole edit. Nothing else moves — the
+   outline and the text marker both key off that one attribute, and the marker
+   text already ships on every card, hidden, so it does not have to be added
+   alongside. data-studio="both" works identically and reads better if the
+   attribute is ever wanted on North-Hills-only cards for symmetry.
+
+   AS OF THIS COMMIT NO CARD IS TAGGED. The mechanism is in place and the key
+   is visible, but the owner has not supplied the names, and a gold outline on
+   a stylist who does not work there is a claim the salon has not made.
+
+   The outline is an outline rather than a border on purpose. .team-card
+   already has a 1px border that turns gold on hover, so a gold border would
+   be indistinguishable from "the mouse is over this card". outline sits inside
+   the border with a negative offset, is twice the weight, does not move the
+   layout, and survives hover unchanged.
+
+   Colour alone is not the marker. Every outlined card also carries the line
+   "Also takes bookings at Canonsburg" in text, because a border says nothing
+   to a screen reader and nothing to a reader who cannot separate gold from the
+   card edge. Do not remove the text and keep the outline.
+   ------------------------------------------------------------------------ */
+
+/* -------------------------------------------------------------- the key */
+
+.team-key {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--mid);
+  max-width: 22rem;
+}
+
+/* Only above 900px. Section 13 already turns .team-header — along with every
+   other section header — into a column below that, and an earlier draft of
+   this block fought it: declaring flex-end alignment outside the query made
+   the stacked heading and key both sit flush right at 768px and below. Let the
+   existing rule own the stacked state and only build the row here.
+
+   margin-left:auto on the key rather than justify-content:space-between, so
+   the behaviour does not depend on how a wrapped line is justified. */
+@media (min-width: 901px) {
+  .team-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1.5rem 2.5rem;
+  }
+
+  .team-key {
+    margin-left: auto;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* A sample of the marker itself, so the key explains itself rather than
+   describing a colour the reader then has to go and find. */
+.team-key-swatch {
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
+@media (max-width: 900px) {
+  .team-key { max-width: none; }
+}
+
+/* ------------------------------------------------------- the card marker */
+
+.team-card[data-studio] {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
+/* The text half of the marker. Present in the markup on every card and shown
+   only on a tagged one, so tagging stays a single attribute. display:none
+   also keeps it out of the accessibility tree on untagged cards, which is the
+   point — an untagged stylist must not announce Canonsburg to anybody. */
+.team-card-studio {
+  display: none;
+}
+
+.team-card[data-studio] .team-card-studio {
+  display: block;
+  margin: -0.6rem 0 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .team-key { font-size: 0.62rem; }
+  .team-card[data-studio] .team-card-studio { margin-top: -0.4rem; }
+}
