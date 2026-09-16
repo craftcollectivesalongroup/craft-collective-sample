@@ -119,6 +119,68 @@ BLOG_POSTS = {
 
 
 # ---------------------------------------------------------------------------
+# WHICH STUDIO EACH STYLIST WORKS AT
+#
+# The single source of truth. It exists because the same fact has to appear in
+# two places -- the roster cards on /meet-the-team and each stylist's own hero
+# -- and this repository has already been bitten once by a fact living in many
+# places (see the Canonsburg appointment-only note above, which lists about
+# seventy).
+#
+# Keyed by slug, which is also the /team/<slug> path. Anything not listed is
+# "north-hills": thirty of the thirty-seven are, and listing them would make
+# the exceptions harder to see rather than easier.
+#
+# Values: "north-hills" | "canonsburg" | "both".
+#
+# process() writes the attribute and the label onto a stylist page from this
+# table, so once the build pass can be run again the profile side is derived
+# rather than maintained. The cards on /meet-the-team are still hand-carried;
+# to check the two have not drifted:
+#
+#   python3 -c "import optimize,re;s=open('meet-the-team/index.html').read();\
+#     print(sorted((sl,v) for v,sl in re.findall(r'data-studio=\"([a-z-]+)\".*?href=\"/team/([a-z0-9-]+)\"',s,re.S)\
+#     if v!=optimize.studio_of(sl)))"
+#
+# An empty list means they agree.
+STYLIST_STUDIO = {
+    "greta-healy": "canonsburg",
+
+    "amanda-melvin": "both",
+    "erin-mccleary": "both",
+    "kayla-quinn": "both",
+    "kelly-buttermore": "both",
+    "selena-pace": "both",
+    "sherry-maiolini": "both",
+}
+
+# Derek is the lead bio block on /meet-the-team rather than one of the cards,
+# and has asked not to carry a label yet. Listed rather than merely absent, so
+# that "no label" reads as a decision instead of an oversight.
+STUDIO_UNLABELLED = {"derek-piekarski"}
+
+
+def studio_of(slug):
+    """The studio for a stylist slug. Everyone not listed is North Hills."""
+    return STYLIST_STUDIO.get(slug, "north-hills")
+
+
+def studio_label(cls):
+    """The label markup, identical wherever it appears.
+
+    Four spans rather than one string: CSS shows the parts that apply and
+    hides the rest, so the attribute drives the wording, and the two studio
+    names can take their own colours. The spacing lives inside the spans, so
+    hiding a part hides its spacing with it."""
+    return (f'<p class="{cls}">'
+            '<span class="studio-nh">North Hills</span>'
+            '<span class="studio-sep"> / </span>'
+            '<span class="studio-cb">Canonsburg</span>'
+            '<span class="studio-only"> only</span>'
+            '</p>')
+
+
+# ---------------------------------------------------------------------------
 # FAQ content
 # ---------------------------------------------------------------------------
 
@@ -1724,6 +1786,36 @@ def classify(path):
     return "page", parts[0]
 
 
+STUDIO_HERO_RE = re.compile(r'\s*<p class="page-studio">.*?</p>', re.S)
+
+
+def apply_studio_label(slug, txt):
+    """Put the studio label on a stylist hero, from STYLIST_STUDIO.
+
+    Idempotent: any existing attribute and label come out before the current
+    ones go in, so running this twice leaves the page identical.
+
+    The label goes AFTER the </h1>, never before it. stylist_meta() and
+    get_faqs() both read the name with class="name">(.*?)</h1> and the role
+    with class="page-eyebrow">(.*?)< , so anything inserted between the eyebrow
+    and the name, or inside the h1, changes the title, the meta description and
+    all five generated FAQ answers for that stylist.
+    """
+    txt = re.sub(r'(<section id="main" class="hero)"', r'\1"', txt)
+    txt = re.sub(r'(<section id="main" class="hero") data-studio="[a-z-]+"', r'\1', txt)
+    txt = STUDIO_HERO_RE.sub("", txt)
+    if slug in STUDIO_UNLABELLED:
+        return txt
+    m = re.search(r'<h1 class="name">.*?</h1>', txt, re.S)
+    if not m:
+        return txt
+    txt = txt.replace('<section id="main" class="hero"',
+                      f'<section id="main" class="hero" data-studio="{studio_of(slug)}"', 1)
+    m = re.search(r'<h1 class="name">.*?</h1>', txt, re.S)
+    indent = " " * 6
+    return txt[:m.end()] + "\n" + indent + studio_label("page-studio") + txt[m.end():]
+
+
 def page_url(path):
     p = path.replace(os.sep, "/")
     if p == "index.html":
@@ -2137,6 +2229,7 @@ def process(path):
         title, desc = area_meta(slug)
     elif kind == "stylist":
         title, desc = stylist_meta(slug, txt)
+        txt = apply_studio_label(slug, txt)
     elif kind == "blog-post" and slug in BLOG_POSTS:
         title, desc = blog_meta(slug, txt)
     else:

@@ -3199,3 +3199,63 @@ footer a.tel-link:focus {
    coloured words and the grammar around them recedes. */
 .studio-nh { color: var(--ink); font-weight: 500; }
 .studio-cb { color: var(--gold); font-weight: 500; }
+
+/* -------------------------------------------------- the same label, on a
+   stylist's own page.
+
+   Same markup, same attribute, same three strings, and — after checking — the
+   same colours as the card.
+
+   The trap here: the stylist page's own inline stylesheet says
+   .hero { background: var(--black) } with the name in --off-white, which reads
+   as a dark panel. It is not one. Section 7 of this file re-points it:
+
+       .hero, .derek-hero { background: var(--paper-warm); }
+
+   and .page-eyebrow is forced to --gold-deep a few lines later. The hero
+   actually renders #fbf9f5 with a navy name and a gold title, so the card's
+   tones are the correct ones and a light-on-dark treatment would have been
+   invisible. Measured on the real ground rather than the declared one:
+
+       --ink  #1A2440  (North Hills)        14.57:1 on #fbf9f5
+       --gold #866336  (Canonsburg)          5.18:1
+       --mid  #565F75  (slash and "only")    6.07:1
+
+   Those colours come from the shared .studio-nh / .studio-cb rules above, so
+   there is nothing to override here — only the block's own placement.
+
+   Position: directly under the name, above the italic .title line, so the hero
+   reads name → studio → title and the studio sits in the same relation to the
+   name as it does on the roster card. Not beside the name: the name is set at
+   clamp(3rem, 5vw, 5.5rem) and several run to two lines, so there is no
+   right-hand space to put it in.
+   ------------------------------------------------------------------------ */
+
+.page-studio {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--mid);
+}
+
+.page-studio > span { display: none; }
+
+.hero[data-studio="north-hills"] .studio-nh,
+.hero[data-studio="north-hills"] .studio-only,
+.hero[data-studio="canonsburg"]  .studio-cb,
+.hero[data-studio="canonsburg"]  .studio-only,
+.hero[data-studio="both"]        .studio-nh,
+.hero[data-studio="both"]        .studio-sep,
+.hero[data-studio="both"]        .studio-cb {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .page-studio {
+    margin: -0.25rem 0 1rem;
+    font-size: 0.64rem;
+  }
+}
