@@ -3054,116 +3054,108 @@ footer a.tel-link:focus {
 }
 
 /* ============================================================== 21
-   MEET THE TEAM — CANONSBURG BOOKING MARKER
+   MEET THE TEAM — WHICH STUDIO EACH STYLIST WORKS AT
 
-   Some stylists take bookings at the Canonsburg studio as well as North Hills.
-   Those cards carry a gold outline, and a key beside the section heading says
-   what the outline means.
+   Every card states, beside the stylist's name, where that stylist works. One
+   of exactly three strings:
 
-   TO TAG A STYLIST: add data-studio="canonsburg" to their .team-card in
-   meet-the-team/index.html. That is the whole edit. Nothing else moves — the
-   outline and the text marker both key off that one attribute, and the marker
-   text already ships on every card, hidden, so it does not have to be added
-   alongside. data-studio="both" works identically and reads better if the
-   attribute is ever wanted on North-Hills-only cards for symmetry.
+       North Hills only
+       Canonsburg only
+       North Hills / Canonsburg
 
-   AS OF THIS COMMIT NO CARD IS TAGGED. The mechanism is in place and the key
-   is visible, but the owner has not supplied the names, and a gold outline on
-   a stylist who does not work there is a claim the salon has not made.
+   This replaced an earlier plan for a gold outline plus a key. Stating the
+   fact is better than encoding it in a colour: there is no key to have missed,
+   nothing to misread if you cannot separate gold from the card edge, nothing
+   extra for a screen reader, and — the point the owner actually cared about —
+   a stylist who works at both can no longer be mistaken for Canonsburg-only.
 
-   The outline is an outline rather than a border on purpose. .team-card
-   already has a 1px border that turns gold on hover, so a gold border would
-   be indistinguishable from "the mouse is over this card". outline sits inside
-   the border with a negative offset, is twice the weight, does not move the
-   layout, and survives hover unchanged.
+   TO ASSIGN A STYLIST: add data-studio to their .team-card in
+   meet-the-team/index.html, with one of three values:
 
-   Colour alone is not the marker. Every outlined card also carries the line
-   "Also takes bookings at Canonsburg" in text, because a border says nothing
-   to a screen reader and nothing to a reader who cannot separate gold from the
-   card edge. Do not remove the text and keep the outline.
+       data-studio="north-hills"   ->  North Hills only
+       data-studio="canonsburg"    ->  Canonsburg only
+       data-studio="both"          ->  North Hills / Canonsburg
+
+   That is the whole edit. The visible string is generated from the attribute,
+   so the wording lives here and only here, and nothing has to be kept in step
+   across 37 cards.
+
+   EVERY CARD NEEDS ONE. A card with no data-studio renders no label at all —
+   it makes no claim, which is correct while the assignments are unknown, but
+   it also means the page is unfinished until all 37 carry one. To list what is
+   still missing:
+
+     grep -c 'class="team-card"' meet-the-team/index.html   # total
+     grep -c 'data-studio'       meet-the-team/index.html   # assigned
+
+   AS OF THIS COMMIT NO CARD IS ASSIGNED. The owner is identifying who works
+   where. Do not treat this page as finished until those two counts match.
+
+   Why the text comes from CSS rather than being written into each card: the
+   attribute is then the single source of truth and the wording is in one
+   place. The cost is that the label is not selectable or machine-translatable,
+   and would vanish if the stylesheet failed to load. That trade is worth
+   revisiting once the build pass can be run again — at that point optimize.py
+   can write the same three strings into the markup from the same attribute,
+   and these rules become the fallback rather than the source.
    ------------------------------------------------------------------------ */
 
-/* -------------------------------------------------------------- the key */
+/* The label sits AFTER .team-card-role in the source and is placed by CSS.
+   That ordering is not cosmetic: TEAM_CARD in optimize.py requires the name
+   element to be followed by the role element with only whitespace between
+   them, and it builds the roster ItemList off that match. Anything inserted
+   between the two — including a wrapper around the name — silently empties the
+   roster schema. Leave the source order alone and let the grid do the placing.
 
-.team-key {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin: 0;
+   Default is the label on its own line under the name. Beside the name, which
+   is where it was asked for, only applies from 1100px up. Below that a card's
+   text column is genuinely too narrow to share: at 1024 it is about 170px, and
+   putting "North Hills / Canonsburg" next to "Caroline Radziminski" there
+   squeezed the name to 42px and six lines. */
+.team-card-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "name"
+    "studio"
+    "role"
+    "bio"
+    "link";
+  align-content: center;
+}
+
+.team-card-name   { grid-area: name; }
+.team-card-studio { grid-area: studio; }
+.team-card-role   { grid-area: role; }
+.team-card-bio    { grid-area: bio; }
+.team-card-content .link-arrow {
+  grid-area: link;
+  justify-self: start;
+}
+
+.team-card-studio {
+  margin: 0.15rem 0 0.6rem;
   font-size: 0.66rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 400;
-  line-height: 1.7;
-  color: var(--mid);
-  max-width: 22rem;
-}
-
-/* Only above 900px. Section 13 already turns .team-header — along with every
-   other section header — into a column below that, and an earlier draft of
-   this block fought it: declaring flex-end alignment outside the query made
-   the stacked heading and key both sit flush right at 768px and below. Let the
-   existing rule own the stacked state and only build the row here.
-
-   margin-left:auto on the key rather than justify-content:space-between, so
-   the behaviour does not depend on how a wrapped line is justified. */
-@media (min-width: 901px) {
-  .team-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 1.5rem 2.5rem;
-  }
-
-  .team-key {
-    margin-left: auto;
-    margin-bottom: 0.4rem;
-  }
-}
-
-/* A sample of the marker itself, so the key explains itself rather than
-   describing a colour the reader then has to go and find. */
-.team-key-swatch {
-  flex: 0 0 auto;
-  width: 2.1rem;
-  height: 1.5rem;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  outline: 2px solid var(--gold);
-  outline-offset: -2px;
-}
-
-@media (max-width: 900px) {
-  .team-key { max-width: none; }
-}
-
-/* ------------------------------------------------------- the card marker */
-
-.team-card[data-studio] {
-  outline: 2px solid var(--gold);
-  outline-offset: -2px;
-}
-
-/* The text half of the marker. Present in the markup on every card and shown
-   only on a tagged one, so tagging stays a single attribute. display:none
-   also keeps it out of the accessibility tree on untagged cards, which is the
-   point — an untagged stylist must not announce Canonsburg to anybody. */
-.team-card-studio {
-  display: none;
-}
-
-.team-card[data-studio] .team-card-studio {
-  display: block;
-  margin: -0.6rem 0 1rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
   line-height: 1.6;
-  color: var(--gold);
+  color: var(--mid);
 }
 
-@media (max-width: 600px) {
-  .team-key { font-size: 0.62rem; }
-  .team-card[data-studio] .team-card-studio { margin-top: -0.4rem; }
-}
+/* It sits under the name rather than beside it, and that is a deliberate
+   climb-down from where it was asked for. The card's text column is 258px at
+   1440 and 170px at 1024 — the grid keeps two cards per row down to 900px, so
+   the column never gets wider than that. "Caroline Radziminski" alone is about
+   190px set at 1.5rem Cormorant. Beside the name, the longest label broke that
+   name across three lines at 1440 and six at 1024. One line down, full width,
+   it is legible at every size and no name is ever squeezed.
+
+   If the right-hand position matters more than the name setting, the place
+   with room is beside .team-card-role — "Stylist" is short — which is a swap
+   of two grid-area names, not a rebuild. */
+
+
+.team-card[data-studio="north-hills"] .team-card-studio::after { content: "North Hills only"; }
+.team-card[data-studio="canonsburg"]  .team-card-studio::after { content: "Canonsburg only"; }
+.team-card[data-studio="both"]        .team-card-studio::after { content: "North Hills / Canonsburg"; }
