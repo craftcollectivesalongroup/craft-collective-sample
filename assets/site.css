@@ -3156,6 +3156,46 @@ footer a.tel-link:focus {
    of two grid-area names, not a rebuild. */
 
 
-.team-card[data-studio="north-hills"] .team-card-studio::after { content: "North Hills only"; }
-.team-card[data-studio="canonsburg"]  .team-card-studio::after { content: "Canonsburg only"; }
-.team-card[data-studio="both"]        .team-card-studio::after { content: "North Hills / Canonsburg"; }
+/* The three strings are assembled from four spans that ship on every card, so
+   the attribute still drives everything and the visible words are real text —
+   selectable, translatable, and present whether or not this stylesheet loads.
+   The spacing lives inside the spans (" / ", " only"), so hiding a part hides
+   its spacing with it and no stray gaps survive.
+
+       north-hills  ->  North Hills only
+       canonsburg   ->  Canonsburg only
+       both         ->  North Hills / Canonsburg
+*/
+.team-card-studio > span { display: none; }
+
+.team-card[data-studio="north-hills"] .studio-nh,
+.team-card[data-studio="north-hills"] .studio-only,
+.team-card[data-studio="canonsburg"]  .studio-cb,
+.team-card[data-studio="canonsburg"]  .studio-only,
+.team-card[data-studio="both"]        .studio-nh,
+.team-card[data-studio="both"]        .studio-sep,
+.team-card[data-studio="both"]        .studio-cb {
+  display: inline;
+}
+
+/* A card with no data-studio makes no claim and takes no space. Once every
+   stylist is assigned this should never match — it is the guard, not a state
+   the finished page is meant to be in. */
+.team-card:not([data-studio]) .team-card-studio {
+  display: none;
+}
+
+/* Colour is reinforcement here, not the carrier of meaning — the words say it
+   outright — so this is purely a legibility question, and both tones clear AA
+   for normal text on all three card grounds:
+
+       --ink  #1A2440   15.33:1 on white, 14.57 on off-white, 13.38 on cream
+       --gold #866336    5.45:1 on white,  5.18 on off-white,  4.76 on cream
+
+   --gold rather than --gold-fill #b08d57, which is the brand gold for grounds
+   and buttons and manages only 3.09:1 as text. The palette already draws that
+   line; see the note on the tokens above. The separator and the word "only"
+   stay in the label's own --mid (6.38:1), so the two studio names are the only
+   coloured words and the grammar around them recedes. */
+.studio-nh { color: var(--ink); font-weight: 500; }
+.studio-cb { color: var(--gold); font-weight: 500; }
