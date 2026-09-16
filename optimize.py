@@ -145,6 +145,7 @@ BLOG_POSTS = {
 # An empty list means they agree.
 STYLIST_STUDIO = {
     "greta-healy": "canonsburg",
+    "angelina-labella": "canonsburg",
 
     "amanda-melvin": "both",
     "erin-mccleary": "both",
@@ -1505,6 +1506,12 @@ IMG_DIMS = {
     # base would have IMG_DIMS reporting 3:4 and _variant would hand the hero
     # band a portrait file for a 21:9 slot.
     "l:canonsburg-studio-wide": (1932, 1288),
+    # Angelina Labella's portrait. The master is a tall phone photograph
+    # (1206x2622), not a studio frame like the rest of the team, so the square
+    # derivatives are cut head-and-shoulders from the upper third and the 3:2
+    # social card is the same square on a blurred fill rather than a crop into
+    # her face. IMG_DIMS carries the shape the square crops actually are.
+    "l:team/angelina-labella": (1206, 1206),
 
     "u:1500917293891-ef795e70e1f6": (600, 400),
     "u:1519699047748-de8e457a634e": (600, 600),
@@ -2179,6 +2186,16 @@ def blog_meta(slug, txt):
 
 def og_crop(src):
     """Re-point a social image at a true 1200x630 crop.
+
+    CAUTION, and this has bitten twice. The value returned here is a ROOT
+    RELATIVE path, and set_meta() applies it to og:image and twitter:image on
+    every page it touches. Scrapers require an absolute URL; a relative one is
+    dropped, and the page loses its social image silently. Thirty-five pages
+    still carry the absolute form because the build has not been run over them.
+    Calling set_meta() by hand -- which is how this repository currently applies
+    generated metadata, the build pass being unrunnable on main -- downgrades
+    whichever pages it touches. Re-absolutise afterwards, or fix this to return
+    SITE + "/og-card.jpg", which is what it should have returned all along.
 
     The og:image:width/height tags below claim 1200x630. Both CDNs can crop to
     order, so the claim is made true rather than dropped — an accurate size
