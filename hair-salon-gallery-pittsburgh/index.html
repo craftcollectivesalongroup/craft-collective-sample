@@ -51,31 +51,6 @@
     .page-headline em { font-style: italic; color: var(--gold-light); }
     .page-sub { font-size: 0.9rem; line-height: 1.8; color: rgba(247,244,239,0.55); max-width: 560px; margin-top: 1.5rem; font-weight: 300; }
 
-    /* FILTER TABS */
-    .gallery-filters {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 4rem 0;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      background: transparent;
-      border: 1px solid var(--rule);
-      color: var(--mid);
-      padding: 0.5rem 1.2rem;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 400;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .filter-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 500; }
-
     /* GALLERY GRID */
     .gallery-main {
       max-width: 1200px;
@@ -157,7 +132,6 @@
 
     @media (max-width: 900px) {
       .page-hero { padding: 8rem 2rem 3rem; }
-      .gallery-filters { padding: 2rem 2rem 0; }
       .gallery-main { padding: 2rem 2rem 4rem; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item.wide { grid-column: span 2; }
@@ -170,7 +144,7 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item.wide { grid-column: span 1; }
   </style>
-  <link rel="stylesheet" href="/assets/site.css?v=576db2ea" />
+  <link rel="stylesheet" href="/assets/site.css?v=0a364459" />
 <!-- cc:head -->
   <meta name="theme-color" content="#1A2440" />
   <meta name="format-detection" content="telephone=yes" />
@@ -482,13 +456,79 @@
     </div>
   </div>
 
-  <div class="gallery-filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="color">Color</button>
-    <button class="filter-btn" data-filter="balayage">Balayage</button>
-    <button class="filter-btn" data-filter="cuts">Cuts</button>
-    <button class="filter-btn" data-filter="studio">Studio</button>
-  </div>
+  <!-- THE CATEGORY FILTER ROW LIVED HERE. It was removed, not lost.
+
+       Fifteen photographs came out of this gallery and the categories went
+       with them: twelve tiles split All 12 / Color 6 / Balayage 3 / Cuts 2 /
+       Studio 1. Three of the four buttons revealed three pictures or fewer and
+       one revealed a single tile, which reads as a broken control rather than
+       a small salon. Six of the twelve are "color" and five of those are
+       blonde from behind, so filtering barely changed what you were looking at
+       either.
+
+       BRING IT BACK when the thinnest category is comfortably above four or
+       five -- roughly twenty-five photographs with a reasonable spread. Every
+       tile still carries its data-category, so restoring this is putting the
+       three pieces below back where they came from -- CSS, markup, script --
+       and deleting the .gallery-main padding rule in site.css section 23.
+       Nothing else has to change.
+
+       ...the CSS that dressed it, which lived in this page's own <style>
+       block between .page-sub and /* GALLERY GRID */:
+
+       /* FILTER TABS */
+       .gallery-filters {
+       max-width: 1200px;
+       margin: 0 auto;
+       padding: 2.5rem 4rem 0;
+       display: flex;
+       gap: 0.5rem;
+       flex-wrap: wrap;
+       }
+       .filter-btn {
+       background: transparent;
+       border: 1px solid var(--rule);
+       color: var(--mid);
+       padding: 0.5rem 1.2rem;
+       font-family: 'Jost', sans-serif;
+       font-size: 0.7rem;
+       letter-spacing: 0.12em;
+       text-transform: uppercase;
+       font-weight: 400;
+       cursor: pointer;
+       transition: all 0.2s;
+       }
+       .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+       .filter-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 500; }
+
+       ...plus this one line inside @media (max-width: 900px):
+
+       .gallery-filters { padding: 2rem 2rem 0; }
+
+       ...the markup itself:
+
+       <div class="gallery-filters">
+       <button class="filter-btn active" data-filter="all">All</button>
+       <button class="filter-btn" data-filter="color">Color</button>
+       <button class="filter-btn" data-filter="balayage">Balayage</button>
+       <button class="filter-btn" data-filter="cuts">Cuts</button>
+       <button class="filter-btn" data-filter="studio">Studio</button>
+       </div>
+
+       ...and the script that drove it, which lived just above the site.js tag:
+
+       document.querySelectorAll('.filter-btn').forEach(btn => {
+         btn.addEventListener('click', () => {
+           document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+           btn.classList.add('active');
+           const filter = btn.dataset.filter;
+           document.querySelectorAll('.gallery-item').forEach(item => {
+             item.style.display =
+               (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+           });
+         });
+       });
+  -->
 
   <main class="gallery-main">
     <div class="gallery-grid">
@@ -606,6 +646,28 @@
 
     </div>
   </main>
+
+  <!-- The gallery is a sample; Instagram is the archive and it is where the
+       salon actually posts. This band is the page's real call to action -- the
+       block beside the headline is the early signpost, this is the ask, and
+       they are worded differently on purpose. It sits after the grid so it
+       catches the reader who has just finished looking, and before the booking
+       CTA further down so the two do not compete. -->
+  <section class="ig-band" aria-labelledby="ig-band-heading">
+    <div class="ig-band-inner">
+      <svg class="ig-band-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5.5" />
+        <circle cx="12" cy="12" r="4.2" />
+        <circle class="ig-mark-dot" cx="17.4" cy="6.6" r="1.15" />
+      </svg>
+      <p class="section-label">Instagram</p>
+      <h2 id="ig-band-heading" class="ig-band-headline">See the work <em>as it happens.</em></h2>
+      <p class="ig-band-copy">This page is a sample. Everything that leaves the chair goes up on Instagram &mdash; new color, fresh cuts, and the occasional look behind the scenes.</p>
+      <a class="btn-primary" href="https://www.instagram.com/craftcollectivesalongroup/"
+         target="_blank" rel="noreferrer noopener">Follow us on Instagram</a>
+      <p class="ig-band-handle">@craftcollectivesalongroup</p>
+    </div>
+  </section>
 <!-- cc:faq -->
   <section class="faq-block" aria-labelledby="faq-heading">
     <div class="faq-block-inner">
@@ -728,23 +790,6 @@
     </div>
   </footer>
 
-  <script>
-    // Gallery filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.gallery-item').forEach(item => {
-          if (filter === 'all' || item.dataset.category === filter) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
   <script src="/assets/site.js?v=755b7037" defer></script>
 <!-- cc:cta -->
   <div class="cta-bar" role="region" aria-label="Call or book an appointment">
