@@ -3272,3 +3272,129 @@ footer a.tel-link:focus {
   color: var(--mid);
   font-weight: 300;
 }
+
+/* ============================================================== 22
+   GALLERY HERO — THE LINK OUT TO INSTAGRAM
+
+   The gallery is a curated set and got a good deal smaller when fourteen
+   photographs came out of it. Instagram is where the volume is and where the
+   salon actually posts, so the empty half of the hero beside the headline
+   earns its keep as a link out rather than being filled with more tiles.
+
+   THE GROUND IS LIGHT, NOT DARK. The page's own stylesheet says
+   .page-hero { background: var(--black) } and colours the headline
+   --off-white. Section 9 of this file overrides both: the hero renders as a
+   cream-to-paper gradient with a navy headline and a --gold-deep italic, and
+   the override is !important. Colours here are measured against the real
+   ground, top and bottom of the gradient:
+
+       --gold-deep #7a5b31  the mark      5.44:1 / 5.93:1
+       --mid       #565F75  the sentence  5.57:1 / 6.07:1
+       --gold      #866336  the handle    4.76:1 / 5.18:1
+
+   All clear AA for normal text, and the mark is a graphic rather than text so
+   3:1 would have been enough for it.
+
+   THE GLYPH is drawn here rather than pulled from an icon set, in the same
+   idiom as the two icons the site already has in the mobile call bar: a
+   24-unit grid, no fill, stroke: currentColor, round joins. It is the
+   Instagram mark's geometry -- rounded square, concentric circle, offset dot
+   -- not a copy of Meta's filled brand file. If exact brand compliance is
+   ever wanted, replace the three shapes with the official asset from Meta's
+   brand resources and drop the stroke rules; nothing else has to change.
+   ------------------------------------------------------------------------ */
+
+@media (min-width: 901px) {
+  .page-hero-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .page-hero-text { flex: 1 1 auto; min-width: 0; }
+
+  .ig-card {
+    flex: 0 0 auto;
+    align-items: flex-end;
+    text-align: right;
+    max-width: 20rem;
+    padding-bottom: 0.25rem;
+  }
+}
+
+.ig-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-decoration: none;
+  margin-top: 2.5rem;
+}
+
+/* Large, as asked, but still a step below a headline that runs to 5rem. */
+.ig-mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  fill: none;
+  stroke: var(--gold-deep);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s, transform 0.2s;
+}
+
+.ig-mark-dot {
+  fill: var(--gold-deep);
+  stroke: none;
+  transition: fill 0.2s;
+}
+
+.ig-copy {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+.ig-handle {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.ig-card:hover .ig-mark,
+.ig-card:focus-visible .ig-mark {
+  stroke: var(--gold);
+  transform: translateY(-2px);
+}
+
+.ig-card:hover .ig-mark-dot,
+.ig-card:focus-visible .ig-mark-dot { fill: var(--gold); }
+
+.ig-card:hover .ig-handle,
+.ig-card:focus-visible .ig-handle { color: var(--gold-deep); }
+
+.ig-card:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-mark { transition: stroke 0.2s; }
+  .ig-card:hover .ig-mark,
+  .ig-card:focus-visible .ig-mark { transform: none; }
+}
+
+/* Stacked under the headline on a phone, left-aligned with it, and with room
+   above the filter row so the two do not read as one block. */
+@media (max-width: 900px) {
+  .ig-card {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 2rem;
+    max-width: 22rem;
+  }
+  .ig-mark { width: 2.75rem; height: 2.75rem; }
+}

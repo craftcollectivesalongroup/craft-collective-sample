@@ -170,7 +170,7 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item.wide { grid-column: span 1; }
   </style>
-  <link rel="stylesheet" href="/assets/site.css?v=18193c58" />
+  <link rel="stylesheet" href="/assets/site.css?v=18a8b55a" />
 <!-- cc:head -->
   <meta name="theme-color" content="#1A2440" />
   <meta name="format-detection" content="telephone=yes" />
@@ -457,10 +457,28 @@
 
   <div id="main" class="page-hero">
     <div class="page-hero-inner">
-      <p class="breadcrumb"><a href="/">Home</a><span>/</span>Gallery</p>
-      <p class="page-eyebrow">Hair Salon Gallery Pittsburgh</p>
-      <h1 class="page-headline">The craft<br>speaks for <em>itself.</em></h1>
-      <p class="page-sub">Real results from our team. Browse balayage, blonding, color transformations, extensions, precision cuts, and studio shots from Craft Collective Salon Group.</p>
+      <div class="page-hero-text">
+        <p class="breadcrumb"><a href="/">Home</a><span>/</span>Gallery</p>
+        <p class="page-eyebrow">Hair Salon Gallery Pittsburgh</p>
+        <h1 class="page-headline">The craft<br>speaks for <em>itself.</em></h1>
+        <p class="page-sub">Real results from our team. Browse balayage, blonding, color transformations, extensions, precision cuts, and studio shots from Craft Collective Salon Group.</p>
+      </div>
+
+      <!-- The gallery is a curated set; Instagram is where the volume is, and
+           it is kept current. Linking out from beside the headline is worth
+           more than padding the grid. The glyph is drawn in the site's own
+           icon idiom (24-unit grid, stroke, currentColor) rather than pulled
+           from a library -- see the note on .ig-mark in site.css. -->
+      <a class="ig-card" href="https://www.instagram.com/craftcollectivesalongroup/"
+         target="_blank" rel="noreferrer noopener">
+        <svg class="ig-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5.5" />
+          <circle cx="12" cy="12" r="4.2" />
+          <circle class="ig-mark-dot" cx="17.4" cy="6.6" r="1.15" />
+        </svg>
+        <span class="ig-copy">For more up-to-date photos, check us out on Instagram.</span>
+        <span class="ig-handle">@craftcollectivesalongroup</span>
+      </a>
     </div>
   </div>
 
