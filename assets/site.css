@@ -3304,17 +3304,33 @@ footer a.tel-link:focus {
    brand resources and drop the stroke rules; nothing else has to change.
    ------------------------------------------------------------------------ */
 
+/* SCOPED TO .hero-split, AND IT MUST STAY THAT WAY.
+
+   .page-hero-inner is a site-wide class: twenty pages use it, and on
+   nineteen of them the breadcrumb, eyebrow, h1 and intro are its direct
+   children with no wrapper. Making the bare class a flex row turned those
+   four into four narrow columns side by side. It looked far worse than a
+   normal flex accident because site.css already sets overflow-wrap: anywhere
+   on every h1 and p: `anywhere` (unlike `break-word`) also shrinks an
+   element's min-content contribution, so the columns collapsed past the
+   longest word and "transformation" broke across two lines mid-word.
+
+   Only the gallery hero has a .page-hero-text wrapper and an .ig-card to sit
+   beside it, so only the gallery hero carries .hero-split. Any future hero
+   that wants two columns needs the wrapper AND the class -- never the bare
+   .page-hero-inner. */
+
 @media (min-width: 901px) {
-  .page-hero-inner {
+  .page-hero-inner.hero-split {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: 3rem;
   }
 
-  .page-hero-text { flex: 1 1 auto; min-width: 0; }
+  .hero-split .page-hero-text { flex: 1 1 auto; min-width: 0; }
 
-  .ig-card {
+  .hero-split .ig-card {
     flex: 0 0 auto;
     align-items: flex-end;
     text-align: right;
