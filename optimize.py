@@ -161,6 +161,14 @@ STYLIST_STUDIO = {
 # that "no label" reads as a decision instead of an oversight.
 STUDIO_UNLABELLED = {"derek-piekarski"}
 
+# Stylist slugs that get no generated FAQ block at all. /team/derek-piekarski is
+# the only one: it is an orphan (39 directories under /team/, 38 cards on
+# /meet-the-team -- Derek has his own page at /derek-piekarski instead), and its
+# five entries were the stylist_faq() template with his name in three of them,
+# duplicating a page that already duplicates it. Removed Sept 2026 with the four
+# on /derek-piekarski. A slug listed here keeps its page and loses only the FAQ.
+STYLIST_NO_FAQ = {"derek-piekarski"}
+
 
 def studio_of(slug):
     """The studio for a stylist slug. Everyone not listed is North Hills."""
@@ -785,22 +793,12 @@ PAGE_FAQ = {
          "Yes, both in our articles and in person. Recommendations in the salon are matched to your specific color "
          "formula and hair condition rather than given as blanket advice."),
     ],
-    "derek-piekarski": [
-        ("Who is Derek Piekarski?",
-         "Derek Piekarski is the owner of Craft Collective Salon Group and a globally recognized hairdresser. He "
-         "served on the North America Signature Artist Team for Wella Professionals and was North America Manager "
-         "of Technical Capabilities for Aveda / Estée Lauder."),
-        ("What awards has Derek won?",
-         "He was named one of the top trainers in the world for Wella Professionals in 2016 and received the Franz "
-         "Ströher Global Education Master Trainer Award. He has been featured in Vogue India and in the ELMI Cut "
-         "Craft video series."),
-        ("Can I book an appointment with Derek?",
-         f"Yes. If you have any questions, please call the salon directly at {PHONE}."),
-        ("What does Derek specialize in?",
-         "Although most of Derek's career was spent traveling and teaching hair color theory and techniques, he has "
-         "always been an avid cutter — from short hair to long, from a blade to scissors. Derek is now available at "
-         "Craft Collective specializing in hair cutting only."),
-    ],
+    "derek-piekarski": None,   # removed Sept 2026 at the owner's request -- the four
+                               # entries restated the credentials section directly above
+                               # them, and "Can I book an appointment with Derek?" sat a
+                               # few hundred pixels above a "Book with Derek" CTA that
+                               # actually answers it. The cutting-only fact that lived in
+                               # the last entry now sits in .derek-story on the page.
     "hair-salon-gallery-pittsburgh": [
         ("Is the work in this gallery done at your salon?",
          "Yes — everything shown is work by Craft Collective stylists at our Pittsburgh North Hills and Canonsburg "
@@ -1838,6 +1836,8 @@ def get_faqs(kind, slug, txt):
     if kind == "blog-post":
         return BLOG_FAQ.get(slug)
     if kind == "stylist":
+        if slug in STYLIST_NO_FAQ:
+            return None
         name = re.search(r'class="name">(.*?)</h1>', txt, re.S)
         name = " ".join(re.sub(r"<[^>]+>", " ", name.group(1)).split()) if name else slug.replace("-", " ").title()
         role = re.search(r'class="page-eyebrow">(.*?)<', txt, re.S)
