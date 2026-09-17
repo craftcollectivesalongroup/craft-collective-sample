@@ -3398,3 +3398,29 @@ footer a.tel-link:focus {
   }
   .ig-mark { width: 2.75rem; height: 2.75rem; }
 }
+
+/* Group headings on /meet-the-team: Hair, Skin, Nails.
+
+   Reuses .section-label rather than introducing a third heading size — the
+   page already has one big .section-headline over the whole section, and three
+   more at that weight would compete with it, especially above groups of one
+   and two. Carried on an h3 so the grouping is in the document outline and not
+   only in the type.
+
+   The ItemList on this page is scraped off the rendered cards by TEAM_CARD in
+   optimize.py, which runs name -> role -> the next /team/ href. These headings
+   sit BETWEEN cards, outside that match, so they do not disturb it — verified
+   at 38 matches with the headings in place. Keep any future heading outside a
+   .team-card and it stays true. */
+.team-group {
+  margin: 3.5rem 0 1.25rem;
+}
+
+.team-group:first-of-type {
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .team-group { margin: 2.5rem 0 1rem; }
+  .team-group:first-of-type { margin-top: 0; }
+}
