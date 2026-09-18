@@ -1829,7 +1829,31 @@ def page_url(path):
     return SITE + "/" + p[: -len("/index.html")]
 
 
+# FAQ BLOCKS ARE OFF, SITE-WIDE. Removed Sept 2026 at the owner's request:
+# "just please remove all frequently ask questions we do not need these a lot
+# are confusing". He was right on both counts. The 425 entries collapsed to
+# roughly 213 distinct answer templates -- the eight commonest accounted for
+# half of every answer on the site -- and a good number had drifted into
+# contradicting the pages they sat on: 38 stylist pages answered "Where does
+# {name} work?" with "call to confirm which location" directly below a hero
+# that already said CANONSBURG ONLY. FAQ rich results were restricted to
+# government and health sites in Aug 2023 and dropped from Google Search
+# entirely on 7 May 2026, so there was nothing to lose by it either.
+#
+# /faq keeps its own hand-built accordion and is untouched. Its FAQPage
+# schema comes from scrape_visible_faq() rather than from here, so returning
+# None below leaves that page working exactly as before -- and if its visible
+# accordion ever goes, the scrape finds nothing and the schema goes with it.
+#
+# To bring the blocks back, delete the two lines under the docstring. Every
+# table below (SERVICE_FAQ, BLOG_FAQ, PAGE_FAQ, area_faq, stylist_faq) is
+# intact and still correct.
+FAQ_BLOCKS_ENABLED = False
+
+
 def get_faqs(kind, slug, txt):
+    if not FAQ_BLOCKS_ENABLED:
+        return None
     if kind == "service":
         return SERVICE_FAQ.get(slug)
     if kind == "location":
