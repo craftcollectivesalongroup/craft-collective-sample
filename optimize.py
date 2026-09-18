@@ -381,8 +381,8 @@ SERVICE_FAQ = {
     "hair-color-pittsburgh": [
         ("What hair color services do you offer?",
          "Single-process color, root touch-ups, all-over gray coverage, dimensional color, lived-in color, "
-         "glossing and toning, fashion and vivid shades, and full color correction. We color exclusively with "
-         "Wella Professionals."),
+         "glossing and toning, fashion and vivid shades, and full color correction. We color with Wella "
+         "Professionals and R+Co."),
         ("How much does hair color cost in Pittsburgh?",
          f"A root touch-up sits at the lower end and a multi-step correction at the higher end. Because color "
          f"work is priced by time and product, we quote at consultation. Call {PHONE} or book a consultation "
@@ -705,7 +705,7 @@ def area_faq(slug):
              "Mt. Lebanon and the wider South Hills."),
             ("Is it the same team as the North Hills salon?",
              "Yes. Both studios are Craft Collective Salon Group, trained to the same standard under owner Derek "
-             "Piekarski, and both use Wella Professionals color."),
+             "Piekarski, and both use Wella Professionals and R+Co color."),
         ]
 
     return [
@@ -812,7 +812,8 @@ PAGE_FAQ = {
          "Your starting color, hair history and texture all affect the outcome. A good consultation is where we tell "
          "you honestly what is achievable in one appointment and what needs staging over two or three."),
         ("What color products do you use?",
-         "Wella Professionals, exclusively. Our owner served on the Wella North America Signature Artist Team."),
+         "We proudly utilize Wella Professionals, R+Co, and some Aveda color. Our owner served on the Wella North America "
+         "Signature Artist Team."),
     ],
     "artist-team": [
         ("Who at Craft Collective is on a brand artist team?",
@@ -1984,13 +1985,13 @@ TITLE_OVERRIDES = {
     "services/highlights-pittsburgh/index.html": (
         "Highlights Pittsburgh PA | Partial & Full Foils",
         "Highlights in Pittsburgh — partial foils, full foils, lowlights and dimensional blonding "
-        "at Craft Collective Salon Group. Wella Professionals color, 5.0-star rated. North Hills "
+        "at Craft Collective Salon Group. Wella Professionals and R+Co color, 5.0-star rated. North Hills "
         f"& Canonsburg. Book online or call {PHONE}.",
     ),
     "services/hair-color-pittsburgh/index.html": (
         "Hair Color Pittsburgh PA | Correction & Glossing",
         "Hair color in Pittsburgh: single-process, gray coverage, dimensional color, glossing and "
-        "full color correction at Craft Collective Salon Group. Wella Professionals exclusively. "
+        "full color correction at Craft Collective Salon Group. Wella Professionals and R+Co color. "
         f"Book online or call {PHONE}.",
     ),
     "services/hair-extensions-pittsburgh/index.html": (

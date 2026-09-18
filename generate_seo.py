@@ -452,7 +452,7 @@ SERVICES = [
         <h3>Types of Highlights We Offer</h3>
         <p><strong>Partial highlights</strong> focus on the face-framing sections and crown for a natural brightening effect. <strong>Full highlights</strong> cover the entire head for maximum dimension and lift. <strong>Lowlights</strong> add depth and richness, perfect for blondes who want more contrast or brunettes who want warmth without going lighter.</p>
         <h3>Our Approach</h3>
-        <p>Every highlight appointment starts with a consultation. Your stylist will assess your current color, discuss your goals, and recommend the best placement strategy. We use Wella Professionals lighteners and toners exclusively, ensuring consistent, healthy results.</p>
+        <p>Every highlight appointment starts with a consultation. Your stylist will assess your current color, discuss your goals, and recommend the best placement strategy. We use Wella Professionals lighteners and toners, ensuring consistent, healthy results.</p>
         <p>Appointment times range from 2 to 3.5 hours. Book online or call <a href="tel:+17245147231">724-514-7231</a>.</p>
         """
     },
@@ -463,7 +463,7 @@ SERVICES = [
         "title": "Hair Color Pittsburgh PA | Full Color, Gloss & Toner | Craft Collective",
         "meta": "Professional hair color services in Pittsburgh. Full color, root touch-ups, glossing, toning, and color corrections at Craft Collective Salon Group. Book now.",
         "content": """
-        <p>From single-process color to full transformations, Craft Collective Salon Group offers the complete spectrum of professional hair color services. Our colorists work with Wella Professionals formulas to achieve rich, lasting color that protects hair integrity.</p>
+        <p>From single-process color to full transformations, Craft Collective Salon Group offers the complete spectrum of professional hair color services. Our colorists work with Wella Professionals and R+Co formulas to achieve rich, lasting color that protects hair integrity.</p>
         <h3>Our Color Services</h3>
         <p><strong>Full color</strong> provides all-over coverage and can take you darker, warmer, cooler, or brighter. <strong>Root touch-ups</strong> maintain your existing color with seamless blending. <strong>Glossing and toning</strong> refresh your shade between full color appointments, adding shine and neutralizing unwanted warmth or brassiness.</p>
         <h3>Corrective Color</h3>
